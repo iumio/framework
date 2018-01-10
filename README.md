@@ -1,2 +1,2 @@
-# iumio-framework-base
+# iumio-framework
 Core file for iumio framework
