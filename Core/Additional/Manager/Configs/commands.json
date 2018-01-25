@@ -1,0 +1,236 @@
+{
+
+  "version": "0.0.9",
+  "description": "This is the console of iumio Framework",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Dany Rafina",
+      "email": "dany.rafina@iumio.com",
+      "homepage": "https://www.linkedin.com/in/dany-rafina/",
+      "role": "iumio Framework Architect / iumio Founder "
+    }
+  ],
+  "commands": {
+    "help": {
+      "class" : "\\iumioFramework\\Core\\Console\\Module\\Help\\HelpManager",
+      "type" : "single",
+      "desc"  : "Get informations about a command or all command.",
+      "usage" : "help [command_name] or help"
+    },
+    "cache": {
+      "class" : "\\iumioFramework\\Core\\Console\\Module\\Cache\\CacheManager",
+      "desc"  : "Manage the framework cache",
+      "usage" : "cache:[command_name] [option]",
+      "type" : "multiple",
+      "options" : [
+        {
+          "name" : "--env",
+          "desc" : "Environment name [dev : Development, prod : Production, all : All environment (dev and prod)",
+          "usage" : "cache:clear --env=[environment]"
+        }
+      ],
+      "args" : [
+        {
+          "name" : "cache:clear",
+          "desc" : "Clear the framework cache (dev environment as default)",
+          "usage" : "cache:clear [options]"
+        }
+      ]
+    },
+    "assets": {
+      "class" : "\\iumioFramework\\Core\\Console\\Module\\Assets\\AssetsManager",
+      "desc"  : "Manage the framework assets",
+      "usage" : "assets:[command_name] [option]",
+      "type" : "multiple",
+      "options" : [
+        {
+          "name" : "--env",
+          "desc" : "Environment name [dev : Development, prod : Production, all : All environment (dev and prod)",
+          "usage" : "assets:[command_name] --env=[environment]"
+        },
+        {
+          "name" : "--symlink",
+          "desc" : "Symbolic link will be created (must only used with assets:copy) ",
+          "usage" : "assets:[command_name] --symlink"
+        },
+        {
+          "name" : "--appname",
+          "desc" : "The app name 'Example --appname=DefaultApp' (must be used with assets:copy or assets:clear command)",
+          "usage" : "assets:[command_name] --appname=ExampleName"
+        }
+      ],
+      "args" : [
+        {
+          "name" : "assets:clear",
+          "desc" : "Clear the framework assets (dev environment as default)",
+          "usage" : "assets:clear [options]"
+        },
+        {
+          "name" : "assets:copy",
+          "desc" : "Copy the framework assets (dev environment as default)",
+          "usage" : "assets:copy [options]"
+        }
+      ]
+    },
+    "app": {
+      "class" : "\\iumioFramework\\Core\\Console\\Module\\App\\AppManager",
+      "type" : "multiple",
+      "desc"  : "Manage the framework app",
+      "usage" : "app:[command_name]",
+      "args" : [
+        {
+          "name" : "app:create",
+          "desc" : "Create an application",
+          "usage" : "app:create"
+        },
+        {
+          "name" : "app:enabled",
+          "desc" : "Enable an application",
+          "usage" : "app:enabled"
+        },
+        {
+          "name" : "app:disabled",
+          "desc" : "Disabled an application",
+          "usage" : "app:disabled"
+        },
+        {
+          "name" : "app:remove",
+          "desc" : "Remove an application",
+          "usage" : "app:remove"
+        }
+      ]
+    },
+    "routing": {
+      "class" : "\\iumioFramework\\Core\\Console\\Module\\Mercure\\MercureManager",
+      "type" : "multiple",
+      "desc"  : "Manage the mercure routing",
+      "usage" : "mercure:[command_name] [option]",
+      "options" : [
+        {
+          "name" : "--baseapp",
+          "desc" : "Build JS Routing for base app",
+          "usage" : "mercure:[command_name] --baseapp"
+        }
+      ],
+      "args" : [
+        {
+          "name" : "mercure:build:jsrouting",
+          "desc" : "Build or rebuild the Mercure JS Routing file",
+          "usage" : "mercure:build:jsrouting"
+        }
+      ]
+    },
+    "deployer": {
+      "class" : "\\iumioFramework\\Core\\Console\\Module\\Deployer\\DeployerManager",
+      "desc"  : "Deploy or undeploy your(s) application(s)",
+      "usage" : "deployer:[command_name]",
+      "type" : "multiple",
+      "args" : [
+        {
+          "name" : "deployer:process-deploy",
+          "desc" : "Process the deployment to production environment",
+          "usage" : "deployer:process-deploy"
+        },
+        {
+          "name" : "deployer:process-undeploy",
+          "desc" : "Undeploy your(s) application(s) (switch to dev)",
+          "usage" : "deployer:process-undeploy"
+        }
+      ]
+    },
+    "compiled": {
+      "class" : "\\iumioFramework\\Core\\Console\\Module\\Compiled\\CompiledManager",
+      "desc"  : "Manage framework compilation directory",
+      "usage" : "compiled:[command_name] [option]",
+      "type" : "multiple",
+      "options" : [
+        {
+          "name" : "--env",
+          "desc" : "Environment name [dev : Development, prod : Production, all : All environment (dev and prod)",
+          "usage" : "compiled:[command_name] --env=[environment]"
+        }
+      ],
+      "args" : [
+        {
+          "name" : "compiled:clear",
+          "desc" : "Clear compiled environment (dev environment as default)",
+          "usage" : "compiled:clear [options]"
+        }
+      ]
+    },
+    "server": {
+      "class" : "\\iumioFramework\\Core\\Console\\Module\\InternalServer\\FrameworkInternalServerManager",
+      "desc"  : "Run iumio Framework on internal web server (Only dev environment)",
+      "usage" : "server:[command_name]",
+      "type" : "multiple",
+      "args" : [
+        {
+          "name" : "server:start",
+          "desc" : "Start the server",
+          "usage" : "server:start"
+        }
+      ],
+      "options" : [
+        {
+          "name" : "--host",
+          "desc" : "Hostname or IP of server ",
+          "usage" : "server:[command_name] --host=127.0.0.1"
+        },
+        {
+          "name" : "--port",
+          "desc" : "Port of server ",
+          "usage" : "server:[command_name] --port=8000"
+        },
+        {
+          "name" : "--cert",
+          "desc" : "Path to the certificate (only use it with --secure option)",
+          "usage" : "server:[command_name] --secure --cert=/path/to/cert"
+        },
+        {
+          "name" : "--clust",
+          "desc" : "The number of PHP built-in server clusters, from 1 to 20. Default is 10",
+          "usage" : "server:[command_name] --clust=11"
+        },
+        {
+          "name" : "--root",
+          "desc" : "Path for the document root. Default is public directory.",
+          "usage" : "server:[command_name] --root=[/path/to/root/directoryy]"
+        },
+        {
+          "name" : "--router",
+          "desc" : "Path for the router script. Default is empty.",
+          "usage" : "server:[command_name] --router=/path/to/router/file"
+        },
+        {
+          "name" : "--secure",
+          "desc" : "Enabled the https server",
+          "usage" : "server:[command_name] --secure"
+        }
+      ]
+    },
+    "version": {
+      "class" : "\\iumioFramework\\Core\\Console\\Module\\Version\\VersionManager",
+      "desc"  : "Get version of framework component",
+      "usage" : "version:[command_name]",
+      "type" : "multiple",
+      "args" : [
+        {
+          "name" : "version:edition",
+          "desc" : "The version of the framework edition",
+          "usage" : "version:edition"
+        },
+        {
+          "name" : "version:core",
+          "desc" : "The version of the framework core",
+          "usage" : "version:core"
+        },
+        {
+          "name" : "version",
+          "desc" : "The version of the framework console manager (Fcm)",
+          "usage" : "version"
+        }
+      ]
+    }
+  }
+}
