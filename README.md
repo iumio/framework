@@ -2,10 +2,12 @@
     <img src="https://framework.iumio.com/images/iumio.logo.black.framework.png" style="max-width:405px;">
 </a></p>
 
-iumio Framework - Core Only
+iumio Framework
 ================
 
 @ Let's create more simply
+
+`The core of iumio framework`
 
 <p align="center"><a href="https://framework.iumio.com" target="_blank">
     <img src="https://travis-ci.org/iumio-team/iumio-framework.svg?branch=master">
