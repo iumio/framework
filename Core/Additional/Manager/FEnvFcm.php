@@ -39,7 +39,7 @@ class FEnvFcm extends FEnv implements FEnvInterface
         $base =  realpath(__DIR__.'/../../../../../').DIRECTORY_SEPARATOR;
         self::__setPaths($base, $env, '',true);
         FEnv::set("framework.fcm.config.commands.file",
-            $base."vendor/iumio_framework/Core/Additional/Manager/Configs/commands.json");
+            $base."vendor/iumio/iumio-framework/Core/Additional/Manager/Configs/commands.json");
         return (true);
 
     }

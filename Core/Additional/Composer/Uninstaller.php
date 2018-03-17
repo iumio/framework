@@ -40,7 +40,7 @@ class Uninstaller
 
         isM::delete(self::$base_dir."public/components/libs/skel/", "directory");
 
-        isM::delete(self::$base_dir."vendor/iumio_framework/Core/Additional/Manager/Module/".
+        isM::delete(self::$base_dir."vendor/iumio/iumio-framework/Core/Additional/Manager/Module/".
         "AppManager/AppTemplate/template/{appname}/Front/Resources/public/js", "directory");
 
         isM::delete(self::$base_dir."public/components/libs/dwr/", "directory");
@@ -92,8 +92,8 @@ class Uninstaller
         );
 
         iSM::move(
-            self::$base_dir."public/components/libs/iumio_framework/assets/js/iumioTaskBar.js",
-            self::$base_dir."public/components/libs/iumio_framework/assets/js/iumioTaskBar.js.iumio"
+            self::$base_dir."public/components/libs/iumio-framework/assets/js/iumioTaskBar.js",
+            self::$base_dir."public/components/libs/iumio-framework/assets/js/iumioTaskBar.js.iumio"
         );
 
         iSM::move(

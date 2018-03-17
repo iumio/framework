@@ -260,7 +260,7 @@ class ViewBasePlugin
      */
     final public static function cssiumio(array $params)
     {
-        return ("<link href='".FEnv::get("host.web.components")."libs/iumio_framework/css/".
+        return ("<link href='".FEnv::get("host.web.components")."libs/iumio-framework/css/".
             ((isset($params['name']))? $params['name'].
                 ".".((isset($params['min']) && $params['min'] == "yes")? "min"."." : "") : "").
             "css' rel='stylesheet' />");
@@ -322,7 +322,7 @@ class ViewBasePlugin
      */
     final public static function jsiumio(array $params)
     {
-        return ("<script type='text/javascript' src='".FEnv::get("host.web.components")."libs/iumio_framework/js/".
+        return ("<script type='text/javascript' src='".FEnv::get("host.web.components")."libs/iumio-framework/js/".
             ((isset($params['name']))? $params['name'].".".((isset($params['min']) && $params['min'] == "yes")?
                     "min"."." : "") : "")."js'></script>");
     }
@@ -334,7 +334,7 @@ class ViewBasePlugin
      */
     final public static function imgiumio(array $params)
     {
-        return (FEnv::get("host.web.components")."libs/iumio_framework/img/".
+        return (FEnv::get("host.web.components")."libs/iumio-framework/img/".
             ((isset($params['name']))? $params['name'] : ""));
     }
 

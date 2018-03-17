@@ -94,11 +94,11 @@ class FrameworkEnvironment
                 "framework.config.hosts.dev.file" =>  $base."elements/config_files/hosts/hosts.dev.json",
                 "framework.config.hosts.prod.file" =>  $base."elements/config_files/hosts/hosts.prod.json",
                 "framework.config.smarty.file" =>  $base."elements/config_files/smarty_config/smarty.json",
-                "framework.baseapps" =>  $base."vendor/iumio_framework/BaseApps/",
-                "framework.baseapps.apps.file" =>  $base."vendor/iumio_framework/BaseApps/apps.json",
-                "framework.vendor_iumio" =>  $base."vendor/iumio_framework/",
-                "framework.fcm" =>  $base."vendor/iumio_framework/Core/Additional/Manager/",
-                "framework.additional" =>  $base."vendor/iumio_framework/Core/Additional/",
+                "framework.baseapps" =>  $base."vendor/iumio/iumio-framework/BaseApps/",
+                "framework.baseapps.apps.file" =>  $base."vendor/iumio/iumio-framework/BaseApps/apps.json",
+                "framework.vendor_iumio" =>  $base."vendor/iumio/iumio-framework/",
+                "framework.fcm" =>  $base."vendor/iumio/iumio-framework/Core/Additional/Manager/",
+                "framework.additional" =>  $base."vendor/iumio/iumio-framework/Core/Additional/",
                 "framework.hosts" =>  $base."elements/config_files/hosts/",
                 "framework.vendor" =>  $base."vendor/",
                 "framework.cache" =>  $base."elements/cache/",
@@ -112,13 +112,13 @@ class FrameworkEnvironment
                 "framework.cache.prod" =>  $base."elements/cache/prod/",
                 "framework.compiled.dev" =>  $base."elements/compiled/dev/",
                 "framework.compiled.prod" =>  $base."elements/compiled/prod/",
-                "framework.exceptions" =>  $base."vendor/iumio_framework/Core/Exceptions/Server/",
-                "framework.exceptions_view" =>  $base."vendor/iumio_framework/Core/Exceptions/Server/views/",
+                "framework.exceptions" =>  $base."vendor/iumio/iumio-framework/Core/Exceptions/Server/",
+                "framework.exceptions_view" =>  $base."vendor/iumio/iumio-framework/Core/Exceptions/Server/views/",
                 "framework.web" =>  $base."public/",
                 "framework.web.components" =>  $base."public/components/",
                 "framework.web.components.apps" =>  $base."public/components/apps/",
                 "framework.web.components.libs" =>  $base."public/components/libs/",
-                "framework.web.components.libs.framework" =>  $base."public/components/libs/iumio_framework/",
+                "framework.web.components.libs.framework" =>  $base."public/components/libs/iumio-framework/",
                 "framework.apps" =>  $base."apps/",
                 "framework.overrides" =>  $base."elements/overrides/",
                 "app.front" =>  $base."apps/%app_name%/Front/",
@@ -126,11 +126,11 @@ class FrameworkEnvironment
                 "app.routing" =>  $base."apps/%app_name%/Routing/",
                 "app.views" =>  $base."apps/%app_name%/Front/views/",
                 "app.resources" =>  $base."apps/%app_name%/Front/Resources/",
-                "baseapp.front" =>  $base."vendor/iumio_framework/BaseApps/%app_name%/Front/",
-                "baseapp.master" =>  $base."vendor/iumio_framework/BaseApps/%app_name%/Master/",
-                "baseapp.routing" =>  $base."vendor/iumio_framework/BaseApps/%app_name%/Routing/",
-                "baseapp.views" =>  $base."vendor/iumio_framework/BaseApps/%app_name%/Front/views/",
-                "baseapp.resources" =>  $base."vendor/iumio_framework/BaseApps/%app_name%/Front/Resources/",
+                "baseapp.front" =>  $base."vendor/iumio/iumio-framework/BaseApps/%app_name%/Front/",
+                "baseapp.master" =>  $base."vendor/iumio/iumio-framework/BaseApps/%app_name%/Master/",
+                "baseapp.routing" =>  $base."vendor/iumio/iumio-framework/BaseApps/%app_name%/Routing/",
+                "baseapp.views" =>  $base."vendor/iumio/iumio-framework/BaseApps/%app_name%/Front/views/",
+                "baseapp.resources" =>  $base."vendor/iumio/iumio-framework/BaseApps/%app_name%/Front/Resources/",
             ];
 
         if ($isfcm == false) {
@@ -139,7 +139,7 @@ class FrameworkEnvironment
             self::$framework_paths["host.web.components"] = $current."/components/";
             self::$framework_paths["host.web.components.apps"] = $current."/components/apps/";
             self::$framework_paths["host.web.components.libs"] = $current."/components/libs/";
-            self::$framework_paths["host.web.components.libs.framework"] = $current."/components/libs/iumio_framework/";
+            self::$framework_paths["host.web.components.libs.framework"] = $current."/components/libs/iumio-framework/";
         }
     }
     

@@ -84,11 +84,11 @@ class Installer
         iSM::move(self::$base_dir."skel.min.js", self::$base_dir."public/components/libs/skel/skel.min.js");
 
 
-        isM::create(self::$base_dir."vendor/iumio_framework/php/Core/Additional/Manager/Module/AppManager/".
+        isM::create(self::$base_dir."vendor/iumio/iumio-framework/php/Core/Additional/Manager/Module/AppManager/".
         "AppTemplate/template/{appname}/Front/Resources/public/js", "directory");
         file_put_contents("main.js", fopen("https://libs.framework.iumio.com/js/apptemplate/".
         "js/main.js", 'r'));
-        iSM::move(self::$base_dir."main.js", self::$base_dir."vendor/iumio_framework/php/Core/Additional/".
+        iSM::move(self::$base_dir."main.js", self::$base_dir."vendor/iumio/iumio-framework/php/Core/Additional/".
         "Manager/Module/AppManager/AppTemplate/template/{appname}/Front/Resources/public/js/main.js");
 
         isM::create(self::$base_dir."public/components/libs/dwr/", "directory");
@@ -200,8 +200,8 @@ class Installer
         );
 
         iSM::move(
-            self::$base_dir."public/components/libs/iumio_framework/assets/js/iumioTaskBar.js.iumio",
-            self::$base_dir."public/components/libs/iumio_framework/assets/js/iumioTaskBar.js"
+            self::$base_dir."public/components/libs/iumio-framework/assets/js/iumioTaskBar.js.iumio",
+            self::$base_dir."public/components/libs/iumio-framework/assets/js/iumioTaskBar.js"
         );
 
         iSM::move(
