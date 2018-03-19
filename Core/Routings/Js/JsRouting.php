@@ -40,11 +40,12 @@ class JsRouting implements Listener
     /**
      * JsRouting constructor.
      * @param bool $is_base is a Base app
+     * @throws
      */
     public function __construct(bool $is_base = false)
     {
-        $this->mercure_path = FEnv::get("framework.web.components")."mercure/config_files/map.merc.js";
-        $this->mercure_path_base = FEnv::get("framework.web.components")."mercure/config_files/map.merc.base.js";
+        $this->mercure_path = FEnv::get("framework.web.components.libs")."mercure/config_files/map.merc.js";
+        $this->mercure_path_base = FEnv::get("framework.web.components.libs")."mercure/config_files/map.merc.base.js";
         $this->apps_path = FEnv::get("framework.config.core.apps.file");
         $this->baseapps_path = FEnv::get("framework.baseapps.apps.file");
         $this->is_base = $is_base;
@@ -52,6 +53,7 @@ class JsRouting implements Listener
 
     /** Build a JS Routing File
      * @return int Operation is a success
+     * @throws
      */
     final public function build():int
     {
@@ -60,6 +62,7 @@ class JsRouting implements Listener
 
     /** Open JS Routing File
      * @return int Operation is a success
+     * @throws
      */
     public function open():int
     {
@@ -119,6 +122,7 @@ class JsRouting implements Listener
 
     /** Get app list
      * @return \stdClass The app list
+     * @throws
      */
     private function getApplist():\stdClass
     {
@@ -140,6 +144,7 @@ class JsRouting implements Listener
     /**
      * Analysis route visibility
      * @return \ArrayIterator An array interator contains all public routes
+     * @throws Server500
      */
     private function analysis():\ArrayIterator
     {

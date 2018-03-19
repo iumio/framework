@@ -29,7 +29,7 @@
   "repositories": [
     {
       "type": "vcs",
-      "url": "https://github.com/iumio/php-hyper-builtin-server"
+      "url": "https://github.com/iumio/framework-internal-server"
     }
   ],
   "require": {
@@ -44,6 +44,6 @@
   },
   "require-dev": {
     "phpunit/phpunit": "4.*",
-    "iumio/php-hyper-builtin-server": "2.*"
+    "iumio/framework-internal-server": "2.*"
   }
 }

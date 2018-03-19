@@ -17,6 +17,8 @@ namespace iumioFramework\Composer;
 @include_once __DIR__.'/../../ServerManager/ServerManager.php';
 
 use iumioFramework\Core\Additionnal\Server\ServerManager as iSM;
+use Composer\Script\Event;
+use Composer\Installer\PackageEvent;
 
 /**
  * Class Installer
@@ -31,6 +33,22 @@ class Installer
     static public $base_dir = __DIR__.'/../../../../../../';
 
     static public $base_dir_new = __DIR__.'/../../../../../';
+
+
+    public static function postUpdate(Event $event)
+    {
+        $composer = $event->getComposer();
+        // do stuff
+    }
+
+    public static function postAutoloadDump(Event $event)
+    {
+        $vendorDir = $event->getComposer()->getConfig()->get('vendor-dir');
+        require $vendorDir . '/autoload.php';
+
+        some_function_from_an_autoloaded_file();
+    }
+
 
     /**
      * Move some components downloaded by composer to the correct location
