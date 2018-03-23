@@ -39,11 +39,11 @@ class FrameworkEnvironmentDispatcher
     public static function dispatch():int
     {
         // Import Composer Autoloader
-        require_once __DIR__.'/../../../../../vendor/autoload.php';
+        require_once __DIR__.'/../../../../../autoload.php';
 
         // Getting File config
         $config = file_get_contents(realpath(__DIR__ .
-            "/../../../../../elements/config_files/core/framework.config.json"));
+            "/../../../../../../elements/config_files/core/framework.config.json"));
         if (!$config) {
             throw new \Exception("Cannot dispatch to specific environment : 
             framework.config.json File is empty or not valid");
