@@ -43,7 +43,7 @@ class FrameworkEnvironment
      */
     public static function definer(string $env):int
     {
-        $base = realpath(__DIR__ . "/../../../../../")."/";
+        $base = realpath(__DIR__ . "/../../../../../../")."/";
 
         define('IUMIO_ENV', $env);
 
