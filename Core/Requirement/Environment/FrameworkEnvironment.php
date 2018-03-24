@@ -174,8 +174,6 @@ class FrameworkEnvironment
      */
     private static function getProtocol()
     {
-        print_r($_SERVER);
-        exit();
         return ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off')? "https" : "http");
     }
 
