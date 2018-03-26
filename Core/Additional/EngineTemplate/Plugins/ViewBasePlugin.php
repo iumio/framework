@@ -187,7 +187,7 @@ class ViewBasePlugin
      */
     final public static function cssmanager(array $params)
     {
-        return ("<link href='".FEnv::get("host.web.components")."libs/iumio_manager/css/".
+        return ("<link href='".FEnv::get("host.web.components")."libs/iumio-manager/css/".
             ((isset($params['name']))? $params['name'].".".
                 ((isset($params['min']) && $params['min'] == "yes")? "min"."." : "") : "")."css' rel='stylesheet' />");
     }
@@ -237,7 +237,7 @@ class ViewBasePlugin
      */
     final public static function jsmanager(array $params)
     {
-        return ("<script type='text/javascript' src='".FEnv::get("host.web.components")."libs/iumio_manager/js/".
+        return ("<script type='text/javascript' src='".FEnv::get("host.web.components")."libs/iumio-manager/js/".
             ((isset($params['name']))? $params['name'].".".((isset($params['min']) && $params['min'] == "yes")?
                     "min"."." : "") : "")."js'></script>");
     }
@@ -249,7 +249,7 @@ class ViewBasePlugin
      */
     final public static function imgmanager(array $params)
     {
-        return (FEnv::get("host.web.components")."libs/iumio_manager/img/".
+        return (FEnv::get("host.web.components")."libs/iumio-manager/img/".
             ((isset($params['name']))? $params['name'] : ""));
     }
 

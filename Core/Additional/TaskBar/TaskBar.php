@@ -343,7 +343,7 @@ class TaskBar
         try {
             $um =  new MasterCore();
             $options['css']                 =  FEnv::get("host.web.components.libs.framework")."assets/css/iumioTaskBar.css";
-            $options['css_icon']            =  FEnv::get("host.web.components.libs.framework")."iumio_manager/css/pe-icon-7-stroke.css";
+            $options['css_icon']            =  FEnv::get("host.web.components.libs.framework")."iumio-manager/css/pe-icon-7-stroke.css";
             $options['js']                  =  FEnv::get("host.web.components.libs.framework")."assets/js/iumioTaskBar.js";
             $options['logo']                =  FEnv::get("host.web.components.libs.framework")."img/logo_white_small.png";
             $options['ve']                  =  \iumioFramework\Core\Requirement\FrameworkCore::

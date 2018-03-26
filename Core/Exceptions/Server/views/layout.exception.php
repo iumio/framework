@@ -26,17 +26,17 @@
     <link href="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs").'animate.css/' ?>animate.min.css" rel="stylesheet"/>
 
     <!--  Light Bootstrap Table core CSS    -->
-    <link href="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs").'iumio_manager/' ?>css/light-bootstrap-dashboard.css" rel="stylesheet"/>
+    <link href="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs").'iumio-manager/' ?>css/light-bootstrap-dashboard.css" rel="stylesheet"/>
 
 
-    <link href="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs").'iumio_manager/' ?>css/index.css" rel="stylesheet" />
+    <link href="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs").'iumio-manager/' ?>css/index.css" rel="stylesheet" />
     <!--  CSS for Demo Purpose, don't include it in your project     -->
-    <link href="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs").'iumio_manager/' ?>css/demo.css" rel="stylesheet" />
+    <link href="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs").'iumio-manager/' ?>css/demo.css" rel="stylesheet" />
 
 
     <!--     Fonts and icons     -->
     <link href="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs").'font-awesome/' ?>css/font-awesome.min.css" rel="stylesheet">
-    <link href="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs").'/iumio_manager/' ?>css/pe-icon-7-stroke.css" rel="stylesheet" />
+    <link href="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs").'/iumio-manager/' ?>css/pe-icon-7-stroke.css" rel="stylesheet" />
 
 </head>
 <body>
@@ -270,19 +270,19 @@
 <script src="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs").'bootstrap/' ?>js/bootstrap.min.js" type="text/javascript"></script>
 
 <!--  Checkbox, Radio & Switch Plugins -->
-<script src="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs").'iumio_manager/' ?>js/bootstrap-checkbox-radio-switch.js"></script>
+<script src="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs").'iumio-manager/' ?>js/bootstrap-checkbox-radio-switch.js"></script>
 
 <!--  Notifications Plugin    -->
-<script src="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs").'iumio_manager/' ?>js/bootstrap-notify.js"></script>
+<script src="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs").'iumio-manager/' ?>js/bootstrap-notify.js"></script>
 
 <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
-<script src="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs").'iumio_manager/' ?>js/light-bootstrap-dashboard.js"></script>
+<script src="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs").'iumio-manager/' ?>js/light-bootstrap-dashboard.js"></script>
 
 <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
-<script src="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs").'iumio_manager/' ?>js/demo.js"></script>
+<script src="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs").'iumio-manager/' ?>js/demo.js"></script>
 
 <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
-<script src="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs").'iumio_manager/' ?>js/main.js"></script>
+<script src="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs").'iumio-manager/' ?>js/main.js"></script>
 
 <?php \iumioFramework\Core\Additionnal\TaskBar\TaskBar::getJsTaskBar() ?>
 
