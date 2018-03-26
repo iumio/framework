@@ -227,11 +227,6 @@ class DeployerManager extends ModuleManager implements ModuleManagerInterface
         $com = new COM();
         $com->__render(["commands" => ["compiled:clear"], "options" => ["--env=all", "--noexit"]]);
 
-        // AUTOLOADER MANAGER
-        $aum = new AUM();
-        $aum->__render(["commands" => ["autoloader:clear"], "options" => ["--env=prod", "--noexit"]]);
-        $aum->__render(["commands" => ["autoloader:build"], "options" => ["--env=prod", "--noexit"]]);
-
         // Mercure MANAGER
         (new Mercure())->__render(["commands" => ["routing;build:jsrouting"], "options" => ["--noexit"]]);
 

@@ -49,10 +49,6 @@ class DeployerMaster extends MasterCore
                 "Directory for /elements/logs and subdirectories must have <strong>READ + WRITE</strong> permissions",
                 "p" => "RW", "path" => FEnv::get("framework.logs")),
             array("s" =>
-                "Directory /elements/config_files/engine_autoloader&nbsp;
-and subdirectories must have <strong>READ + WRITE</strong> permissions",
-                "p" => "RW", "path" => FEnv::get("framework.config.autoloader")),
-            array("s" =>
                 "File /elements/config_files/core/framework.config.json&nbsp;
 must have <strong>READ + WRITE</strong> permissions",
                 "p" => "RW", "path" => FEnv::get("framework.config.core.config.file")),
@@ -225,11 +221,6 @@ subdirectories file must have <strong>READ + WRITE + EXECUTION</strong> permissi
         // COMPILED MASTER
         $compiled = $this->getMaster("Compile");
         $compiled->deleteAllCompile();
-
-        // AUTOLOADER MASTER
-        $auto = $this->getMaster("Autoloader");
-        $auto->clearClassMap("prod");
-        $auto->buildClassMap("prod");
 
         // JS ROUTING MASTER
         $rt = new JsRouting();
