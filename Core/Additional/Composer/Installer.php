@@ -109,7 +109,8 @@ class Installer
         iSM::delete(self::$base_dir."public/components/libs/mercure", "directory");
         // remove SKEL assets to public libs directory
         iSM::delete(self::$base_dir."public/components/libs/skel", "directory");
-
+        // Create libs directory
+        iSM::create(self::$base_dir."public/components/libs/", "directory");
     }
 
 
