@@ -35,7 +35,6 @@
   ],
   "require": {
     "php": ">=7.0.0",
-    "twbs/bootstrap": "3.3.7",
     "phpmailer/phpmailer": "~6.0",
     "php-di/php-di": "6.*",
     "php-di/invoker": "2.*",
