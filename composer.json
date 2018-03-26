@@ -27,6 +27,15 @@
       "iumioFramework\\Units\\": "Units"
     }
   },
+  "scripts": {
+    "post-update-cmd": "iumioFramework\\Composer\\Installer::postUpdate",
+    "post-package-install": [
+      "iumioFramework\\Composer\\Installer::postPackageInstall"
+    ],
+    "post-install-cmd": [
+      "iumioFramework\\Composer\\Installer::postPackageInstall"
+    ]
+  },
   "repositories": [
     {
       "type": "vcs",
