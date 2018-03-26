@@ -13,7 +13,6 @@
  */
 
 namespace iumioFramework\Composer;
-
 @include_once __DIR__.'/../../ServerManager/ServerManager.php';
 
 use iumioFramework\Core\Additionnal\Server\ServerManager as iSM;
@@ -35,18 +34,24 @@ class Installer
     static public $base_dir_new = __DIR__.'/../../../../../';
 
 
+    /**
+     * @param Event $event
+     * @throws \Exception
+     */
     public static function postUpdate(Event $event)
     {
         $composer = $event->getComposer();
-        // do stuff
+        self::do();
     }
 
-    public static function postAutoloadDump(Event $event)
+    /**
+     * @param Event $event
+     * @throws \Exception
+     */
+    public static function postPackageInstall(Event $event)
     {
         $vendorDir = $event->getComposer()->getConfig()->get('vendor-dir');
-        require $vendorDir . '/autoload.php';
-
-        some_function_from_an_autoloaded_file();
+        self::do();
     }
 
 
@@ -55,9 +60,28 @@ class Installer
      * @throws \Exception
      */
     final public static function moveComponentsDownloadedByComposer() {
-        iSM::move(self::$base_dir."vendor/twbs/bootstrap/dist/", self::$base_dir."public/components/libs/bootstrap");
-        iSM::move(self::$base_dir."vendor/components/font-awesome/", self::$base_dir."public/components/libs/font-awesome/");
-        iSM::move(self::$base_dir."vendor/components/jquery/", self::$base_dir."public/components/libs/jquery/");
+        iSM::move(self::$base_dir."vendor/twbs/bootstrap/dist/",
+            self::$base_dir."public/components/libs/bootstrap");
+        iSM::move(self::$base_dir."vendor/components/font-awesome/",
+            self::$base_dir."public/components/libs/font-awesome/");
+        iSM::move(self::$base_dir."vendor/components/jquery/",
+            self::$base_dir."public/components/libs/jquery/");
+        iSM::move(self::$base_dir."vendor/daneden/animate.css/",
+            self::$base_dir."public/components/libs/animate.css/");
+
+        // Move framework assets to public libs directory
+        iSM::move(self::$base_dir."vendor/framework-assets/iumio-framework/",
+            self::$base_dir."public/components/libs/");
+        // Move manager assets to public libs directory
+        iSM::move(self::$base_dir."vendor/framework-assets/iumio-manager",
+            self::$base_dir."public/components/libs/");
+        // Move mercure assets to public libs directory
+        iSM::move(self::$base_dir."vendor/framework-assets/mercure",
+            self::$base_dir."public/components/libs/");
+
+        // Move SKEL assets to public libs directory
+        iSM::move(self::$base_dir."vendor/framework-assets/skel",
+            self::$base_dir."public/components/libs/");
     }
 
 
@@ -67,176 +91,35 @@ class Installer
      */
     final public static function removeComponentsDir()
     {
-        iSM::delete(self::$base_dir."vendor/twbs/", "directory");
-        iSM::delete(self::$base_dir."vendor/components/jquery", "directory");
-        iSM::delete(self::$base_dir."vendor/composer/", "directory");
-        iSM::delete(self::$base_dir."vendor/autoload.php", "file");
-        iSM::delete(self::$base_dir."vendor/components/", "directory");
+        // remove animate.css assets to public directory
+        iSM::delete(self::$base_dir."public/components/libs/animate.css/", "directory");
+        // remove bootstrap assets to public directory
+        iSM::delete(self::$base_dir."public/components/libs/bootstrap/", "directory");
+        // remove dwr assets to public directory
+        iSM::delete(self::$base_dir."public/components/libs/dwr/", "directory");
+        // remove font-awesome assets to public directory
+        iSM::delete(self::$base_dir."public/components/libs/font-awesome/", "directory");
+        // remove jquery assets to public directory
+        iSM::delete(self::$base_dir."public/components/libs/jquery/", "directory");
+        // remove framework assets to public libs directory
+        iSM::delete(self::$base_dir."public/components/libs/iumio-framework", "directory");
+        // remove manager assets to public libs directory
+        iSM::delete(self::$base_dir."public/components/libs/iumio-manager", "directory");
+        // remove mercure assets to public libs directory
+        iSM::delete(self::$base_dir."public/components/libs/mercure", "directory");
+        // remove SKEL assets to public libs directory
+        iSM::delete(self::$base_dir."public/components/libs/skel", "directory");
 
-        /*iSM::delete(self::$base_dir."public/components/libs/bootstrap", "directory");
-        iSM::delete(self::$base_dir."vendor/components/jquery", "directory");
-        iSM::delete(self::$base_dir."public/components/libs/font-awesome/", "directory");*/
     }
 
-    /**
-     * Download required libs for iumio framework
-     * @throws \Exception
-     */
-    final public static function downloadComponents()
-    {
-        file_put_contents("animate.css", fopen("https://libs.framework.iumio.com/".
-        "css/animate.css", 'r'));
-        isM::create(self::$base_dir."public/components/libs/animate.css/", "directory");
-        file_put_contents("animate.min.css", fopen("https://libs.framework.iumio.com/".
-        "css/animate.min.css", 'r'));
-        iSM::move(self::$base_dir."animate.css", self::$base_dir."public/components/libs/animate.css/".
-        "animate.css");
-        iSM::move(self::$base_dir."animate.min.css", self::$base_dir."public/components/libs/".
-        "animate.css/animate.min.css");
-
-        isM::create(self::$base_dir."public/components/libs/skel/", "directory");
-        file_put_contents("skel.min.js", fopen(
-            "https://libs.framework.iumio.com/js/skel.min.js",
-            'r'
-        ));
-        iSM::move(self::$base_dir."skel.min.js", self::$base_dir."public/components/libs/skel/skel.min.js");
-
-
-        isM::create(self::$base_dir."vendor/iumio/iumio-framework/php/Core/Additional/Manager/Module/AppManager/".
-        "AppTemplate/template/{appname}/Front/Resources/public/js", "directory");
-        file_put_contents("main.js", fopen("https://libs.framework.iumio.com/js/apptemplate/".
-        "js/main.js", 'r'));
-        iSM::move(self::$base_dir."main.js", self::$base_dir."vendor/iumio/iumio-framework/php/Core/Additional/".
-        "Manager/Module/AppManager/AppTemplate/template/{appname}/Front/Resources/public/js/main.js");
-
-        isM::create(self::$base_dir."public/components/libs/dwr/", "directory");
-        file_put_contents("util.js", fopen("https://libs.framework.iumio.com/js/util.js", 'r'));
-        iSM::move(self::$base_dir."util.js", self::$base_dir."public/components/libs/dwr/util.js");
-
-        file_put_contents("demo.js", fopen(
-            "https://libs.framework.iumio.com/js/iumio_manager/demo.js",
-            'r'
-        ));
-        iSM::move(self::$base_dir."demo.js", self::$base_dir."public/components/libs/iumio_manager/js/demo.js");
-
-        file_put_contents("light-bootstrap-dashboard.css", fopen("https://libs.framework.iumio.com/".
-            "css/light-bootstrap-dashboard.css", 'r'));
-        iSM::move(self::$base_dir."light-bootstrap-dashboard.css", self::$base_dir."public/components/libs/".
-        "iumio_manager/css/light-bootstrap-dashboard.css");
-
-        file_put_contents("pe-icon-7-stroke.css", fopen("https://libs.framework.iumio.com/css/".
-        "pe-icon-7-stroke.css", 'r'));
-        iSM::move(self::$base_dir."pe-icon-7-stroke.css", self::$base_dir."public/components/libs/iumio_manager".
-        "/css/pe-icon-7-stroke.css");
-
-        file_put_contents(
-            "bootstrap-checkbox-radio-switch.js",
-            fopen("https://libs.framework.iumio.com/js/bootstrap-checkbox-radio-switch.js", 'r')
-        );
-        iSM::move(
-            self::$base_dir."bootstrap-checkbox-radio-switch.js",
-            self::$base_dir."public/components/libs/iumio_manager/js/bootstrap-checkbox-radio-switch.js"
-        );
-
-        file_put_contents(
-            "bootstrap-notify.js",
-            fopen("https://libs.framework.iumio.com/js/bootstrap-notify.js", 'r')
-        );
-        iSM::move(
-            self::$base_dir."bootstrap-notify.js",
-            self::$base_dir."public/components/libs/iumio_manager/js/bootstrap-notify.js"
-        );
-
-        file_put_contents(
-            "bootstrap-select.js",
-            fopen("https://libs.framework.iumio.com/js/bootstrap-select.js", 'r')
-        );
-        iSM::move(
-            self::$base_dir."bootstrap-select.js",
-            self::$base_dir."public/components/libs/iumio_manager/js/bootstrap-select.js"
-        );
-
-        file_put_contents(
-            "light-bootstrap-dashboard.js",
-            fopen("https://libs.framework.iumio.com/js/light-bootstrap-dashboard.js", 'r')
-        );
-        iSM::move(
-            self::$base_dir."light-bootstrap-dashboard.js",
-            self::$base_dir."public/components/libs/iumio_manager/js/light-bootstrap-dashboard.js"
-        );
-
-
-        file_put_contents(
-            "Pe-icon-7-stroke.eot",
-            fopen("https://libs.framework.iumio.com/fonts/Pe-icon-7-stroke.eot", 'r')
-        );
-        iSM::move(
-            self::$base_dir."Pe-icon-7-stroke.eot",
-            self::$base_dir."public/components/libs/iumio_manager/fonts/Pe-icon-7-stroke.eot"
-        );
-
-
-        file_put_contents(
-            "Pe-icon-7-stroke.svg",
-            fopen("https://libs.framework.iumio.com/fonts/Pe-icon-7-stroke.svg", 'r')
-        );
-        iSM::move(
-            self::$base_dir."Pe-icon-7-stroke.svg",
-            self::$base_dir."public/components/libs/iumio_manager/fonts/Pe-icon-7-stroke.svg"
-        );
-
-
-        file_put_contents(
-            "Pe-icon-7-stroke.ttf",
-            fopen("https://libs.framework.iumio.com/fonts/Pe-icon-7-stroke.ttf", 'r')
-        );
-        iSM::move(
-            self::$base_dir."Pe-icon-7-stroke.ttf",
-            self::$base_dir."public/components/libs/iumio_manager/fonts/Pe-icon-7-stroke.ttf"
-        );
-
-
-        file_put_contents(
-            "Pe-icon-7-stroke.woff",
-            fopen("https://libs.framework.iumio.com/fonts/Pe-icon-7-stroke.woff", 'r')
-        );
-        iSM::move(
-            self::$base_dir."Pe-icon-7-stroke.woff",
-            self::$base_dir."public/components/libs/iumio_manager/fonts/Pe-icon-7-stroke.woff"
-        );
-    }
-
-    /**
-     * Change name of file
-     * @throws \Exception
-     */
-    final public static function changeNameComponents()
-    {
-        iSM::move(
-            self::$base_dir."public/components/libs/iumio_manager/js/main.js.iumio",
-            self::$base_dir."public/components/libs/iumio_manager/js/main.js"
-        );
-
-        iSM::move(
-            self::$base_dir."public/components/libs/iumio-framework/assets/js/iumioTaskBar.js.iumio",
-            self::$base_dir."public/components/libs/iumio-framework/assets/js/iumioTaskBar.js"
-        );
-
-        iSM::move(
-            self::$base_dir."public/components/rt/libs/js/Mercure.js.iumio",
-            self::$base_dir."public/components/rt/libs/js/Mercure.js"
-        );
-    }
 
     /**
      * Init installer
      * @throws \Exception
      */
     final public static function do() {
-        Installer::removeComponentsDir();
-        //Installer::moveComponentsDownloadedByComposer();
-        Installer::downloadComponents();
-        Installer::changeNameComponents();
+        self::removeComponentsDir();
+        self::moveComponentsDownloadedByComposer();
     }
 }
 
