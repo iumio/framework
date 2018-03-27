@@ -24,7 +24,10 @@
       "iumioFramework\\": "",
       "ManagerApp\\": "BaseApps/ManagerApp",
       "FServiceApp\\": "BaseApps/FServiceApp",
-      "iumioFramework\\Units\\": "Units"
+      "iumioFramework\\Units\\": "Units",
+      "iumioFramework\\Masters\\": "Core/Masters",
+      "iumioFramework\\Base\\Renderer\\": "Core/Base/Renderer",
+      "iumioFramework\\Exception\\Tools\\": "Core/Exception/Tools"
     }
   },
   "repositories": [

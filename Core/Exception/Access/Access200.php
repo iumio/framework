@@ -12,7 +12,7 @@
  *
  */
 
-namespace iumioFramework\Exception\Access;
+namespace iumioFramework\Core\Exception\Access;
 
 use iumioFramework\Core\Base\File\FileListener;
 use iumioFramework\Core\Base\Http\HttpResponse;
@@ -23,7 +23,7 @@ use iumioFramework\Core\Exception\Server\Server500;
 
 /**
  * Class Access200
- * @package iumioFramework\Exception\Access
+ * @package iumioFramework\Core\Exception\Access
  * @category Framework
  * @licence  MIT License
  * @link https://framework.iumio.com

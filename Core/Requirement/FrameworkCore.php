@@ -17,7 +17,7 @@ use iumioFramework\Base\Renderer\Renderer;
 use iumioFramework\Core\Server\Server;
 use iumioFramework\Core\Requirement\Environment\FEnv;
 use iumioFramework\Core\Base\Http\HttpListener;
-use iumioFramework\Exception\Access\Access200;
+use iumioFramework\Core\Exception\Access\Access200;
 use iumioFramework\Core\Routing\Routing;
 use iumioFramework\Core\Requirement\Reflection\FrameworkReflection;
 use iumioFramework\Core\Requirement\FrameworkServices\GlobalCoreService;
