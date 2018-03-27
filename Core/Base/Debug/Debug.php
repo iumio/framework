@@ -15,7 +15,7 @@
 namespace iumioFramework\Core\Base\Debug;
 
 use DateTime;
-use iumioFramework\Base\Renderer\Renderer;
+use iumioFramework\Core\Base\Renderer\Renderer;
 use iumioFramework\Core\Base\Json\JsonListener as JL;
 use iumioFramework\Core\Requirement\Environment\FEnv;
 use iumioFramework\Core\Exception\Server\Server500;

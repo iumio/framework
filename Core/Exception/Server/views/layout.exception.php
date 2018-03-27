@@ -54,7 +54,7 @@
             <ul class="nav">
                 <li>
                     <a href="<?=
-                    (new \iumioFramework\Masters\MasterCore())->generateRoute(
+                    (new \iumioFramework\Core\Masters\MasterCore())->generateRoute(
                         "iumio_manager_index",
                         null,
                         "ManagerApp",
@@ -66,7 +66,7 @@
                 </li>
                 <li>
                     <a href="<?=
-                    (new \iumioFramework\Masters\MasterCore())->generateRoute(
+                    (new \iumioFramework\Core\Masters\MasterCore())->generateRoute(
                         "iumio_manager_app_manager",
                         null,
                         "ManagerApp",
@@ -78,7 +78,7 @@
                 </li>
                 <li>
                     <a href="<?=
-                    (new \iumioFramework\Masters\MasterCore())->generateRoute(
+                    (new \iumioFramework\Core\Masters\MasterCore())->generateRoute(
                         "iumio_manager_app_manager",
                         null,
                         "ManagerApp",
@@ -90,7 +90,7 @@
                 </li>
                 <li>
                     <a href="<?=
-                    (new \iumioFramework\Masters\MasterCore())->generateRoute(
+                    (new \iumioFramework\Core\Masters\MasterCore())->generateRoute(
                         "iumio_manager_app_manager",
                         null,
                         "ManagerApp",
@@ -233,7 +233,7 @@
                             </div>
                             <div class="content">
                                 <ul class="errorlastlog" attr-href="<?php $master =
-                                    new \iumioFramework\Masters\MasterCore();
+                                    new \iumioFramework\Core\Masters\MasterCore();
                                 echo $master->generateRoute(
                                     "iumio_manager_logs_get",
                                     null,

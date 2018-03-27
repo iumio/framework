@@ -13,7 +13,7 @@
  */
 
 namespace iumioFramework\Core\Requirement;
-use iumioFramework\Base\Renderer\Renderer;
+use iumioFramework\Core\Base\Renderer\Renderer;
 use iumioFramework\Core\Server\Server;
 use iumioFramework\Core\Requirement\Environment\FEnv;
 use iumioFramework\Core\Base\Http\HttpListener;
@@ -570,11 +570,11 @@ abstract class FrameworkCore extends GlobalCoreService
     final private function declareExceptionHandlers()
     {
         set_error_handler(
-            'iumioFramework\Exception\Tools\ToolsExceptions::errorHandler',
+            'iumioFramework\Core\Exception\Tools\ToolsExceptions::errorHandler',
             E_ALL
         );
 
-        set_exception_handler('iumioFramework\Exception\Tools\ToolsExceptions::exceptionHandler');
-        register_shutdown_function('iumioFramework\Exception\Tools\ToolsExceptions::shutdownFunctionHandler');
+        set_exception_handler('iumioFramework\Core\Exception\Tools\ToolsExceptions::exceptionHandler');
+        register_shutdown_function('iumioFramework\Core\Exception\Tools\ToolsExceptions::shutdownFunctionHandler');
     }
 }

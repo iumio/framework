@@ -2,8 +2,8 @@
 
 namespace {appname}\Masters;
 
-use iumioFramework\Masters\MasterCore;
-use iumioFramework\Base\Renderer\Renderer;
+use iumioFramework\Core\Masters\MasterCore;
+use iumioFramework\Core\Base\Renderer\Renderer;
 
 /**
  * Class DefaultMaster

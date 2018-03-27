@@ -16,7 +16,7 @@ namespace iumioFramework\Core\Additional\TaskBar;
 
 use iumioFramework\Core\Requirement\Environment\FEnv;
 use iumioFramework\Core\Exception\Server\Server500;
-use iumioFramework\Masters\MasterCore;
+use iumioFramework\Core\Masters\MasterCore;
 
 /**
  * Class TaskBar

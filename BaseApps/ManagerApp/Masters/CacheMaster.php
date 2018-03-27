@@ -14,8 +14,8 @@
 
 namespace ManagerApp\Masters;
 
-use iumioFramework\Masters\MasterCore;
-use iumioFramework\Base\Renderer\Renderer;
+use iumioFramework\Core\Masters\MasterCore;
+use iumioFramework\Core\Base\Renderer\Renderer;
 use iumioFramework\Core\Server\Server as Server;
 use DirectoryIterator;
 use iumioFramework\Core\Requirement\Environment\FEnv;

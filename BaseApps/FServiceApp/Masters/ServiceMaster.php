@@ -15,8 +15,8 @@ namespace FServiceApp\Masters;
 
 use iumioFramework\Core\Requirement\Environment\FEnv;
 use iumioFramework\Core\Exception\Server\Server500;
-use iumioFramework\Masters\MasterCore;
-use iumioFramework\Base\Renderer\Renderer;
+use iumioFramework\Core\Masters\MasterCore;
+use iumioFramework\Core\Base\Renderer\Renderer;
 
 /**
  * Class ServiceMaster

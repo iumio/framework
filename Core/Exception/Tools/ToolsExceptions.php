@@ -12,7 +12,7 @@
  *
  */
 
-namespace iumioFramework\Exception\Tools;
+namespace iumioFramework\Core\Exception\Tools;
 
 use iumioFramework\Core\Base\File\FileListener;
 use iumioFramework\Core\Requirement\Environment\FEnv;
@@ -21,7 +21,7 @@ use iumioFramework\Core\Exception\Server\Server500;
 
 /**
  * Class ToolsExceptions
- * @package iumioFramework\Exception\Tools
+ * @package iumioFramework\Core\Exception\Tools
  * @category Framework
  * @licence  MIT License
  * @link https://framework.iumio.com

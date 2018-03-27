@@ -19,8 +19,8 @@ use iumioFramework\Core\Base\Json\JsonListener;
 use iumioFramework\Core\Requirement\Environment\FEnv;
 use iumioFramework\Core\Exception\Server\Server500;
 use iumioFramework\Core\Routing\Js\JsRouting;
-use iumioFramework\Masters\MasterCore;
-use iumioFramework\Base\Renderer\Renderer;
+use iumioFramework\Core\Masters\MasterCore;
+use iumioFramework\Core\Base\Renderer\Renderer;
 use iumioFramework\Core\Server\Server;
 use ManagerApp\Masters\Libs\Diff;
 

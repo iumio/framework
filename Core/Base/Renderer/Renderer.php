@@ -13,10 +13,9 @@
  *
  */
 
-namespace iumioFramework\Base\Renderer;
+namespace iumioFramework\Core\Base\Renderer;
 use iumioFramework\Core\Additional\EngineTemplate\SmartyEngineTemplate;
 use iumioFramework\Core\Base\Http\HttpResponse;
-use iumioFramework\Core\Base\Renderer\RendererInterface;
 use iumioFramework\Core\Requirement\Environment\FEnv;
 use iumioFramework\Core\Exception\Server\Server500;
 

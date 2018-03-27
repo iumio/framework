@@ -18,7 +18,7 @@ use iumioFramework\Core\Base\File\FileListener;
 use iumioFramework\Core\Base\Http\HttpResponse;
 use iumioFramework\Core\Base\Json\JsonListener;
 use iumioFramework\Core\Requirement\Environment\FEnv;
-use iumioFramework\Exception\Tools\ToolsExceptions;
+use iumioFramework\Core\Exception\Tools\ToolsExceptions;
 use iumioFramework\Core\Exception\Server\Server500;
 
 /**

@@ -14,7 +14,6 @@
  */
 
 namespace iumioFramework\Core\Base\Renderer;
-use iumioFramework\Base\Renderer\Renderer;
 use iumioFramework\Core\Exception\Server\Server500;
 
 /**

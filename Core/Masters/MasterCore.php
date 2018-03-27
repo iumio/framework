@@ -12,9 +12,9 @@
  *
  */
 
-namespace iumioFramework\Masters;
+namespace iumioFramework\Core\Masters;
 
-use iumioFramework\Base\Renderer\Renderer;
+use iumioFramework\Core\Base\Renderer\Renderer;
 use iumioFramework\Core\Base\Container\FrameworkContainer;
 use iumioFramework\Core\Requirement\Environment\FEnv;
 use iumioFramework\Core\Routing\Routing;
@@ -31,7 +31,7 @@ use iumioFramework\Core\Base\Json\JsonListener as JL;
 /**
  * Class MasterCore
  * This is the parent master for all subclass
- * @package iumioFramework\Masters
+ * @package iumioFramework\Core\Masters
  * @category Framework
  * @licence  MIT License
  * @link https://framework.iumio.com

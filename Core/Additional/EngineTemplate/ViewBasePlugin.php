@@ -347,7 +347,7 @@ class ViewBasePlugin
         if (!FEnv::isset("framework.smarty.called")) {
             FEnv::set("framework.smarty.called", 1);
         }
-        $im = new \iumioFramework\Masters\MasterCore();
+        $im = new \iumioFramework\Core\Masters\MasterCore();
 
         if (!isset($params['name'])){
             throw new \Exception("The parameter [name] is missing to generate a valid route", E_ERROR);

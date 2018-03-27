@@ -23,8 +23,8 @@ use iumioFramework\Core\Base\Json\JsonListener as JL;
 use iumioFramework\Core\Base\Json\JsonListener;
 use iumioFramework\Core\Additional\Manager\Display\OutputManager;
 use iumioFramework\Core\Requirement\Environment\FEnv;
-use iumioFramework\Exception\Tools\ToolsExceptions;
-use iumioFramework\Masters\MasterCore;
+use iumioFramework\Core\Exception\Tools\ToolsExceptions;
+use iumioFramework\Core\Masters\MasterCore;
 
 /**
  * Class AbstractServer
