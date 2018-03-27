@@ -605,15 +605,15 @@ class AppManager extends ModuleManager implements ModuleManagerInterface
         }
         Server::delete(FEnvFcm::get("framework.apps")."$appname", "directory");
         $asm = new AssetsManager();
-        $asm->__render(["commands" => ["assets:clear"], "options" => ["--quiet", "--noexit", "--appname=". $this->params['appname']]]);
+        $asm->__render(["commands" => ["assets:clear"],
+            "options" => ["--quiet", "--noexit", "--appname=". $this->params['appname']]]);
+        $this->removeComposerApp($appname);
         if (strlen($f) < 3) {
             $e = json_decode(file_get_contents((FEnvFcm::get("framework.config.core.config.file"))));
             $e->installation = null;
             $e->deployment = null;
             file_put_contents(FEnvFcm::get("framework.config.core.config.file"), json_encode($e));
         }
-
-        $this->removeComposerApp($appname);
 
         Output::displayAsGreen("The application has been deleted. To create a new application,
          use [app create] .", "none", false);
