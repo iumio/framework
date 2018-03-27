@@ -14,9 +14,7 @@
 
 namespace iumioFramework\Core\Requirement\Environment;
 
-use iumioFramework\Core\Base\Debug\Debug;
 use iumioFramework\Core\Base\Http\HttpListener;
-use iumioFramework\Core\Additional\TaskBar\TaskBar as TB;
 use iumioFramework\Core\Exception\Server\Server500;
 
 /**
@@ -40,9 +38,8 @@ class ProdEnvironment extends FrameworkEnvironment
     {
         parent::definer('prod');
         if (self::hostAllowed() == 1) {
+            self::enableComponents("prod");
             $core = new AppCore('prod', true);
-            Debug::enabled();
-            TB::switchStatus("off");
             $request = HttpListener::createFromGlobals();
             $core->dispatching($request);
             return (1);

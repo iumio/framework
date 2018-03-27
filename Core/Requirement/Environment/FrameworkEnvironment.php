@@ -14,7 +14,9 @@
 
 namespace iumioFramework\Core\Requirement\Environment;
 
+use iumioFramework\Core\Additional\TaskBar\TaskBar;
 use iumioFramework\Core\Base\Container\FrameworkContainer;
+use iumioFramework\Core\Base\Debug\Debug;
 use iumioFramework\Core\Exception\Server\Server403;
 use ArrayObject;
 use iumioFramework\Core\Exception\Server\Server500;
@@ -253,6 +255,29 @@ class FrameworkEnvironment
             throw new Server500(new ArrayObject(
                 array("explain" => "Undefined global ".$global.
                     " for FrameworkEnvironment.", "solution" => "Please Check the global name")));
+        }
+    }
+
+    /** Enable framework components
+     * @param string $env Current environment
+     * @throws Server500
+     */
+    public static function enableComponents(string $env) {
+        $base = realpath(__DIR__ . "/../../../../../../")."/";
+        $f = json_decode(file_get_contents($base."elements/config_files/core/framework.config.json"));
+        if (in_array($env, array("dev", "prod"))) {
+            if ("dev" === $env) {
+                TaskBar::switchStatus(((true  === $f->taskbar_dev)? "on" : "off"));
+            }
+            elseif ("prod" === $env) {
+                TaskBar::switchStatus(((true  === $f->taskbar_prod)? "on" : "off"));
+            }
+            if (true === $f->debug) {
+                Debug::enabled();
+            }
+            else {
+                Debug::disabled();
+            }
         }
     }
 }

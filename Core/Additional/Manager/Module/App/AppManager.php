@@ -521,6 +521,7 @@ class AppManager extends ModuleManager implements ModuleManagerInterface
         if (isset($f->installation) && $f->installation == null) {
             $f->installation = new \DateTime();
             $f->default_env =  "dev";
+            $f->location = realpath(__DIR__."../../../../../../../../").DIRECTORY_SEPARATOR;
             $rs = json_encode($f, JSON_PRETTY_PRINT);
             file_put_contents(FEnvFcm::get("framework.config.core.config.file"), $rs);
         }

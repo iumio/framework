@@ -498,7 +498,7 @@ abstract class FrameworkCore extends GlobalCoreService
                 $rs = $edition->u3i;
                 break;
             case 'LOCATION':
-                $rs =  realpath(__DIR__.DIRECTORY_SEPARATOR.'../../../../');
+                $rs =  realpath(__DIR__.DIRECTORY_SEPARATOR.'../../../../../');
                 break;
         }
         return ($rs);

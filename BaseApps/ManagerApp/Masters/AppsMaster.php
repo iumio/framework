@@ -199,24 +199,22 @@ class AppsMaster extends MasterCore
             return ((new Renderer())->jsonRenderer(array("code" => 500, "msg" => "App does not exist")));
         }
         $file = array_values((array)$file);
-
         $filetemp = $file;
         $file = json_encode((object) $file, JSON_PRETTY_PRINT);
-        JL::put(FEnv::get("framework.config.core.apps.file"), $file);
-        $msg = "OK";
-        if (empty($filetemp)) {
-            $e = JL::open(FEnv::get("framework.config.core.config.file"));
-            $e->installation = null;
-            $e->deployment = null;
-            JL::put(FEnv::get("framework.config.core.config.file"), $e);
-            $msg = "RELOAD";
-        }
         $assets = $this->getMaster("Assets");
         $assets->clear($appname, "all");
-
+        JL::put(FEnv::get("framework.config.core.apps.file"), $file);
         $this->removeComposerApp($appname);
         Server::delete(FEnv::get("framework.apps").$appname, "directory");
-
+        $msg = "OK";
+        if (empty($filetemp)) {
+            $base = __DIR__."/../../../../../../";
+            $e = json_decode(file_get_contents($base."elements/config_files/core/framework.config.json"));
+            $e->installation = null;
+            $e->deployment = null;
+            file_put_contents($base."elements/config_files/core/framework.config.json", json_encode($e));
+            $msg = "RELOAD";
+        }
         return ((new Renderer())->jsonRenderer(array("code" => 200, "msg" => $msg)));
     }
 
