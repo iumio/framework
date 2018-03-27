@@ -16,7 +16,7 @@ namespace iumioFramework\Core\Additional\Manager;
 
 use iumioFramework\Core\Additional\Manager\Module\ModuleManager;
 use iumioFramework\Core\Requirement\Environment\FEnv;
-use iumioFramework\Requirement\Environment\FEnvInterface;
+use iumioFramework\Core\Requirement\Environment\FEnvInterface;
 
 
 /**
