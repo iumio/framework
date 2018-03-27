@@ -208,7 +208,7 @@ class AppsMaster extends MasterCore
         $assets->clear($appname, "all");
         if (strlen($file) < 3) {
             JL::put(FEnv::get("framework.config.core.config.file"), "");
-            $e = JL::open(FEnvFcm::get("framework.config.core.config.file"));
+            $e = JL::open(FEnv::get("framework.config.core.config.file"));
             $e->installation = null;
             $e->deployment = null;
             JL::put(FEnv::get("framework.config.core.config.file"), $e);
