@@ -64,7 +64,6 @@ abstract class FrameworkCore extends GlobalCoreService
     {
         $this->environment = $environment;
         $this->debug = (bool) $debug;
-
         self::detectFirstInstallation();
 
         if ($this->debug) {
@@ -552,11 +551,12 @@ abstract class FrameworkCore extends GlobalCoreService
     final private function detectFirstInstallation():int
     {
         $file = JL::open(FEnv::get("framework.config.core.config.file"));
-        if (isset($file->installation) && ($file->installation == null)) {
+        if (!isset($file->installation) || ($file->installation == NULL)) {
             if (file_exists(FEnv::get("framework.root").'public/setup/setup.php')) {
                 header('Location: '.FEnv::get("host.current").'/setup/setup.php');
                 exit(1);
             } else {
+
                 throw new \RuntimeException("(Setup components does not exist in web directory => Please download".
                     "the setup components on iumio Framework Website to fix this error and put him in web directory)");
             }

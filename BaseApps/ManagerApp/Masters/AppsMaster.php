@@ -200,23 +200,24 @@ class AppsMaster extends MasterCore
         }
         $file = array_values((array)$file);
 
+        $filetemp = $file;
         $file = json_encode((object) $file, JSON_PRETTY_PRINT);
         JL::put(FEnv::get("framework.config.core.apps.file"), $file);
-
-        Server::delete(FEnv::get("framework.apps").$appname, "directory");
-        $assets = $this->getMaster("Assets");
-        $assets->clear($appname, "all");
-        $this->removeComposerApp($appname);
-        if (strlen($file) < 3) {
+        $msg = "OK";
+        if (empty($filetemp)) {
             $e = JL::open(FEnv::get("framework.config.core.config.file"));
             $e->installation = null;
             $e->deployment = null;
             JL::put(FEnv::get("framework.config.core.config.file"), $e);
-            return ((new Renderer())->jsonRenderer(array("code" => 200, "msg" => "RELOAD")));
+            $msg = "RELOAD";
         }
+        $assets = $this->getMaster("Assets");
+        $assets->clear($appname, "all");
 
+        $this->removeComposerApp($appname);
+        Server::delete(FEnv::get("framework.apps").$appname, "directory");
 
-        return ((new Renderer())->jsonRenderer(array("code" => 200, "msg" => "OK")));
+        return ((new Renderer())->jsonRenderer(array("code" => 200, "msg" => $msg)));
     }
 
 
