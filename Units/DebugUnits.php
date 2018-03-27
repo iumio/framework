@@ -19,7 +19,10 @@ use iumioFramework\Core\Base\Debug\Debug;
 
 class DebugUnits extends FrameworkUnits
 {
-    
+
+    /**
+     * @throws \iumioFramework\Core\Exception\Server\Server500
+     */
     public function execute()
     {
         Debug::output("hello", "screen");

@@ -12,16 +12,16 @@
  *
  */
 
-namespace iumioFramework\Core\Console;
+namespace iumioFramework\Core\Additional\Manager;
 
-use iumioFramework\Additional\Manager\Module\ModuleManager;
+use iumioFramework\Core\Additional\Manager\Module\ModuleManager;
 use iumioFramework\Core\Requirement\Environment\FEnv;
 use iumioFramework\Requirement\Environment\FEnvInterface;
 
 
 /**
  * Class FEnvFcm
- * @package iumioFramework\Core\Console
+ * @package iumioFramework\Core\Additional\Manager\
  * @category Framework
  * @licence  MIT License
  * @link https://framework.iumio.com
@@ -34,9 +34,8 @@ class FEnvFcm extends FEnv implements FEnvInterface
      * @throws \Exception
      */
     public static function __initialize():bool {
-
         $env = (new ModuleManager())->getCurrentEnv();
-        $base =  realpath(__DIR__.'/../../../../../').DIRECTORY_SEPARATOR;
+        $base =  realpath(__DIR__.'/../../../../../../').DIRECTORY_SEPARATOR;
         self::__setPaths($base, $env, '',true);
         FEnv::set("framework.fcm.config.commands.file",
             $base."vendor/iumio/iumio-framework/Core/Additional/Manager/Configs/commands.json");

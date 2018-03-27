@@ -16,10 +16,8 @@
 namespace iumioFramework\Core\Requirement\Environment;
 
 use iumioFramework\Core\Base\Container\FrameworkContainer;
-use iumioFramework\Core\Base\Http\ParameterRequest;
-use iumioFramework\Exception\Server\Server403;
 use ArrayObject;
-use iumioFramework\Exception\Server\Server500;
+use iumioFramework\Core\Exception\Server\Server500;
 use iumioFramework\Requirement\Environment\FEnvInterface;
 
 /**

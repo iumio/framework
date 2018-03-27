@@ -14,7 +14,7 @@
 
 namespace iumioFramework\Core\Requirement;
 
-use iumioFramework\Core\Additionnal\Server\ServerManager as ServerManager;
+use iumioFramework\Core\Server\Server;
 use iumioFramework\Core\Requirement\Environment\FEnv;
 
 /**
@@ -38,9 +38,9 @@ class BaseApp extends App
         $appname = $this->name;
         $temp = "no";
         $temdirbase = FEnv::get("framework.root").
-            "vendor/iumio-framework/Core/Additional/Manager/Module/AppManager/AppTemplate";
+            "vendor/iumio-framework/Core/Additional/Manager/Module/App/AppTemplate";
         $tempdir = ($temp == "no")? $temdirbase.'/notemplate/{appname}/' : $temdirbase.'/template/{appname}/';
-        ServerManager::copy($tempdir, FEnv::get("framework.root")."apps/".$appname, 'directory');
+        Server::copy($tempdir, FEnv::get("framework.root")."apps/".$appname, 'directory');
         $napp = FEnv::get("framework.root")."apps/".$appname;
 
         // APP
@@ -55,10 +55,10 @@ class BaseApp extends App
         file_put_contents($napp."/Routing/default.merc", $str);
 
         // MASTER
-        $f = file_get_contents($napp."/Master/DefaultMaster.php.local");
+        $f = file_get_contents($napp."/Masters/DefaultMaster.php.local");
         $str = str_replace("{appname}", $appname, $f);
-        file_put_contents($napp."/Master/DefaultMaster.php.local", $str);
-        rename($napp."/Master/DefaultMaster.php.local", $napp."/Master/DefaultMaster.php");
+        file_put_contents($napp."/Masters/DefaultMaster.php.local", $str);
+        rename($napp."/Masters/DefaultMaster.php.local", $napp."/Masters/DefaultMaster.php");
 
         // REGISTER TO APP CORE
         $f = json_decode(file_get_contents(FEnv::get("framework.root").
@@ -89,7 +89,9 @@ class BaseApp extends App
          browser with parameter /hello. Enjoy ! \n", "none");
     }
 
-    /** Delete an app
+    /**
+     * Delete an app
+     * @throws
      */
     public function remove()
     {
@@ -105,8 +107,8 @@ class BaseApp extends App
         $f = json_encode($f, JSON_PRETTY_PRINT);
         file_put_contents(FEnv::get("framework.root")."elements/config_files/core/apps.json", $f);
 
-        ServerManager::delete(FEnv::get("framework.root")."apps/".$this->name, "directory");
-        ServerManager::delete(FEnv::get("framework.root")."public/components/apps/".strtolower($this->name),
+        Server::delete(FEnv::get("framework.root")."apps/".$this->name, "directory");
+        Server::delete(FEnv::get("framework.root")."public/components/apps/".strtolower($this->name),
             'directory');
     }
 }

@@ -21,7 +21,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "iumioFramework\\": "Core",
+      "iumioFramework\\": "",
       "ManagerApp\\": "BaseApps/ManagerApp",
       "FServiceApp\\": "BaseApps/FServiceApp",
       "iumioFramework\\Units\\": "Units"

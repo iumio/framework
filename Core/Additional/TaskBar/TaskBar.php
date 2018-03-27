@@ -12,10 +12,10 @@
  *
  */
 
-namespace iumioFramework\Core\Additionnal\TaskBar;
+namespace iumioFramework\Core\Additional\TaskBar;
 
 use iumioFramework\Core\Requirement\Environment\FEnv;
-use iumioFramework\Exception\Server\Server500;
+use iumioFramework\Core\Exception\Server\Server500;
 use iumioFramework\Masters\MasterCore;
 
 /**

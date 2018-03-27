@@ -14,13 +14,16 @@
 
 namespace iumioFramework\Units;
 
-
 use iumioFramework\Core\Base\File\FileListener;
-use iumioFramework\Exception\Server\AbstractServer;
+use iumioFramework\Core\Exception\Server\AbstractServer;
 
 class FileListenerUnits extends FrameworkUnits
 {
-    public function putAsser()
+    /**
+     * @throws \Exception
+     * @throws \iumioFramework\Core\Exception\Server\Server500
+     */
+    public function putAssert()
     {
         $fl = new FileListener();
         $fl->open(ROOT_LOGS.'dev.log', 'a+');
@@ -28,6 +31,10 @@ class FileListenerUnits extends FrameworkUnits
         $fl->close();
     }
 
+    /**
+     * @throws \Exception
+     * @throws \iumioFramework\Core\Exception\Server\Server500
+     */
     public function readAssert() {
         $f = new FileListener();
         $rs = $f->open(ROOT_LOGS.strtolower("dev").".log");
@@ -38,6 +45,10 @@ class FileListenerUnits extends FrameworkUnits
     public function readByLineAssert() {
     }
 
+    /**
+     * @throws \Exception
+     * @throws \iumioFramework\Core\Exception\Server\Server500
+     */
     public function getLogs()
     {
         print_r(AbstractServer::getLogs());

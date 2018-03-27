@@ -32,8 +32,6 @@ class SimpleApp extends App
      */
     public function __construct(string $appname = null)
     {
-        if ($appname != null) {
-        }
     }
 
     /** Save an App

@@ -11,10 +11,9 @@
 
 namespace iumioFramework\Core\Base\Http\Session;
 
-use iumioFramework\Core\Base\Http\MetaBagRequest;
 use iumioFramework\Core\Base\Http\SessionBagRequest;
 use iumioFramework\Core\Base\Http\SessionInterfaceRequest;
-use iumioFramework\Exception\Server\Server500;
+use iumioFramework\Core\Exception\Server\Server500;
 
 /**
  * HttpSession class.
@@ -180,7 +179,6 @@ class HttpSession implements SessionInterfaceRequest
                 "iumio Session Error : Your session name is not defined", "solution" =>
                 "Please check the session object with HttpSession::all instruction")));
         }
-        return (false);
     }
 
     /**

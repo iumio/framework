@@ -12,23 +12,11 @@
  *
  */
 
-/**
- *
- *  * This is an iumio Framework component
- *  *
- *  * (c) RAFINA DANY <dany.rafina@iumio.com>
- *  *
- *  * iumio Framework - iumio Components
- *  *
- *  * To get more information about licence, please check the licence file
- *
- */
-
-namespace iumioFramework\Core\Console\Module;
+namespace iumioFramework\Core\Additional\Manager\Module;
 
 /**
  * Interface ModuleManagerInterface
- * @package iumioFramework\Core\Console\Module
+ * @package iumioFramework\Core\Manager\Module
  * @category Framework
  * @licence  MIT License
  * @link https://framework.iumio.com

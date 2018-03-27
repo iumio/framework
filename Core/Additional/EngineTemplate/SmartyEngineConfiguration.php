@@ -12,15 +12,15 @@
  *
  */
 
-namespace iumioFramework\Core\Additionnal\Template;
+namespace iumioFramework\Core\Additional\EngineTemplate;
 
 use iumioFramework\Core\Requirement\Environment\FEnv;
 use iumioFramework\Core\Base\Json\JsonListener as JL;
-use iumioFramework\Exception\Server\Server500;
+use iumioFramework\Core\Exception\Server\Server500;
 
 /**
  * Class SmartyEngineConfiguration
- * @package iumioFramework\Core\Additionnal\Template
+ * @package iumioFramework\Core\Additional\EngineTemplate
  * @author RAFINA Dany <dany.rafina@iumio.com>
  * @category Framework
  * @licence  MIT License

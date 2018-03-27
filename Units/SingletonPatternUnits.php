@@ -14,7 +14,6 @@
 
 namespace iumioFramework\Units;
 
-use iumioFramework\Core\Requirement\Patterns\SingletonPattern;
 use iumioFramework\Units\FrameworkUnits;
 
 /**

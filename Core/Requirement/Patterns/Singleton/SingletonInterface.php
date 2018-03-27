@@ -26,7 +26,8 @@ interface SingletonInterface
 {
     /**
      * Get an instance of the class
-     * @return SingletonPattern The new class instance
+     * @param $name string Instance name
+     * @return mixed The new class instance
      */
     public static function getInstance(string $name = "none");
 }

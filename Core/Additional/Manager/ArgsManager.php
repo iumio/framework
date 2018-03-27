@@ -12,18 +12,18 @@
  *
  */
 
-namespace iumioFramework\Core\Console;
+namespace iumioFramework\Core\Additional\Manager;
 
-use iumioFramework\Additional\Manager\Module\ParseManager;
-use iumioFramework\Additional\Manager\Module\PredictionManager;
-use iumioFramework\Exception\Server\Server500;
+use iumioFramework\Core\Additional\Manager\Module\ParseManager;
+use iumioFramework\Core\Additional\Manager\Module\PredictionManager;
+use iumioFramework\Core\Exception\Server\Server500;
 use iumioFramework\Core\Requirement\Reflection\FrameworkReflection as Reflex;
-use iumioFramework\Core\Console\ComManager as File;
-use iumioFramework\Core\Console\Display\OutputManager as Output;
+use iumioFramework\Core\Additional\Manager\ComManager as File;
+use iumioFramework\Core\Additional\Manager\Display\OutputManager as Output;
 
 /**
  * Class ArgsManager
- * @package iumioFramework\Core\Console
+ * @package iumioFramework\Core\Additional\Manager\
  * @category Framework
  * @licence  MIT License
  * @link https://framework.iumio.com

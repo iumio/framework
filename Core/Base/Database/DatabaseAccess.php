@@ -14,7 +14,8 @@
 
 namespace iumioFramework\Core\Base\Database;
 
-use iumioFramework\Exception\Server\Server500;
+use iumioFramework\Core\Requirement\Environment\FEnv;
+use iumioFramework\Core\Exception\Server\Server500;
 use iumioFramework\Core\Base\Json\JsonListener as JL;
 
 /**

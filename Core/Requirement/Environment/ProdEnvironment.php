@@ -16,8 +16,8 @@ namespace iumioFramework\Core\Requirement\Environment;
 
 use iumioFramework\Core\Base\Debug\Debug;
 use iumioFramework\Core\Base\Http\HttpListener;
-use iumioFramework\Core\Additionnal\TaskBar\TaskBar as TB;
-use iumioFramework\Exception\Server\Server500;
+use iumioFramework\Core\Additional\TaskBar\TaskBar as TB;
+use iumioFramework\Core\Exception\Server\Server500;
 
 /**
  * Class ProdEnvironment

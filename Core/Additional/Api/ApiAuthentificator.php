@@ -15,9 +15,8 @@
 
 namespace iumioFramework\Core\Additional\Api;
 use iumioFramework\Core\Requirement\Environment\FEnv;
-use iumioFramework\Core\Requirement\Environment\FrameworkEnvironment;
 use iumioFramework\Core\Base\Json\JsonListener as JL;
-use iumioFramework\Exception\Server\Server500;
+use iumioFramework\Core\Exception\Server\Server500;
 
 /**
  * Class ApiAuthentificator

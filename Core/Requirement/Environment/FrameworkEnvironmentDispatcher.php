@@ -16,7 +16,6 @@
 
 namespace iumioFramework\Core\Requirement\Environment;
 
-
 /**
  * Class FrameworkEnvironmentDispatcher
  * Class for dispatch to correct environment
@@ -34,7 +33,7 @@ class FrameworkEnvironmentDispatcher
      * Environment is based on framework.config.json => default_env [dev, prod]
      * @return int Dispatch is a success
      * @throws \Exception Environment is not valid or file framework.config.json is empty or not valid
-     * @throws \iumioFramework\Exception\Server\Server500
+     * @throws \iumioFramework\Core\Exception\Server\Server500
      */
     public static function dispatch():int
     {

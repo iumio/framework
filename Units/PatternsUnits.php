@@ -26,11 +26,7 @@ use iumioFramework\Units\FrameworkUnits;
  */
 class PatternsUnits extends FrameworkUnits
 {
-    public function assertSingleton()
-    {
-        $sl = SingletonPatternUnits::getInstance(1);
-        $sl->test();
-    }
+
     public function execute()
     {
         // TODO: Implement execute() method.

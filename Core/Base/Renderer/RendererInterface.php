@@ -15,7 +15,7 @@
 
 namespace iumioFramework\Core\Base\Renderer;
 use iumioFramework\Base\Renderer\Renderer;
-use iumioFramework\Exception\Server\Server500;
+use iumioFramework\Core\Exception\Server\Server500;
 
 /**
  * Class RendererInterface
@@ -79,9 +79,3 @@ interface RendererInterface {
     public function pushRender();
 
 }
-
-
-/**
- *
- *
- */

@@ -14,7 +14,7 @@
 
 namespace iumioFramework\Core\Base\Http;
 
-use iumioFramework\Exception\Server\Server500;
+use iumioFramework\Core\Exception\Server\Server500;
 
 /**
  * Class HttpResponse

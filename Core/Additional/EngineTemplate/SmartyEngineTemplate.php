@@ -12,18 +12,18 @@
  *
  */
 
-namespace iumioFramework\Core\Additionnal\Template;
+namespace iumioFramework\Core\Additional\EngineTemplate;
 
-use iumioFramework\Core\Additionnal\Server\ServerManager;
-use iumioFramework\Core\Additionnal\Template\SmartyEngineConfiguration as SmartyConfig;
+use iumioFramework\Core\Server\Server;
+use iumioFramework\Core\Additional\EngineTemplate\SmartyEngineConfiguration as SmartyConfig;
 use iumioFramework\Core\Base\Json\JsonListener;
 use iumioFramework\Core\Requirement\Environment\FEnv;
-use iumioFramework\Exception\Server\Server500;
+use iumioFramework\Core\Exception\Server\Server500;
 
 
 /**
  * Class SmartyEngineTemplate
- * @package iumioFramework\Core\Additionnal\Template
+ * @package iumioFramework\Core\Additional\EngineTemplate
  * @category Framework
  * @licence  MIT License
  * @link https://framework.iumio.com
@@ -67,7 +67,7 @@ final class SmartyEngineTemplate
 
             if (self::$appCall != "iumio") {
                 $dirapp = FEnv::get((FEnv::get("app.is_components")) ? 'framework.baseapps' : 'framework.apps');
-                ServerManager::create($dirapp . self::$appCall . '/Front/views', "directory");
+                Server::create($dirapp . self::$appCall . '/Front/views', "directory");
             }
 
             self::$instance = new \Smarty();
@@ -128,147 +128,147 @@ final class SmartyEngineTemplate
         self::$instance->registerPlugin(
             \Smarty::PLUGIN_FUNCTION,
             'webassets',
-            array("iumioFramework\Core\Additionnal\Template\ViewBasePlugin", "webassets")
+            array("iumioFramework\Core\Additional\EngineTemplate\ViewBasePlugin", "webassets")
         );
 
         self::$instance->registerPlugin(
             \Smarty::PLUGIN_FUNCTION,
             'jquery',
-            array("iumioFramework\Core\Additionnal\Template\ViewBasePlugin", "jquery")
+            array("iumioFramework\Core\Additional\EngineTemplate\ViewBasePlugin", "jquery")
         );
 
         self::$instance->registerPlugin(
             \Smarty::PLUGIN_FUNCTION,
             'fawesome_css',
-            array("iumioFramework\Core\Additionnal\Template\ViewBasePlugin", "fontawesomecss")
+            array("iumioFramework\Core\Additional\EngineTemplate\ViewBasePlugin", "fontawesomecss")
         );
         self::$instance->registerPlugin(
             \Smarty::PLUGIN_FUNCTION,
             'fawesome_less',
-            array("iumioFramework\Core\Additionnal\Template\ViewBasePlugin", "fontawesomeless")
+            array("iumioFramework\Core\Additional\EngineTemplate\ViewBasePlugin", "fontawesomeless")
         );
         self::$instance->registerPlugin(
             \Smarty::PLUGIN_FUNCTION,
             'fawesome_scss',
-            array("iumioFramework\Core\Additionnal\Template\ViewBasePlugin", "fontawesomescss")
+            array("iumioFramework\Core\Additional\EngineTemplate\ViewBasePlugin", "fontawesomescss")
         );
         self::$instance->registerPlugin(
             \Smarty::PLUGIN_FUNCTION,
             'fawesome_fonts',
-            array("iumioFramework\Core\Additionnal\Template\ViewBasePlugin", "fontawesomefonts")
+            array("iumioFramework\Core\Additional\EngineTemplate\ViewBasePlugin", "fontawesomefonts")
         );
 
 
         self::$instance->registerPlugin(
             \Smarty::PLUGIN_FUNCTION,
             'framework_info',
-            array("iumioFramework\Core\Additionnal\Template\ViewBasePlugin", "finfo")
+            array("iumioFramework\Core\Additional\EngineTemplate\ViewBasePlugin", "finfo")
         );
         self::$instance->registerPlugin(
             \Smarty::PLUGIN_FUNCTION,
             'system_info',
-            array("iumioFramework\Core\Additionnal\Template\ViewBasePlugin", "sinfo")
+            array("iumioFramework\Core\Additional\EngineTemplate\ViewBasePlugin", "sinfo")
         );
 
         self::$instance->registerPlugin(
             \Smarty::PLUGIN_FUNCTION,
             'bootstrap_js',
-            array("iumioFramework\Core\Additionnal\Template\ViewBasePlugin", "btspjs")
+            array("iumioFramework\Core\Additional\EngineTemplate\ViewBasePlugin", "btspjs")
         );
         self::$instance->registerPlugin(
             \Smarty::PLUGIN_FUNCTION,
             'bootstrap_css',
-            array("iumioFramework\Core\Additionnal\Template\ViewBasePlugin", "btspcss")
+            array("iumioFramework\Core\Additional\EngineTemplate\ViewBasePlugin", "btspcss")
         );
 
         self::$instance->registerPlugin(
             \Smarty::PLUGIN_FUNCTION,
             'animate_css',
-            array("iumioFramework\Core\Additionnal\Template\ViewBasePlugin", "animatecss")
+            array("iumioFramework\Core\Additional\EngineTemplate\ViewBasePlugin", "animatecss")
         );
 
         self::$instance->registerPlugin(
             \Smarty::PLUGIN_FUNCTION,
             'css',
-            array("iumioFramework\Core\Additionnal\Template\ViewBasePlugin", "css")
+            array("iumioFramework\Core\Additional\EngineTemplate\ViewBasePlugin", "css")
         );
         self::$instance->registerPlugin(
             \Smarty::PLUGIN_FUNCTION,
             'js',
-            array("iumioFramework\Core\Additionnal\Template\ViewBasePlugin", "js")
+            array("iumioFramework\Core\Additional\EngineTemplate\ViewBasePlugin", "js")
         );
 
         self::$instance->registerPlugin(
             \Smarty::PLUGIN_FUNCTION,
             'css_libs',
-            array("iumioFramework\Core\Additionnal\Template\ViewBasePlugin", "csslibs")
+            array("iumioFramework\Core\Additional\EngineTemplate\ViewBasePlugin", "csslibs")
         );
         self::$instance->registerPlugin(
             \Smarty::PLUGIN_FUNCTION,
             'js_libs',
-            array("iumioFramework\Core\Additionnal\Template\ViewBasePlugin", "jslibs")
+            array("iumioFramework\Core\Additional\EngineTemplate\ViewBasePlugin", "jslibs")
         );
 
         self::$instance->registerPlugin(
             \Smarty::PLUGIN_FUNCTION,
             'css_manager',
-            array("iumioFramework\Core\Additionnal\Template\ViewBasePlugin", "cssmanager")
+            array("iumioFramework\Core\Additional\EngineTemplate\ViewBasePlugin", "cssmanager")
         );
         self::$instance->registerPlugin(
             \Smarty::PLUGIN_FUNCTION,
             'js_manager',
-            array("iumioFramework\Core\Additionnal\Template\ViewBasePlugin", "jsmanager")
+            array("iumioFramework\Core\Additional\EngineTemplate\ViewBasePlugin", "jsmanager")
         );
         self::$instance->registerPlugin(
             \Smarty::PLUGIN_FUNCTION,
             'img_manager',
-            array("iumioFramework\Core\Additionnal\Template\ViewBasePlugin", "imgmanager")
+            array("iumioFramework\Core\Additional\EngineTemplate\ViewBasePlugin", "imgmanager")
         );
 
 
         self::$instance->registerPlugin(
             \Smarty::PLUGIN_FUNCTION,
             'css_iumio',
-            array("iumioFramework\Core\Additionnal\Template\ViewBasePlugin", "cssiumio")
+            array("iumioFramework\Core\Additional\EngineTemplate\ViewBasePlugin", "cssiumio")
         );
         self::$instance->registerPlugin(
             \Smarty::PLUGIN_FUNCTION,
             'js_iumio',
-            array("iumioFramework\Core\Additionnal\Template\ViewBasePlugin", "jsiumio")
+            array("iumioFramework\Core\Additional\EngineTemplate\ViewBasePlugin", "jsiumio")
         );
         self::$instance->registerPlugin(
             \Smarty::PLUGIN_FUNCTION,
             'img_iumio',
-            array("iumioFramework\Core\Additionnal\Template\ViewBasePlugin", "imgiumio")
+            array("iumioFramework\Core\Additional\EngineTemplate\ViewBasePlugin", "imgiumio")
         );
 
         self::$instance->registerPlugin(
             \Smarty::PLUGIN_FUNCTION,
             'skel',
-            array("iumioFramework\Core\Additionnal\Template\ViewBasePlugin", "skel")
+            array("iumioFramework\Core\Additional\EngineTemplate\ViewBasePlugin", "skel")
         );
 
         self::$instance->registerPlugin(
             \Smarty::PLUGIN_FUNCTION,
             'util',
-            array("iumioFramework\Core\Additionnal\Template\ViewBasePlugin", "util")
+            array("iumioFramework\Core\Additional\EngineTemplate\ViewBasePlugin", "util")
         );
 
         self::$instance->registerPlugin(
             \Smarty::PLUGIN_FUNCTION,
             'route',
-            array("iumioFramework\Core\Additionnal\Template\ViewBasePlugin", "route")
+            array("iumioFramework\Core\Additional\EngineTemplate\ViewBasePlugin", "route")
         );
         self::$instance->registerPlugin(
             \Smarty::PLUGIN_FUNCTION,
             'taskbar',
-            array("iumioFramework\Core\Additionnal\Template\ViewBasePlugin", "taskbar")
+            array("iumioFramework\Core\Additional\EngineTemplate\ViewBasePlugin", "taskbar")
         );
 
         self::$instance->registerPlugin(
             \Smarty::PLUGIN_FUNCTION,
             'rt',
-            array("iumioFramework\Core\Additionnal\Template\ViewBasePlugin", "rtfile")
+            array("iumioFramework\Core\Additional\EngineTemplate\ViewBasePlugin", "rtfile")
         );
 
         return (1);
@@ -281,7 +281,7 @@ final class SmartyEngineTemplate
     final private function registerExtendedPlugin()
     {
         if (self::$appCall != null) {
-            if (ServerManager::exist( FEnv::get("framework.apps").FEnv::get("app.call")."/Extra/".
+            if (Server::exist( FEnv::get("framework.apps").FEnv::get("app.call")."/Extra/".
                 strtolower(FEnv::get("app.call")).".view.plugin.json")) {
                 $file = JsonListener::open(FEnv::get("framework.apps").FEnv::get("app.call")."/Extra/".
                     strtolower(FEnv::get("app.call")).".view.plugin.json");

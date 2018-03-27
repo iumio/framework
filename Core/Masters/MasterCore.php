@@ -15,20 +15,16 @@
 namespace iumioFramework\Masters;
 
 use iumioFramework\Base\Renderer\Renderer;
-use iumioFramework\Core\Additionnal\Template\SmartyEngineConfiguration;
 use iumioFramework\Core\Base\Container\FrameworkContainer;
 use iumioFramework\Core\Requirement\Environment\FEnv;
-use iumioFramework\Core\Requirement\Patterns\ObjectCreator;
-use iumioFramework\HttpRoutes\Routing;
-use iumioFramework\Core\Base\Http\ParameterRequest;
-use iumioFramework\Core\Additionnal\Template\SmartyEngineTemplate;
+use iumioFramework\Core\Routing\Routing;
+use iumioFramework\Core\Additional\EngineTemplate\SmartyEngineTemplate;
 use iumioFramework\Core\Requirement\Environment\FrameworkEnvironment;
 use iumioFramework\Core\Requirement\FrameworkServices\Services;
 use iumioFramework\Core\Requirement\FrameworkCore;
 use iumioFramework\Core\Requirement\FrameworkServices\GlobalCoreService;
 use iumioFramework\Core\Base\Database\DatabaseAccess as IDA;
-use iumioFramework\Exception\Server\Server500;
-use iumioFramework\Exception\Server\Server404;
+use iumioFramework\Core\Exception\Server\Server500;
 use iumioFramework\Core\Base\Http\Session\HttpSession;
 use iumioFramework\Core\Base\Json\JsonListener as JL;
 
@@ -93,7 +89,7 @@ class MasterCore extends GlobalCoreService
      * @param array $options options to view
      * @param bool $iscached By default to true, this option allows you to disable
      * or enable the cache for a page (Useful for dynamic content of a page)
-     * @throws \Exception if class does not exist
+     * @throws * if class does not exist
      * @return Renderer
      */
     final protected function render(string $view, array $options = array(), bool $iscached = true):Renderer

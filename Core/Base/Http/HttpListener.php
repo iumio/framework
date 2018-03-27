@@ -332,7 +332,7 @@ class HttpListener
             'SERVER_NAME' => 'localhost',
             'SERVER_PORT' => 80,
             'HTTP_HOST' => 'localhost',
-            'HTTP_USER_AGENT' => 'iumio Framework/0.X',
+            'HTTP_USER_AGENT' => 'iumio Framework/1.X',
             'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
             'HTTP_ACCEPT_LANGUAGE' => 'en-us,en;q=0.5',
             'HTTP_ACCEPT_CHARSET' => 'ISO-8859-1,utf-8;q=0.7,*;q=0.7',
@@ -466,7 +466,7 @@ class HttpListener
             $dup->cookies = new ParameterRequest($cookies);
         }
         if ($files !== null) {
-            $dup->files = new FileBag($files);
+            //$dup->files = new FileBag($files);
         }
         if ($server !== null) {
             $dup->server = new ServerRequest($server);
@@ -821,9 +821,9 @@ class HttpListener
     /**
      * Sets the Session.
      *
-     * @param SessionInterface $session The Session
+     * @param SessionInterfaceRequest $session The Session
      */
-    public function setSession(SessionInterface $session)
+    public function setSession(SessionInterfaceRequest $session)
     {
         $this->session = $session;
     }
@@ -840,6 +840,7 @@ class HttpListener
      * @return array The client IP addresses
      *
      * @see getClientIp()
+     * @throws \Exception
      */
     public function getClientIps()
     {
@@ -876,7 +877,7 @@ class HttpListener
 
         if ($hasTrustedForwardedHeader && $hasTrustedClientIpHeader &&
             $forwardedClientIps !== $xForwardedForClientIps) {
-            throw new ConflictingHeadersException('The request has both a trusted Forwarded header and a 
+            throw new \Exception('The request has both a trusted Forwarded header and a 
             trusted Client IP header, conflicting with each other with regards to the originating IP addresses of 
             the request. This is the result of a misconfiguration. You should either configure your proxy only 
             to send one of these headers, or configure iumio Framework to distrust one of them.');
@@ -1867,7 +1868,6 @@ class HttpListener
             $baseUrl = substr($requestUri, 0, $pos + strlen($baseUrl));
         }
 
-        exit($baseUrl. '/'.DIRECTORY_SEPARATOR);
         return rtrim($baseUrl, '/'.DIRECTORY_SEPARATOR);
     }
 

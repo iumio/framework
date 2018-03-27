@@ -13,13 +13,13 @@
   ],
   "commands": {
     "help": {
-      "class" : "\\iumioFramework\\Core\\Console\\Module\\Help\\HelpManager",
+      "class" : "iumioFramework\\Core\\Additional\\Manager\\Module\\Help\\HelpManager",
       "type" : "single",
       "desc"  : "Get informations about a command or all command.",
       "usage" : "help [command_name] or help"
     },
     "cache": {
-      "class" : "\\iumioFramework\\Core\\Console\\Module\\Cache\\CacheManager",
+      "class" : "iumioFramework\\Core\\Additional\\Manager\\Module\\Cache\\CacheManager",
       "desc"  : "Manage the framework cache",
       "usage" : "cache:[command_name] [option]",
       "type" : "multiple",
@@ -39,7 +39,7 @@
       ]
     },
     "assets": {
-      "class" : "\\iumioFramework\\Core\\Console\\Module\\Assets\\AssetsManager",
+      "class" : "iumioFramework\\Core\\Additional\\Manager\\Module\\Assets\\AssetsManager",
       "desc"  : "Manage the framework assets",
       "usage" : "assets:[command_name] [option]",
       "type" : "multiple",
@@ -74,7 +74,7 @@
       ]
     },
     "app": {
-      "class" : "\\iumioFramework\\Core\\Console\\Module\\App\\AppManager",
+      "class" : "iumioFramework\\Core\\Additional\\Manager\\Module\\App\\AppManager",
       "type" : "multiple",
       "desc"  : "Manage the framework app",
       "usage" : "app:[command_name]",
@@ -102,7 +102,7 @@
       ]
     },
     "routing": {
-      "class" : "\\iumioFramework\\Core\\Console\\Module\\Mercure\\MercureManager",
+      "class" : "iumioFramework\\Core\\Additional\\Manager\\Module\\Mercure\\MercureManager",
       "type" : "multiple",
       "desc"  : "Manage the mercure routing",
       "usage" : "mercure:[command_name] [option]",
@@ -122,7 +122,7 @@
       ]
     },
     "deployer": {
-      "class" : "\\iumioFramework\\Core\\Console\\Module\\Deployer\\DeployerManager",
+      "class" : "iumioFramework\\Core\\Additional\\Manager\\Module\\Deployer\\DeployerManager",
       "desc"  : "Deploy or undeploy your(s) application(s)",
       "usage" : "deployer:[command_name]",
       "type" : "multiple",
@@ -140,7 +140,7 @@
       ]
     },
     "compiled": {
-      "class" : "\\iumioFramework\\Core\\Console\\Module\\Compiled\\CompiledManager",
+      "class" : "iumioFramework\\Core\\Additional\\Manager\\Module\\Compiled\\CompiledManager",
       "desc"  : "Manage framework compilation directory",
       "usage" : "compiled:[command_name] [option]",
       "type" : "multiple",
@@ -160,7 +160,7 @@
       ]
     },
     "server": {
-      "class" : "\\iumioFramework\\Core\\Console\\Module\\InternalServer\\FrameworkInternalServerManager",
+      "class" : "iumioFramework\\Core\\Additional\\Manager\\Module\\InternalServer\\FrameworkInternalServerManager",
       "desc"  : "Run iumio Framework on internal web server (Only dev environment)",
       "usage" : "server:[command_name]",
       "type" : "multiple",
@@ -210,7 +210,7 @@
       ]
     },
     "version": {
-      "class" : "\\iumioFramework\\Core\\Console\\Module\\Version\\VersionManager",
+      "class" : "iumioFramework\\Core\\Additional\\Manager\\Module\\Version\\VersionManager",
       "desc"  : "Get version of framework component",
       "usage" : "version:[command_name]",
       "type" : "multiple",

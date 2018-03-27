@@ -15,10 +15,9 @@
 namespace iumioFramework\Core\Requirement\Environment;
 
 use iumioFramework\Core\Base\Container\FrameworkContainer;
-use iumioFramework\Core\Base\Http\ParameterRequest;
-use iumioFramework\Exception\Server\Server403;
+use iumioFramework\Core\Exception\Server\Server403;
 use ArrayObject;
-use iumioFramework\Exception\Server\Server500;
+use iumioFramework\Core\Exception\Server\Server500;
 
 /**
  * Class FrameworkEnvironment
@@ -113,7 +112,7 @@ class FrameworkEnvironment
                 "framework.compiled.dev" =>  $base."elements/compiled/dev/",
                 "framework.compiled.prod" =>  $base."elements/compiled/prod/",
                 "framework.exceptions" =>  $base."vendor/iumio/iumio-framework/Core/Exceptions/Server/",
-                "framework.exceptions_view" =>  $base."vendor/iumio/iumio-framework/Core/Exceptions/Server/views/",
+                "framework.exceptions_view" =>  $base."vendor/iumio/iumio-framework/Core/Exception/Server/views/",
                 "framework.web" =>  $base."public/",
                 "framework.web.components" =>  $base."public/components/",
                 "framework.web.components.apps" =>  $base."public/components/apps/",
@@ -122,12 +121,12 @@ class FrameworkEnvironment
                 "framework.apps" =>  $base."apps/",
                 "framework.overrides" =>  $base."elements/overrides/",
                 "app.front" =>  $base."apps/%app_name%/Front/",
-                "app.master" =>  $base."apps/%app_name%/Master/",
+                "app.master" =>  $base."apps/%app_name%/Masters/",
                 "app.routing" =>  $base."apps/%app_name%/Routing/",
                 "app.views" =>  $base."apps/%app_name%/Front/views/",
                 "app.resources" =>  $base."apps/%app_name%/Front/Resources/",
                 "baseapp.front" =>  $base."vendor/iumio/iumio-framework/BaseApps/%app_name%/Front/",
-                "baseapp.master" =>  $base."vendor/iumio/iumio-framework/BaseApps/%app_name%/Master/",
+                "baseapp.master" =>  $base."vendor/iumio/iumio-framework/BaseApps/%app_name%/Masters/",
                 "baseapp.routing" =>  $base."vendor/iumio/iumio-framework/BaseApps/%app_name%/Routing/",
                 "baseapp.views" =>  $base."vendor/iumio/iumio-framework/BaseApps/%app_name%/Front/views/",
                 "baseapp.resources" =>  $base."vendor/iumio/iumio-framework/BaseApps/%app_name%/Front/Resources/",
@@ -186,7 +185,7 @@ class FrameworkEnvironment
     {
         if (!in_array(self::$framework_paths["framework.env"], array("dev", "prod"))) {
             throw new Server500(new ArrayObject(array("explain" => "An error was detected on environment declaration",
-                "solution" => "Please check the environement declaration.", "external" => "yes")));
+                "solution" => "Please check the environment declaration.", "external" => "yes")));
         }
         $host_env = FEnv::get((FEnv::get("framework.env"))?
             "framework.config.hosts.dev.file" : "framework.config.hosts.prod.file");

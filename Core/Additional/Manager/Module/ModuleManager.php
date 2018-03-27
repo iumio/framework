@@ -12,13 +12,13 @@
  *
  */
 
-namespace iumioFramework\Additional\Manager\Module;
+namespace iumioFramework\Core\Additional\Manager\Module;
 use iumioFramework\Core\Base\Json\JsonListener;
-use iumioFramework\Exception\Server\Server500;
+use iumioFramework\Core\Exception\Server\Server500;
 
 /**
  * Class ToolsManager
- * @package iumioFramework\Core\Console\Module
+ * @package iumioFramework\Core\Manager\Module
  * @category Framework
  * @licence  MIT License
  * @link https://framework.iumio.com
@@ -58,7 +58,7 @@ class ModuleManager
     public function getCurrentEnv():string {
         $f = new JsonListener();
         $result = $f->open(
-            realpath(__DIR__."/../../../../../../elements/config_files/core/framework.config.json"));
+            realpath(__DIR__."/../../../../../../../elements/config_files/core/framework.config.json"));
         return ($result->default_env);
     }
 }

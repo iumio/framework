@@ -12,11 +12,11 @@
  *
  */
 
-namespace iumioFramework\Core\Console;
+namespace iumioFramework\Core\Additional\Manager;
 
 /**
  * Class CoreManager
- * @package iumioFramework\Core\Console
+ * @package iumioFramework\Core\Additional\Manager\
  * @category Framework
  * @licence  MIT License
  * @link https://framework.iumio.com

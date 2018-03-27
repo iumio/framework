@@ -12,12 +12,12 @@
  *
  */
 
-namespace iumioFramework\Additional\Manager\Module;
-use iumioFramework\Exception\Server\Server500;
+namespace iumioFramework\Core\Additional\Manager\Module;
+use iumioFramework\Core\Exception\Server\Server500;
 
 /**
  * Class ParseManager
- * @package iumioFramework\Core\Console\Module
+ * @package iumioFramework\Core\Manager\Module
  * @category Framework
  * @licence  MIT License
  * @link https://framework.iumio.com

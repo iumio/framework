@@ -14,18 +14,16 @@
 
 namespace iumioFramework\Core\Requirement;
 use iumioFramework\Base\Renderer\Renderer;
-use iumioFramework\Core\Additionnal\Server\ServerManager;
+use iumioFramework\Core\Server\Server;
 use iumioFramework\Core\Requirement\Environment\FEnv;
-use iumioFramework\Core\Requirement\Environment\FrameworkEnvironment;
 use iumioFramework\Core\Base\Http\HttpListener;
 use iumioFramework\Exception\Access\Access200;
-use iumioFramework\HttpRoutes\Routing;
+use iumioFramework\Core\Routing\Routing;
 use iumioFramework\Core\Requirement\Reflection\FrameworkReflection;
 use iumioFramework\Core\Requirement\FrameworkServices\GlobalCoreService;
-use iumioFramework\Exception\Server\Server200;
-use iumioFramework\Exception\Server\Server500;
-use iumioFramework\Exception\Server\Server404;
-use iumioFramework\Exception\Server\Server000;
+use iumioFramework\Core\Exception\Server\Server500;
+use iumioFramework\Core\Exception\Server\Server404;
+use iumioFramework\Core\Exception\Server\Server000;
 use iumioFramework\Core\Base\Json\JsonListener as JL;
 
 
@@ -113,17 +111,17 @@ abstract class FrameworkCore extends GlobalCoreService
      */
     public function checkPermission():int
     {
-        if (!ServerManager::checkIsExecutable(FEnv::get("framework.root")."elements/") ||
-            !ServerManager::checkIsReadable(FEnv::get("framework.root")."elements/") ||
-            !ServerManager::checkIsWritable(FEnv::get("framework.root")."elements/")) {
+        if (!Server::checkIsExecutable(FEnv::get("framework.root")."elements/") ||
+            !Server::checkIsReadable(FEnv::get("framework.root")."elements/") ||
+            !Server::checkIsWritable(FEnv::get("framework.root")."elements/")) {
             throw new Server500(new \ArrayObject(array("explain" =>
                 "Core Error : Folder /elements does not have correct permission",
                 "solution" => "Must be read, write, executable permission")));
         }
 
-        if (!ServerManager::checkIsExecutable(FEnv::get("framework.root")."apps/") ||
-            !ServerManager::checkIsReadable(FEnv::get("framework.root")."apps/") ||
-            !ServerManager::checkIsWritable(FEnv::get("framework.root")."apps/")) {
+        if (!Server::checkIsExecutable(FEnv::get("framework.root")."apps/") ||
+            !Server::checkIsReadable(FEnv::get("framework.root")."apps/") ||
+            !Server::checkIsWritable(FEnv::get("framework.root")."apps/")) {
             throw new Server500(new \ArrayObject(array("explain" =>
                 "Core Error : Folder /apps does not have correct permission",
                 "solution" => "Must be read, write, executable permission")));
@@ -153,6 +151,7 @@ abstract class FrameworkCore extends GlobalCoreService
     /** Detect the app type
      * @param string $appname App name
      * @return string The type of app called. Possibility to return a << none >> app when appname not detected
+     * @throws
      */
     final public function detectAppType(string $appname):string
     {
@@ -441,6 +440,7 @@ abstract class FrameworkCore extends GlobalCoreService
 
     /** Return app declaration file
      * @return \stdClass File result
+     * @throws
      */
     final protected function getClassFile():\stdClass
     {
@@ -450,6 +450,7 @@ abstract class FrameworkCore extends GlobalCoreService
 
     /** Return base app declaration file
      * @return \stdClass File result
+     * @throws
      */
     final protected function getBaseClassFile():\stdClass
     {

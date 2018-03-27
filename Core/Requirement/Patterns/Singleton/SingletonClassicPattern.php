@@ -12,7 +12,7 @@
  **
  **/
 
-namespace iumioFramework\Core\Requirement\Patterns;
+namespace iumioFramework\Core\Requirement\Patterns\Singleton;
 
 /**
  * Class SingletonPattern

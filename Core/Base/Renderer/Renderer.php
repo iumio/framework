@@ -14,13 +14,11 @@
  */
 
 namespace iumioFramework\Base\Renderer;
-use iumioFramework\Core\Additionnal\Template\SmartyEngineConfiguration;
-use iumioFramework\Core\Additionnal\Template\SmartyEngineTemplate;
+use iumioFramework\Core\Additional\EngineTemplate\SmartyEngineTemplate;
 use iumioFramework\Core\Base\Http\HttpResponse;
 use iumioFramework\Core\Base\Renderer\RendererInterface;
 use iumioFramework\Core\Requirement\Environment\FEnv;
-use iumioFramework\Core\Requirement\Patterns\ObjectCreator;
-use iumioFramework\Exception\Server\Server500;
+use iumioFramework\Core\Exception\Server\Server500;
 
 
 /**
@@ -89,7 +87,7 @@ class Renderer implements RendererInterface
 
         $viewRs = $si->fetch($view . SmartyEngineTemplate::$viewExtention);
 
-        $taskbar = \iumioFramework\Core\Additionnal\TaskBar\TaskBar::getTaskBar();
+        $taskbar = \iumioFramework\Core\Additional\TaskBar\TaskBar::getTaskBar();
         if ($taskbar !== "#none") {
             $pos = strpos($viewRs, "</body>");
             $viewRs = $this->strAdd($viewRs, $taskbar, $pos );
@@ -116,6 +114,7 @@ class Renderer implements RendererInterface
      * @param string $text text value
      * @param string $dataType The data type
      * @return Renderer The renderer object
+     * @throws
      */
     public function textRenderer(string $text, string $dataType = 'text'): Renderer
     {

@@ -18,9 +18,7 @@ use Invoker\ParameterResolver\Container\ParameterNameContainerResolver;
 use Invoker\ParameterResolver\Container\TypeHintContainerResolver;
 use iumioFramework\Core\Requirement\Environment\FEnv;
 use iumioFramework\Core\Requirement\FrameworkCore;
-use iumioFramework\Core\Requirement\Patterns\SingletonClassicPattern;
-use iumioFramework\Core\Requirement\Patterns\SingletonPattern;
-use iumioFramework\Exception\Server\Server500;
+use iumioFramework\Core\Exception\Server\Server500;
 use PHPMailer\PHPMailer\PHPMailer;
 
 
@@ -38,6 +36,10 @@ class FrameworkContainer
     protected static $instance = null;
 
 
+    /**
+     * FrameworkContainer constructor.
+     * @throws Server500
+     */
     protected function __construct()
     {
         $env = FEnv::get("framework.env");
