@@ -12,7 +12,7 @@
  *
  */
 
-namespace iumioFramework\Requirement\Environment;
+namespace iumioFramework\Core\Requirement\Environment;
 
 /**
  * Interface FEnvInterface
