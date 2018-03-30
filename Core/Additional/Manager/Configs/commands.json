@@ -160,7 +160,7 @@
       ]
     },
     "server": {
-      "class" : "iumioFramework\\Core\\Additional\\Manager\\Module\\InternalServer\\FrameworkInternalServerManager",
+      "class" : "iumioFramework\\Core\\Additional\\Manager\\Module\\Server\\FrameworkInternalServerManager",
       "desc"  : "Run iumio Framework on internal web server (Only dev environment)",
       "usage" : "server:[command_name]",
       "type" : "multiple",

@@ -13,7 +13,7 @@
  *
  */
 
-namespace iumioFramework\Core\Additional\Manager\Module\InternalServer;
+namespace iumioFramework\Core\Additional\Manager\Module\Server;
 
 use iumioFramework\Core\Additional\Manager\Module\ModuleManager;
 use iumioFramework\Core\Additional\Manager\CoreManager;
@@ -23,7 +23,7 @@ use iumioFramework\Fis\Runner;
 
 /**
  * Class FrameworkInternalServerManager
- * @package iumioFramework\Core\Additional\Manager\Module\Cache
+ * @package iumioFramework\Core\Additional\Manager\Module\Server
  * @category Framework
  * @licence  MIT License
  * @link https://framework.iumio.com
