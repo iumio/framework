@@ -597,6 +597,7 @@ class AppManager extends ModuleManager implements ModuleManagerInterface
             }
 
             $f = array_values((array)$f);
+            $filetemp = $f;
             $f = json_encode((object) $f, JSON_PRETTY_PRINT);
 
             file_put_contents(FEnvFcm::get("framework.config.core.apps.file"), $f);
@@ -604,18 +605,19 @@ class AppManager extends ModuleManager implements ModuleManagerInterface
                 file_put_contents(FEnvFcm::get("framework.config.core.apps.file"), "");
             }
         }
-        Server::delete(FEnvFcm::get("framework.apps")."$appname", "directory");
+
         $asm = new AssetsManager();
         $asm->__render(["commands" => ["assets:clear"],
             "options" => ["--quiet", "--noexit", "--appname=". $this->params['appname']]]);
         $this->removeComposerApp($appname);
-        if (strlen($f) < 3) {
-            $e = json_decode(file_get_contents((FEnvFcm::get("framework.config.core.config.file"))));
+        Server::delete(FEnvFcm::get("framework.apps")."$appname", "directory");
+        if (empty($filetemp)) {
+            $base = __DIR__."/../../../../../../";
+            $e = json_decode(file_get_contents($base."elements/config_files/core/framework.config.json"));
             $e->installation = null;
             $e->deployment = null;
-            file_put_contents(FEnvFcm::get("framework.config.core.config.file"), json_encode($e));
+            file_put_contents($base."elements/config_files/core/framework.config.json", json_encode($e));
         }
-
         Output::displayAsGreen("The application has been deleted. To create a new application,
          use [app create] .", "none", false);
     }
