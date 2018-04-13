@@ -14,6 +14,7 @@
 
 namespace iumioFramework\Core\Requirement\Environment;
 
+use iumioFramework\Apps\AppCore;
 use iumioFramework\Core\Base\Http\HttpListener;
 use iumioFramework\Core\Exception\Server\Server500;
 
