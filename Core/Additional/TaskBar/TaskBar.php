@@ -123,16 +123,12 @@ class TaskBar
                     "ManagerApp",
                     true
                 ).'">
-      <i class="pe-7s-refresh icon-iumio-task">
-      </i> 
       <span class="iumio-taskbar-text">No requests
       </span>
     </a>
   </li>
   <li id="iumioTaskBarAssets" class="iumioTaskBarDropdown">
     <a href="#">
-      <i class="pe-7s-file icon-iumio-task">
-      </i>  
       <span class="iumio-taskbar-text">Assets
       </span>
     </a>
@@ -155,8 +151,8 @@ class TaskBar
                     true
                 ).
                 '"> 
-                <i class="pe-7s-angle-right icon-iumio-task">
-                </i> &nbsp; Publish all environment
+                <i class="icon-iumio-task">
+                </i>Publish all environment
               </td>
             </tr>
             <tr>
@@ -168,8 +164,8 @@ class TaskBar
                     true
                 ).
                 '"> 
-                <i class="pe-7s-angle-right icon-iumio-task">
-                </i> &nbsp; Publish dev
+                <i class="icon-iumio-task">
+                </i>Publish dev
               </td>
             </tr>
             <tr>
@@ -181,8 +177,8 @@ class TaskBar
                     true
                 ).
                 '"> 
-                <i class="pe-7s-angle-right icon-iumio-task">
-                </i> &nbsp; Publish prod
+                <i class="icon-iumio-task">
+                </i>Publish prod
               </td>
             </tr>
             <tr>
@@ -194,8 +190,8 @@ class TaskBar
                     true
                 ).
                 '"> 
-                <i class="pe-7s-angle-right icon-iumio-task">
-                </i> &nbsp; Clear all environment
+                <i class="icon-iumio-task">
+                </i>Clear all environment
               </td>
             </tr>
             <tr>
@@ -207,8 +203,8 @@ class TaskBar
                     true
                 ).
                 '" >
-                <i class="pe-7s-angle-right icon-iumio-task">
-                </i> &nbsp; Clear dev
+                <i class="icon-iumio-task">
+                </i>Clear dev
               </td>
             </tr>
             <tr>
@@ -220,8 +216,8 @@ class TaskBar
                     true
                 ).
                 '" > 
-                <i class="pe-7s-angle-right icon-iumio-task">
-                </i> &nbsp; Clear prod
+                <i class="icon-iumio-task">
+                </i>Clear prod
               </td>
             </tr>
           </tbody>
@@ -237,9 +233,7 @@ class TaskBar
                     "ManagerApp",
                     true
                 ).'">
-      <i class="pe-7s-switch icon-iumio-task">
-      </i> 
-      <span class="iumio-taskbar-text">Change status
+      <span class="iumio-taskbar-text">Apps status
       </span>
     </a>
   </li>
@@ -254,8 +248,6 @@ class TaskBar
   </li>
   <li id="iumioTaskBarCacheClear" class="iumioTaskBarDropdown">
     <a href="#" >
-      <i class="pe-7s-back icon-iumio-task">
-      </i> 
       <span class="iumio-taskbar-text">Clear cache
       </span>
     </a>
@@ -277,8 +269,9 @@ class TaskBar
                     "ManagerApp",
                     true
                 ).'"> 
-                <i class="pe-7s-angle-right icon-iumio-task">
-                </i> &nbsp; Clear all environment
+              <i class="icon-iumio-task">
+                </i> 
+               Clear all environment
               </td>
             </tr>
             <tr>
@@ -289,8 +282,9 @@ class TaskBar
                     "ManagerApp",
                     true
                 ).'"> 
-                <i class="pe-7s-angle-right icon-iumio-task">
-                </i> &nbsp; Clear dev
+              <i class="icon-iumio-task">
+                </i> 
+               Clear dev
               </td>
             </tr>
             <tr>
@@ -301,8 +295,9 @@ class TaskBar
                     "ManagerApp",
                     true
                 ).'"> 
-                <i class="pe-7s-angle-right icon-iumio-task">
-                </i> &nbsp; Clear prod
+              <i class="icon-iumio-task">
+              </i> 
+               Clear prod
               </td>
             </tr>
           </tbody>

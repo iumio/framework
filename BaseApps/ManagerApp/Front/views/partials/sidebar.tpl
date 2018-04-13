@@ -80,12 +80,12 @@
                 <p>Deployer</p>
             </a>
         </li>
-        <li class="{if $selected == "apimanager"}active{/if}">
+        {*<li class="{if $selected == "apimanager"}active{/if}">
             <a href="{route name='iumio_manager_api_manager' component='yes'}">
                 <i class="pe-7s-airplay"></i>
                 <p>API</p>
             </a>
-        </li>
+        </li>*}
     </ul>
 </div>
 </div>

@@ -14,7 +14,9 @@
 
 namespace ManagerApp\Masters;
 
+use iumioFramework\Core\Base\Json\JsonListener;
 use iumioFramework\Core\Base\Renderer\Renderer;
+use iumioFramework\Core\Requirement\FrameworkServices\AppConfig;
 use iumioFramework\Core\Server\Server;
 use iumioFramework\Core\Additional\Zip\ZipEngine;
 use iumioFramework\Core\Exception\Server\Server500;
@@ -90,6 +92,13 @@ class AppsMaster extends MasterCore
                 null,
                 true
             );
+
+            $one->link_config = $this->generateRoute(
+                "iumio_manager_app_manager_get_config_app",
+                array("appname" => $one->name),
+                null,
+                true
+            );
         }
         return ($file);
     }
@@ -154,7 +163,7 @@ class AppsMaster extends MasterCore
 
     /** auto change enabled or disabled app
      * @param string $appname App name
-     * @return int
+     * @return Renderer
      * @throws
      */
     public function autoDisabledOrEnabledActivity(string $appname):Renderer
@@ -222,7 +231,7 @@ class AppsMaster extends MasterCore
     /**
      * export one app
      * @param string $appname App name
-     * @return int
+     * @return Renderer
      * @throws Server500
      */
     public function exportActivity(string $appname):Renderer
@@ -251,10 +260,10 @@ class AppsMaster extends MasterCore
             Server::create($dirbase, 'directory');
             Server::create($dirapp, 'directory');
             Server::create($dirappexp, 'directory');
-            JL::put($dirappexp."config.json", json_encode($appconfig, JSON_PRETTY_PRINT));
+            JL::put($dirappexp."register.json", json_encode($appconfig, JSON_PRETTY_PRINT));
             $zip = new ZipEngine($dirapp.($appname)."_".$date.".zip");
             $zip->setSource(FEnv::get("framework.apps").$appname);
-            $zip->addFile($dirappexp."config.json", "config.json");
+            $zip->addFile($dirappexp."register.json", "register.json");
             $zip->setArchiveComment("$appname - Export date :".$datefull->format('g:ia \o\n l jS F Y'));
             $zip->recursiveCompress();
             if ($zip->close()) {
@@ -293,13 +302,14 @@ class AppsMaster extends MasterCore
             try {
                 $zip = new ZipEngine($fileex);
                 $zip->extractTo(FEnv::get("framework.bin").'import/'.$datex);
-                $f =  JL::open(FEnv::get("framework.bin").'import/'.$datex.'/config.json');
+                $f =  JL::open(FEnv::get("framework.bin").'import/'.$datex.'/register.json');
                 if (empty($f)) {
-                    return ((new Renderer())->jsonRenderer(array("code" => 500, "msg" => "Missing file config.json")));
+                    return ((new Renderer())->jsonRenderer(array("code" => 500, "msg" => "Missing file register.json")));
                 }
                 $appname = $f->name;
 
-                $fa = json_decode(file_get_contents(FEnv::get("framework.root")."elements/config_files/core/apps.json"));
+                $fa = json_decode(file_get_contents(
+                    FEnv::get("framework.root")."elements/config_files/core/apps.json"));
                 $lastapp = 0;
                 foreach ($fa as $one => $val) {
                     if ($val->name == $appname) {
@@ -311,7 +321,7 @@ class AppsMaster extends MasterCore
 
                 Server::copy(FEnv::get("framework.bin").'import/'.$datex,
                     FEnv::get("framework.apps").$appname, 'directory');
-                Server::delete(FEnv::get("framework.apps").$appname.'/config.json', 'file');
+                Server::delete(FEnv::get("framework.apps").$appname.'/register.json', 'file');
                 Server::delete(FEnv::get("framework.bin").'import/'.$datex, 'directory');
                 $zip->close();
                 Server::delete(FEnv::get("framework.bin").'import/'.$datex.'.zip', 'file');
@@ -447,6 +457,16 @@ class AppsMaster extends MasterCore
         $prefix = $this->get("request")->get("prefix");
         $enable = $this->get("request")->get("enabled");
 
+
+        // Advanced options
+        $vdev = $this->get("request")->get("vdev");
+        $vprod = $this->get("request")->get("vprod");
+
+        $hostsdeva = $this->get("request")->get("hostsdeva");
+        $hostsdevd = $this->get("request")->get("hostsdevd");
+        $hostsproda = $this->get("request")->get("hostsproda");
+        $hostsprodd = $this->get("request")->get("hostsprodd");
+
         if ($prefix != "" && $this->checkPrefix($prefix) == -1) {
             return ((new Renderer())->jsonRenderer(array("code" => 500, "msg" =>
                 "Error on app prefix. (App prefix must be a string without special character exepted [ _ & numbers])"))
@@ -457,7 +477,18 @@ class AppsMaster extends MasterCore
             return ((new Renderer())->jsonRenderer(array("code" => 500, "msg" => "App name already exist")));
         }
 
-        $f = json_decode(file_get_contents(FEnv::get("framework.root")."elements/config_files/core/apps.json"));
+        if (!in_array($vdev, array("null", "false", "true"))) {
+            return ((new Renderer())->jsonRenderer(array("code" => 500,
+                "msg" => "Cannot set visibility on dev environment : Undefined value $vdev")));
+        }
+
+        if (!in_array($vprod, array("null", "false", "true"))) {
+            return ((new Renderer())->jsonRenderer(array("code" => 500,
+                "msg" => "Cannot set visibility on prod environment : Undefined value $vdev")));
+        }
+
+        $f = json_decode(file_get_contents(
+            FEnv::get("framework.root")."elements/config_files/core/apps.json"));
 
         foreach ($f as $one => $val) {
             if ($val->name == $appname) {
@@ -470,7 +501,75 @@ class AppsMaster extends MasterCore
         $f = json_encode($f, JSON_PRETTY_PRINT);
         file_put_contents(FEnv::get("framework.root")."elements/config_files/core/apps.json", $f);
 
+
+        if ("null" === $vdev) {
+            $vdev = null;
+        }
+        elseif ("false" === $vdev) {
+            $vdev = false;
+        }
+        elseif ("true" === $vdev) {
+            $vdev = true;
+        }
+        else {
+            $vdev = null;
+        }
+
+        if ("null" === $vprod) {
+            $vprod = null;
+        }
+        elseif ("false" === $vprod) {
+            $vprod = false;
+        }
+        elseif ("true" === $vprod) {
+            $vprod = true;
+        }
+        else {
+            $vprod = null;
+        }
+
+        $hostsdeva  = (("" === trim($hostsdeva))? null : array_map('trim',
+            (explode(";", $hostsdeva))));
+        $hostsdevd  = (("" === trim($hostsdevd))? null : array_map('trim',
+            (explode(";", $hostsdevd))));
+        $hostsproda = (("" === trim($hostsproda))? null : array_map('trim',
+            (explode(";", $hostsproda))));
+        $hostsprodd = (("" === trim($hostsprodd))? null : array_map('trim',
+            (explode(";", $hostsprodd))));
+
+
+
+
+        if (JsonListener::exists(FEnv::get("app.config.file", $appname))) {
+            $a = json_decode(file_get_contents(
+                FEnv::get("app.config.file", $appname)));
+        }
+        else {
+            $a = new \stdClass();
+        }
+
+        $a->visibility_dev  = $vdev;
+        $a->visibility_prod = $vprod;
+
+        $a->hosts_allowed_dev   = $hostsdeva;
+        $a->hosts_denied_dev    = $hostsdevd;
+        $a->hosts_allowed_prod  = $hostsproda;
+        $a->hosts_denied_prod   = $hostsprodd;
+
+        $a = json_encode($a, JSON_PRETTY_PRINT);
+        file_put_contents(FEnv::get("app.config.file", $appname), $a);
+
         return ((new Renderer())->jsonRenderer(array("code" => 200, "msg" => "OK")));
+    }
+
+    /** Get the app configuration
+     * @param string $appname The app name
+     * @return Renderer Json Renderer
+     * @throws Server500
+     */
+    public function getAppConfigActivity(string $appname) {
+        $g = AppConfig::getInstance($appname);
+        return ((new Renderer())->jsonRenderer(array("code" => 200, "result" =>  $g->getConfig())));
     }
 
     /** Adding into composer.json the app class and path

@@ -57,10 +57,12 @@ class FrameworkContainer
         $builder->useAnnotations($annotation);
         $builder->useAutowiring($autowired);
 
-        if ($env == "prod") {
-            $builder = new \DI\ContainerBuilder();
-            $builder->enableCompilation(FEnv::get("framework.cache").'container');
-            $builder->enableDefinitionCache();
+        if ("prod" === $env) {
+            if (function_exists('apcu_fetch') && ini_get('apc.enabled')
+                && ! ('cli' === PHP_SAPI && ! ini_get('apc.enable_cli'))) {
+                $builder->enableCompilation(FEnv::get("framework.cache").'container');
+                $builder->enableDefinitionCache();
+            }
         }
 
         $container = $builder->build();

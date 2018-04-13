@@ -127,6 +127,7 @@ class FrameworkEnvironment
                 "app.routing" =>  $base."apps/%app_name%/Routing/",
                 "app.views" =>  $base."apps/%app_name%/Front/views/",
                 "app.resources" =>  $base."apps/%app_name%/Front/Resources/",
+                "app.config.file" =>  $base."apps/%app_name%/config.json",
                 "baseapp.front" =>  $base."vendor/iumio/iumio-framework/BaseApps/%app_name%/Front/",
                 "baseapp.master" =>  $base."vendor/iumio/iumio-framework/BaseApps/%app_name%/Masters/",
                 "baseapp.routing" =>  $base."vendor/iumio/iumio-framework/BaseApps/%app_name%/Routing/",

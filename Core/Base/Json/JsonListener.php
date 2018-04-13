@@ -74,6 +74,24 @@ class JsonListener implements JsonInterface
         return (1);
     }
 
+    /** Check if json file exist
+     * @param string ...$filepath File path(s)
+     * @return array|bool  A boolean array with key and value (file path and if it exist or not) | if file exist or not
+     */
+    public static function exists(string ...$filepath)
+    {
+        if (count($filepath) == 1) {
+            return (file_exists($filepath[0]));
+        }
+        else {
+            $exists = [];
+            foreach ($filepath as $one) {
+                array_push($exists, [$one => file_exists($one)]);
+            }
+            return ($exists);
+        }
+    }
+
     /** Close file configuration
      * @param string $filepath File path
      * @return int Is file closed

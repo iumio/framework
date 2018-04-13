@@ -17,6 +17,12 @@ route:
 endroute
 
 route:
+  name: iumio_manager_app_manager_get_config_app
+  path :  /_manager/apps/get/config/{appname}
+  activity : Apps%getAppConfig
+endroute
+
+route:
   name : iumio_manager_app_manager_switch_default_app
   path :  /_manager/apps/setstatus/{appname}
   activity : Apps%switchDefault

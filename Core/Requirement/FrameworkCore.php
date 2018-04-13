@@ -46,10 +46,10 @@ abstract class FrameworkCore extends GlobalCoreService
     protected $environment;
     private static $runtime_parameters = null;
 
-    const CORE_VERSION = '0.5.0';
+    const CORE_VERSION = '0.6.1';
     const CORE_NAME = 'APRICOTS';
     const CORE_STAGE = 'BETA';
-    const CORE_BUILD = 201750;
+    const CORE_BUILD = 201761;
     protected static $edition = array();
 
     /**
@@ -234,7 +234,10 @@ abstract class FrameworkCore extends GlobalCoreService
     {
         $narray = array();
         foreach ($apps as $oneapp => $val) {
-            array_push($narray, array("name" => $oneapp, "value" => $val));
+            $e = AppConfig::getInstance($oneapp);
+            if ($e->checkVisibility()) {
+                array_push($narray, array("name" => $oneapp, "value" => $val));
+            }
         }
         return ($narray);
     }
