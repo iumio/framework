@@ -82,6 +82,9 @@ class AppConfig extends SingletonMulPattern
      * @throws Server500 For FEnv
      */
     private function checkHosts():bool {
+        if (null === $this->config) {
+            return (true);
+        }
         $current_env = FEnv::get("framework.env");
         $ip = ToolsExceptions::getClientIp();
         $result = true;
@@ -157,9 +160,11 @@ class AppConfig extends SingletonMulPattern
      * @throws Server500 Fenv
      */
     public function checkVisibility():bool {
+        if (null === $this->config) {
+            return (true);
+        }
         $current_env = FEnv::get("framework.env");
         if (property_exists($this->config, "visibility_$current_env")) {
-
             if (false === $this->config->{"visibility_$current_env"}) {
                 return (false);
             }
@@ -209,7 +214,5 @@ class AppConfig extends SingletonMulPattern
     {
         $this->config = $config;
     }
-
-
 
 }

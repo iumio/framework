@@ -504,7 +504,7 @@ class AppManager extends ModuleManager implements ModuleManagerInterface
             $asm->__render(["commands" => ["assets:copy"], "options" => ["--symlink", "--noexit", "--appname=". $this->params['appname']]]);
         }
 
-        $this->addComposerApp($this->params['appname']);
+        // $this->addComposerApp($this->params['appname']);
         Output::displayAsGreen("Your app is ready to use. To test your app,
          go to project location on your browser with parameter ".(($this->params['prefix'] != "")?
                 "/".trim(stripslashes($this->params['prefix'])) : "")."/index. Enjoy !", "none", false);
@@ -609,7 +609,7 @@ class AppManager extends ModuleManager implements ModuleManagerInterface
         $asm = new AssetsManager();
         $asm->__render(["commands" => ["assets:clear"],
             "options" => ["--quiet", "--noexit", "--appname=". $this->params['appname']]]);
-        $this->removeComposerApp($appname);
+        // $this->removeComposerApp($appname);
         Server::delete(FEnvFcm::get("framework.apps")."$appname", "directory");
         if (empty($filetemp)) {
             $base = __DIR__."/../../../../../../";

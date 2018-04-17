@@ -213,7 +213,7 @@ class AppsMaster extends MasterCore
         $assets = $this->getMaster("Assets");
         $assets->clear($appname, "all");
         JL::put(FEnv::get("framework.config.core.apps.file"), $file);
-        $this->removeComposerApp($appname);
+        // $this->removeComposerApp($appname);
         Server::delete(FEnv::get("framework.apps").$appname, "directory");
         $msg = "OK";
         if (empty($filetemp)) {
@@ -339,7 +339,7 @@ class AppsMaster extends MasterCore
 
                 JL::close(FEnv::get("framework.root")."/elements/config_files/core/apps.json");
 
-                $this->addComposerApp($appname);
+                // $this->addComposerApp($appname);
 
                 return ((new Renderer())->jsonRenderer(array("code" => 200, "msg" => "OK", "ext" =>
                     "The application ".$appname. " is installed.")));
@@ -429,7 +429,7 @@ class AppsMaster extends MasterCore
             $assets->publish($name, "dev");
         }
 
-        $this->addComposerApp($name);
+        // $this->addComposerApp($name);
 
         return ((new Renderer())->jsonRenderer(array("code" => 200, "msg" => "OK")));
     }
