@@ -40,7 +40,7 @@ abstract class SingletonMulPattern
     public static function getInstance(string $name)
     {
         if (!isset(self::$instances[$name]) || empty(self::$instances[$name])) {
-            new static();
+            new static($name);
         }
         return (self::$instances[$name]);
     }
