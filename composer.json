@@ -1,7 +1,7 @@
 {
   "name": "iumio/framework",
   "license": "MIT",
-  "type": "project",
+  "type": "library",
   "description": "iumio Framework, let's create more simply",
   "keywords": ["php-framework", "iumio-framework", "core", "mvc", "php", "php7", "components", "iumio"],
   "homepage": "https://framework.iumio.com",
