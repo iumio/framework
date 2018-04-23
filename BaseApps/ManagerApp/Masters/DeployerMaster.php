@@ -57,7 +57,7 @@ must have <strong>READ + WRITE</strong> permissions",
 subdirectories file must have <strong>READ + WRITE + EXECUTION</strong> permissions",
                 "p" => "RWX", "path" => FEnv::get("framework.cache")),
             array("s" =>
-                "Directory /public/setup must have <strong>removed</strong>",
+                "Directory /public/setup must be <strong>removed</strong>",
                 "p" => "D", "path" => FEnv::get("framework.web")."setup/"),
         );
         parent::__construct();
