@@ -47,10 +47,10 @@ abstract class FrameworkCore extends GlobalCoreService
     protected $environment;
     private static $runtime_parameters = null;
 
-    const CORE_VERSION = '0.6.3';
+    const CORE_VERSION = '0.6.4';
     const CORE_NAME = 'APRICOTS';
     const CORE_STAGE = 'BETA';
-    const CORE_BUILD = 201763;
+    const CORE_BUILD = 201764;
     protected static $edition = array();
 
     /**
