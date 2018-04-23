@@ -1,7 +1,7 @@
 {
   "name": "iumio/framework",
   "license": "MIT",
-  "type": "project",
+  "type": "library",
   "authors": [
     {
       "name": "Dany Rafina",
