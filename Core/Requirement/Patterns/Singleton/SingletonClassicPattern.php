@@ -64,5 +64,4 @@ abstract class SingletonClassicPattern
         // LOCKED THE UNSERIALIZE
         return (null);
     }
-
 }

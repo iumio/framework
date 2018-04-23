@@ -14,7 +14,6 @@
 
 namespace iumioFramework\Units;
 
-
 use iumioFramework\Core\Base\Debug\Debug;
 
 class DebugUnits extends FrameworkUnits

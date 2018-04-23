@@ -82,7 +82,6 @@ class CompiledManager extends ModuleManager implements ModuleManagerInterface
         } else {
             Output::displayAsNormal("Compiled delete for $env environment(s) is successfull.");
         }
-
     }
 
     /** Call Server delete and create function

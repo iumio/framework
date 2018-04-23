@@ -141,7 +141,7 @@ class RoutingMaster extends MasterCore
         $rt = array();
         $prefix = "";
 
-        if (($router = fopen((FEnv::get("framework.apps")) 
+        if (($router = fopen((FEnv::get("framework.apps"))
             . $appname . "/Routing/" . $filename, "r"))) {
             $appc = $this->getMaster("Apps");
             $apps = $appc->getAllApps();

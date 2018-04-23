@@ -14,6 +14,7 @@
 
 
 namespace iumioFramework\Core\Additional\Api;
+
 use iumioFramework\Core\Requirement\Environment\FEnv;
 use iumioFramework\Core\Base\Json\JsonListener as JL;
 use iumioFramework\Core\Exception\Server\Server500;
@@ -46,18 +47,17 @@ class ApiAuthentificator implements ApiInterface
      * @return int
      * @throws Server500
      */
-    public static function authEnabled() {
+    public static function authEnabled()
+    {
         $j = JL::open(FEnv::get("framework.config.core.config.file"));
         if (isset($j->api_auth_for)) {
             $auth = $j->api_auth_for;
 
             foreach ($auth as $oneauth) {
                 if (self::checkFileExistAndApiKeys($oneauth)) {
-
                 }
             }
-        }
-        else {
+        } else {
             return (0);
         }
     }
@@ -66,9 +66,9 @@ class ApiAuthentificator implements ApiInterface
      * @param string $appname
      * @return bool
      */
-    private static function checkFileExistAndApiKeys(string $appname) {
+    private static function checkFileExistAndApiKeys(string $appname)
+    {
         //if ()
         return (false);
     }
-
 }

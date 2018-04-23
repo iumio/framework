@@ -55,7 +55,8 @@ class ArgsManager
             Output::displayAsGreen(
                 "Welcome to the Framework Console Manager\n".
                 "I noticed that you didn't enter any parameters.\n".
-                "For more information, you can use the help command to get a command list.");
+                "For more information, you can use the help command to get a command list."
+            );
         }
 
         $c = $this->searchCommand($argv[1]);
@@ -70,7 +71,6 @@ class ArgsManager
                     "To get command list, use [help] keyword.\n\n".
                     PredictionManager::structMessage($predict));
             }
-
         }
 
         $p = ParseManager::parse($argv);
@@ -96,22 +96,17 @@ class ArgsManager
         $commands = $f->commands;
 
         foreach ($commands as $command => $val) {
-
             if ($val->type === "single") {
                 if ($command == $name) {
                     return (array("name" => $command, "class" => $val->class, "desc" => $val->desc));
                 }
-            }
-            elseif ($val->type === "multiple") {
+            } elseif ($val->type === "multiple") {
                 foreach ($val->args as $acommand => $aval) {
-
                     if ($aval->name === $name) {
                         return (array("name" => $aval->name, "class" => $val->class, "desc" => $aval->desc));
                     }
                 }
-
-            }
-            else {
+            } else {
                 throw new Server500(new \ArrayObject(array("explain" => "Undefined command type [".$val->type."]",
                     "solution" => "Please set a valid command type [single, multiple]")));
             }

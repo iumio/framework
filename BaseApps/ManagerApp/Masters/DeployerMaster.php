@@ -91,18 +91,16 @@ subdirectories file must have <strong>READ + WRITE + EXECUTION</strong> permissi
 
         JsonListener::close(FEnv::get("framework.config.core.config.file"));
 
-        for ($i = 0; $i < count($this->requirements); $i++)
-        {
-            switch ($this->requirements[$i]["p"])
-            {
+        for ($i = 0; $i < count($this->requirements); $i++) {
+            switch ($this->requirements[$i]["p"]) {
                 case "RWX":
-                        if (is_readable($this->requirements[$i]["path"]) &&
+                    if (is_readable($this->requirements[$i]["path"]) &&
                             is_writable($this->requirements[$i]["path"]) &&
                             is_executable($this->requirements[$i]["path"])) {
-                            $this->requirements[$i]["status"] = true;
-                        } else {
-                            $this->requirements[$i]["status"] = false;
-                        }
+                        $this->requirements[$i]["status"] = true;
+                    } else {
+                        $this->requirements[$i]["status"] = false;
+                    }
                     break;
                 case "R":
                     if (is_readable($this->requirements[$i]["path"])) {
@@ -138,7 +136,7 @@ subdirectories file must have <strong>READ + WRITE + EXECUTION</strong> permissi
                         is_executable($this->requirements[$i]["path"])) {
                         $this->requirements[$i]["status"] = true;
                     } else {
-                    $this->requirements[$i]["status"] = false;
+                        $this->requirements[$i]["status"] = false;
                     }
                     break;
                 case "XW":
@@ -152,8 +150,7 @@ subdirectories file must have <strong>READ + WRITE + EXECUTION</strong> permissi
                 case "D":
                     if (file_exists($this->requirements[$i]["path"])) {
                         $this->requirements[$i]["status"] = false;
-                    }
-                    else {
+                    } else {
                         $this->requirements[$i]["status"] = true;
                     }
                     break;
@@ -183,8 +180,10 @@ subdirectories file must have <strong>READ + WRITE + EXECUTION</strong> permissi
         }
 
         $configs->default_env = "dev";
-        JsonListener::put(FEnv::get("framework.config.core.config.file"),
-            json_encode($configs, JSON_PRETTY_PRINT));
+        JsonListener::put(
+            FEnv::get("framework.config.core.config.file"),
+            json_encode($configs, JSON_PRETTY_PRINT)
+        );
         JsonListener::close(FEnv::get("framework.config.core.config.file"));
 
         return ((new Renderer())->jsonRenderer(array("code" => 200, "msg" => "OK")));
@@ -206,8 +205,10 @@ subdirectories file must have <strong>READ + WRITE + EXECUTION</strong> permissi
         }
 
         $configs->default_env = "prod";
-        JsonListener::put(FEnv::get("framework.config.core.config.file"),
-            json_encode($configs, JSON_PRETTY_PRINT));
+        JsonListener::put(
+            FEnv::get("framework.config.core.config.file"),
+            json_encode($configs, JSON_PRETTY_PRINT)
+        );
         JsonListener::close(FEnv::get("framework.config.core.config.file"));
 
         //ASSETS MASTER

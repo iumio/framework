@@ -84,9 +84,7 @@ class HelpManager extends ModuleManager implements ModuleManagerInterface
                         "" . $val->desc . "\n".
                         "\033[0;33musage : " .$val->usage. "\033[0m".(($nopt != "")?".\n  options:\n$nopt" : "").
                         "\n  sub-commands : \n".$nstr."\n\n\n";
-
-                }
-                else {
+                } else {
                     $str .= "\033[0;35m" .$command . "\033[0m" ;
                     $str = "\033[0;32m" . $str  . "\033[0m" . $this->putSpace($command, $space) .
                         "" . $val->desc . "\n".
@@ -129,9 +127,7 @@ class HelpManager extends ModuleManager implements ModuleManagerInterface
                             "" . $val->desc . "\n".
                             "\033[0;33musage : " .$val->usage. "\033[0m".(($nopt != "")?".\n  options:\n$nopt" : "").
                             "\n  sub-commands : \n".$nstr."\n\n\n";
-
-                    }
-                    else {
+                    } else {
                         $str .= "\033[0;35m" .$command . "\033[0m" ;
                         $str .= $this->putSpace($command, $space) .
                             "" . $val->desc . "\n".
@@ -153,7 +149,8 @@ class HelpManager extends ModuleManager implements ModuleManagerInterface
      * @param int $max Max space
      * @return string The required spaces
      */
-    private function putSpace(string $str, int $max):string {
+    private function putSpace(string $str, int $max):string
+    {
         $i = 0;
         $len = strlen($str);
         $max -= $len;

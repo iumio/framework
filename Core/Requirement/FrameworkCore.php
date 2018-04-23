@@ -13,6 +13,7 @@
  */
 
 namespace iumioFramework\Core\Requirement;
+
 use iumioFramework\Core\Base\Renderer\Renderer;
 use iumioFramework\Core\Server\Server;
 use iumioFramework\Core\Requirement\Environment\FEnv;
@@ -26,7 +27,6 @@ use iumioFramework\Core\Exception\Server\Server404;
 use iumioFramework\Core\Exception\Server\Server000;
 use iumioFramework\Core\Base\Json\JsonListener as JL;
 use iumioFramework\Core\Requirement\FrameworkServices\AppConfig;
-
 
 /**
  * Class FrameworkCore
@@ -47,10 +47,10 @@ abstract class FrameworkCore extends GlobalCoreService
     protected $environment;
     private static $runtime_parameters = null;
 
-    const CORE_VERSION = '0.6.4';
-    const CORE_NAME = 'APRICOTS';
+    const CORE_VERSION = '0.6.5';
+    const CORE_NAME = 'SUN';
     const CORE_STAGE = 'BETA';
-    const CORE_BUILD = 201764;
+    const CORE_BUILD = 201765;
     protected static $edition = array();
 
     /**
@@ -221,8 +221,9 @@ abstract class FrameworkCore extends GlobalCoreService
      */
     final protected function assembly(array $keys, array $values)
     {
-        if (count($keys) !== count($values))
+        if (count($keys) !== count($values)) {
             return (false);
+        }
         return (array_combine($keys, $values));
     }
 
@@ -310,7 +311,8 @@ abstract class FrameworkCore extends GlobalCoreService
                             array("explain" => "The activity {".$ac_called['method'].
                                 "} result in object {".$ac_called['class'].
                                 "} must be a Renderer : ".ucfirst(gettype($rscall))." is given", "solution" =>
-                            "Return a Renderer instance in this activity")));
+                            "Return a Renderer instance in this activity")
+                        ));
                     }
                     $great = true;
                     new Access200();
@@ -541,7 +543,8 @@ abstract class FrameworkCore extends GlobalCoreService
      * @return \stdClass edition infos
      * @throws Server500
      */
-    final public static function getEditionInfo():\stdClass {
+    final public static function getEditionInfo():\stdClass
+    {
         $file = JL::open(FEnv::get("framework.config.core.config.file"));
         JL::close(FEnv::get("framework.config.core.config.file"));
         self::$edition = $file;
@@ -555,12 +558,11 @@ abstract class FrameworkCore extends GlobalCoreService
     final private function detectFirstInstallation():int
     {
         $file = JL::open(FEnv::get("framework.config.core.config.file"));
-        if (!isset($file->installation) || ($file->installation == NULL)) {
+        if (!isset($file->installation) || ($file->installation == null)) {
             if (file_exists(FEnv::get("framework.root").'public/setup/setup.php')) {
                 header('Location: '.FEnv::get("host.current").'/setup/setup.php');
                 exit(1);
             } else {
-
                 throw new \RuntimeException("(Setup components does not exist in web directory => Please download".
                     "the setup components on iumio Framework Website to fix this error and put him in web directory)");
             }

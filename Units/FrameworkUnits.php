@@ -14,17 +14,15 @@
 
 namespace iumioFramework\Units;
 
-
 abstract class FrameworkUnits
 {
     /**
-     * @var 
+     * @var
      */
     protected $object;
 
     /**
-     * 
+     *
      */
     abstract public function execute();
-
 }

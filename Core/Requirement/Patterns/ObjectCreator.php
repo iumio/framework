@@ -13,6 +13,7 @@
  */
 
 namespace iumioFramework\Core\Requirement\Patterns;
+
 use iumioFramework\Core\Requirement\Reflection\FrameworkReflection;
 
 /**

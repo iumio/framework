@@ -40,8 +40,12 @@ class AcceptHeaderItem
      */
     public static function fromString($itemValue)
     {
-        $bits = preg_split('/\s*(?:;*("[^"]+");*|;*(\'[^\']+\');*|;+)\s*/', $itemValue, 0,
-            PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+        $bits = preg_split(
+            '/\s*(?:;*("[^"]+");*|;*(\'[^\']+\');*|;+)\s*/',
+            $itemValue,
+            0,
+            PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE
+        );
         $value = array_shift($bits);
         $attributes = array();
 
@@ -74,7 +78,7 @@ class AcceptHeaderItem
         if (count($this->attributes) > 0) {
             $string .= ';'.implode(';', array_map(function ($name, $value) {
                     return sprintf(preg_match('/[,;=]/', $value) ? '%s="%s"' : '%s=%s', $name, $value);
-                }, array_keys($this->attributes), $this->attributes));
+            }, array_keys($this->attributes), $this->attributes));
         }
 
         return $string;

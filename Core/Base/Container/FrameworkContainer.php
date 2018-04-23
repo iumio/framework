@@ -21,7 +21,6 @@ use iumioFramework\Core\Requirement\FrameworkCore;
 use iumioFramework\Core\Exception\Server\Server500;
 use PHPMailer\PHPMailer\PHPMailer;
 
-
 /**
  * Class FrameworkContainer
  * @package iumioFramework\Core\Base\Container
@@ -47,7 +46,8 @@ class FrameworkContainer
         if (!in_array($env, array("dev", "prod"))) {
             throw new Server500(new \ArrayObject(
                 array("Cannot create the framework container : undefined environment $env",
-                    "solution" => "Please set the correct environment [dev, prod]")));
+                "solution" => "Please set the correct environment [dev, prod]")
+            ));
         }
 
         $config = FrameworkCore::getEditionInfo();

@@ -239,11 +239,11 @@ class TaskBar
   </li>
   <li>
     <a href="'. $um->generateRoute(
-                    "iumio_manager_index",
-                    null,
-                    "ManagerApp",
-                    true
-                ) .'">Go to manager
+                "iumio_manager_index",
+                null,
+                "ManagerApp",
+                true
+            ) .'">Go to manager
     </a>
   </li>
   <li id="iumioTaskBarCacheClear" class="iumioTaskBarDropdown">

@@ -53,21 +53,19 @@ class VersionManager extends ModuleManager implements ModuleManagerInterface
         $opt = $options["commands"][0] ?? null;
         if ("version:edition" === $opt) {
             $this->editionVersion();
-        }
-        else if ("version:core" === $opt) {
+        } elseif ("version:core" === $opt) {
             $this->coreVersion();
-        }
-        else if ("version" === $opt) {
+        } elseif ("version" === $opt) {
             $this->selfVersion();
         }
-
     }
 
     /**
      * Get the version informations about framework edition
      * @throws Server500
      */
-    private function editionVersion() {
+    private function editionVersion()
+    {
         $e = JsonListener::open(FEnvFcm::get("framework.config.core.config.file"));
         $date = new \DateTime($e->installation->date);
         $date = $date->format("Y-m-d H:i:s");
@@ -79,7 +77,8 @@ class VersionManager extends ModuleManager implements ModuleManagerInterface
     /**
      * Get the version informations about framework core
      */
-    private function coreVersion() {
+    private function coreVersion()
+    {
         $str = "iumio Framework Core named ".FrameworkCore::CORE_NAME."\nVersion : ".
             FrameworkCore::CORE_VERSION." build ".FrameworkCore::CORE_BUILD."\nStage : ".FrameworkCore::CORE_STAGE;
         Output::displayAsGreen($str);
@@ -89,7 +88,8 @@ class VersionManager extends ModuleManager implements ModuleManagerInterface
      * Get the version informations about fcm
      * @throws Server500
      */
-    private function selfVersion() {
+    private function selfVersion()
+    {
 
         $e = JsonListener::open(FEnvFcm::get("framework.fcm.config.commands.file"));
         $str = "iumio Framework Console Manager"."\nVersion : ".

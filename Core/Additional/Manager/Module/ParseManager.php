@@ -13,6 +13,7 @@
  */
 
 namespace iumioFramework\Core\Additional\Manager\Module;
+
 use iumioFramework\Core\Exception\Server\Server500;
 
 /**
@@ -32,7 +33,8 @@ class ParseManager
      * @return array An array with commands and options
      * @throws Server500 If $arguments array cannot have some commands
      */
-    public static function parse(array $arguments):array {
+    public static function parse(array $arguments):array
+    {
         if (count($arguments) < 1) {
             throw new Server500(new \ArrayObject(array("explain" => "Cannot parse value without commands",
                 "solution" => "Please set an command to parse it")));
@@ -55,10 +57,10 @@ class ParseManager
      * @param array $arguments All element in console
      * @return array The commands on console
      */
-    private static function parseCommands(array $arguments):array {
+    private static function parseCommands(array $arguments):array
+    {
         $commands = [];
         foreach ($arguments as $one) {
-
             if (strpos($one, '--') === false) {
                 $commands[] = $one;
             }
@@ -71,7 +73,8 @@ class ParseManager
      * @param array $arguments All element in console
      * @return array executable and manager path on console in array
      */
-    private static function parseExecutable(array $arguments):array {
+    private static function parseExecutable(array $arguments):array
+    {
         return (["executable" => 'php', "manager" => $arguments[0]]);
     }
 
@@ -81,7 +84,8 @@ class ParseManager
      * @param array $arguments All element in console
      * @return array The options on console
      */
-    private static function parseOptions(array $arguments):array {
+    private static function parseOptions(array $arguments):array
+    {
         $options = [];
         foreach ($arguments as $one) {
             if (strpos($one, '--') !== false && strlen($one) > 2) {

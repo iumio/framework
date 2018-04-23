@@ -31,7 +31,7 @@ class Server403 extends AbstractServer
      * Server403 constructor.
      * @param ArrayObject $component
      * @param $none string parameter not used. it's for the interface
-     * @throws 
+     * @throws
      */
     public function __construct(ArrayObject $component, string $none = null)
     {

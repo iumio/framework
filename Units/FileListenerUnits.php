@@ -35,14 +35,16 @@ class FileListenerUnits extends FrameworkUnits
      * @throws \Exception
      * @throws \iumioFramework\Core\Exception\Server\Server500
      */
-    public function readAssert() {
+    public function readAssert()
+    {
         $f = new FileListener();
         $rs = $f->open(ROOT_LOGS.strtolower("dev").".log");
         $a =  array();
         print_r($f->read());
     }
 
-    public function readByLineAssert() {
+    public function readByLineAssert()
+    {
     }
 
     /**

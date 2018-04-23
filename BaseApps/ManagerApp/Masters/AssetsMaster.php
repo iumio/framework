@@ -86,9 +86,13 @@ class AssetsMaster extends MasterCore
                                 true
                             );
                         } elseif (strtolower($env) == "prod") {
-                            Server::copy(FEnv::get("framework.apps"). $dir . "/Front/Resources/",
+                            Server::copy(
+                                FEnv::get("framework.apps"). $dir . "/Front/Resources/",
                                 FEnv::get("framework.root") .
-                                "public/components/apps/prod/" . strtolower($dir), 'directory', false);
+                                "public/components/apps/prod/" . strtolower($dir),
+                                'directory',
+                                false
+                            );
                         } else {
                             if (Server::exist(FEnv::get("framework.root") .
                                 "apps/" . $dir . "/Front/Resources/")) {

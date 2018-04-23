@@ -56,11 +56,8 @@ class FrameworkEnvironmentDispatcher
 
         if ($env === "dev") {
             return (DevEnvironment::start());
-        }
-        else {
+        } else {
             return (ProdEnvironment::start());
         }
     }
-
-
 }

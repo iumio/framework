@@ -44,7 +44,7 @@ class DashboardMaster extends MasterCore
         $file->installation = $date->format('Y/m/d');
 
         return($this->render("index", array("env" => strtolower(FEnv::get("framework.env")),
-            "selected" => "dashboard", "fi" => $file, 
+            "selected" => "dashboard", "fi" => $file,
             'https' => isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on',
             "loader_msg" => "Framework Graphic Manager - Dashboard")));
     }

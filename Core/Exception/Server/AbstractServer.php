@@ -15,16 +15,10 @@
 namespace iumioFramework\Core\Exception\Server;
 
 use ArrayObject;
-use iumioFramework\Core\Server\Server;
 use iumioFramework\Core\Additional\EngineTemplate\SmartyEngineTemplate;
-use iumioFramework\Core\Base\File\FileListener;
 use iumioFramework\Core\Base\Http\HttpResponse;
-use iumioFramework\Core\Base\Json\JsonListener as JL;
-use iumioFramework\Core\Base\Json\JsonListener;
-use iumioFramework\Core\Additional\Manager\Display\OutputManager;
 use iumioFramework\Core\Requirement\Environment\FEnv;
 use iumioFramework\Core\Exception\Tools\ToolsExceptions;
-use iumioFramework\Core\Masters\MasterCore;
 
 /**
  * Class AbstractServer
@@ -75,11 +69,17 @@ abstract class AbstractServer extends \Exception implements ServerInterface
             if ($it->key() == "codeTitle") {
                 $this->codeTitle = $value;
             } elseif ($it->key() == "explain") {
-                $this->explain =  preg_replace( "/\r|\n/", " ",
-                    trim(preg_replace('/\s\s+/', ' ', strip_tags($value))));
+                $this->explain =  preg_replace(
+                    "/\r|\n/",
+                    " ",
+                    trim(preg_replace('/\s\s+/', ' ', strip_tags($value)))
+                );
             } elseif ($it->key() == "solution") {
-                $this->solution =  preg_replace( "/\r|\n/", " ",
-                    trim(preg_replace('/\s\s+/', ' ', strip_tags ($value))));
+                $this->solution =  preg_replace(
+                    "/\r|\n/",
+                    " ",
+                    trim(preg_replace('/\s\s+/', ' ', strip_tags($value)))
+                );
             } elseif ($it->key() == "inlog") {
                 $this->inlog = $value;
             } elseif ($it->key() == "external") {
@@ -109,7 +109,7 @@ abstract class AbstractServer extends \Exception implements ServerInterface
     /** Display server error to user
      * @param string $code Header code
      * @param string $message Header message
-     * @return void None
+     * @return void
      * @throws \Exception
      */
     public function display(string $code, string $message)
@@ -119,7 +119,7 @@ abstract class AbstractServer extends \Exception implements ServerInterface
         }
 
         if (ob_get_contents()) {
-          ob_end_clean();
+            ob_end_clean();
         }
         @header($_SERVER['SERVER_PROTOCOL'] .' '.
             (($code == 000)? 500 : $code).' '.HttpResponse::getPhrase($code), true, $code);
@@ -158,7 +158,8 @@ abstract class AbstractServer extends \Exception implements ServerInterface
             $this->uidie."\nTime : ". $this->time."\nType : ".
             $this->code." ".$this->codeTitle."\nEnv : ".
             $this->env."\nExplain : ". $this->explain.
-            " \nSolution : ".$this->solution.$str_additionnal);
+            " \nSolution : ".$this->solution.$str_additionnal
+        );
 
         exit(1);
     }
@@ -196,16 +197,14 @@ abstract class AbstractServer extends \Exception implements ServerInterface
         $debug['env'] = $d1.FEnv::get("framework.env").$d2;
 
 
-         if (defined("IUMIO_FCM") && IUMIO_FCM === true) {
-             $debug['uri'] = $d1."Framework Console Manager".$d2;
+        if (defined("IUMIO_FCM") && IUMIO_FCM === true) {
+            $debug['uri'] = $d1."Framework Console Manager".$d2;
 
-             $debug['referer'] = $d1."From Framework Console Manager".$d2;
-
-         }
-         else {
-             $debug['method'] = $d1 . $_SERVER['REQUEST_METHOD'] . $d2;
-             $debug['uri'] = $d1 . $_SERVER['REQUEST_URI'] . $d2;
-         }
+            $debug['referer'] = $d1."From Framework Console Manager".$d2;
+        } else {
+            $debug['method'] = $d1 . $_SERVER['REQUEST_METHOD'] . $d2;
+            $debug['uri'] = $d1 . $_SERVER['REQUEST_URI'] . $d2;
+        }
 
         $debug['referer'] = $d1.(isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null).$d2;
 
@@ -217,8 +216,11 @@ abstract class AbstractServer extends \Exception implements ServerInterface
         $strlog =  implode(" ", $debug);
         $f = new \iumioFramework\Core\Base\File\FileListener();
 
-        $f->open(FEnv::get("framework.logs").strtolower(FEnv::get("framework.env")).".log",
-            "a+", true);
+        $f->open(
+            FEnv::get("framework.logs").strtolower(FEnv::get("framework.env")).".log",
+            "a+",
+            true
+        );
         $f->put($strlog);
         $f->close();
         return (1);
@@ -238,15 +240,15 @@ abstract class AbstractServer extends \Exception implements ServerInterface
      */
     final public static function checkFileLogExist(string $path):bool
     {
-        if (!file_exists($path)){
-          return ((file_put_contents($path, "") != false)? true : false);
+        if (!file_exists($path)) {
+            return ((file_put_contents($path, "") != false)? true : false);
         }
 
-        if (!is_readable($path)){
+        if (!is_readable($path)) {
             return (false);
         }
 
-        if (!is_writable($path)){
+        if (!is_writable($path)) {
             return (false);
         }
         return (true);

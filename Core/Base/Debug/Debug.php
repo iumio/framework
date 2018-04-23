@@ -57,15 +57,15 @@ class Debug implements DebugInterface
                 $log[$c] = $debug;
                 $log = (object) $log;
                 JL::put(
-                    $file_debug, json_encode($log, JSON_PRETTY_PRINT)
+                    $file_debug,
+                    json_encode($log, JSON_PRETTY_PRINT)
                 );
                 
                 JL::close($file_debug);
             } elseif ($interface == 'screen') {
                 return (new Renderer())->textRenderer("<br>Time : " . self::$logformat['time'] .
                     " ### Content : " . self::$logformat['msg'] . "<br>");
-            }
-            else {
+            } else {
                 throw new Server500(new \ArrayObject(array("explain" => "Undefined interface $interface",
                     "solution" => "interface available for debug [file, screen]", "line_error" => "43")));
             }

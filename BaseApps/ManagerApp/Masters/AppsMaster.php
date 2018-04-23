@@ -309,7 +309,8 @@ class AppsMaster extends MasterCore
                 $appname = $f->name;
 
                 $fa = json_decode(file_get_contents(
-                    FEnv::get("framework.root")."elements/config_files/core/apps.json"));
+                    FEnv::get("framework.root")."elements/config_files/core/apps.json"
+                ));
                 $lastapp = 0;
                 foreach ($fa as $one => $val) {
                     if ($val->name == $appname) {
@@ -319,8 +320,11 @@ class AppsMaster extends MasterCore
                 }
 
 
-                Server::copy(FEnv::get("framework.bin").'import/'.$datex,
-                    FEnv::get("framework.apps").$appname, 'directory');
+                Server::copy(
+                    FEnv::get("framework.bin").'import/'.$datex,
+                    FEnv::get("framework.apps").$appname,
+                    'directory'
+                );
                 Server::delete(FEnv::get("framework.apps").$appname.'/register.json', 'file');
                 Server::delete(FEnv::get("framework.bin").'import/'.$datex, 'directory');
                 $zip->close();
@@ -488,7 +492,8 @@ class AppsMaster extends MasterCore
         }
 
         $f = json_decode(file_get_contents(
-            FEnv::get("framework.root")."elements/config_files/core/apps.json"));
+            FEnv::get("framework.root")."elements/config_files/core/apps.json"
+        ));
 
         foreach ($f as $one => $val) {
             if ($val->name == $appname) {
@@ -504,47 +509,49 @@ class AppsMaster extends MasterCore
 
         if ("null" === $vdev) {
             $vdev = null;
-        }
-        elseif ("false" === $vdev) {
+        } elseif ("false" === $vdev) {
             $vdev = false;
-        }
-        elseif ("true" === $vdev) {
+        } elseif ("true" === $vdev) {
             $vdev = true;
-        }
-        else {
+        } else {
             $vdev = null;
         }
 
         if ("null" === $vprod) {
             $vprod = null;
-        }
-        elseif ("false" === $vprod) {
+        } elseif ("false" === $vprod) {
             $vprod = false;
-        }
-        elseif ("true" === $vprod) {
+        } elseif ("true" === $vprod) {
             $vprod = true;
-        }
-        else {
+        } else {
             $vprod = null;
         }
 
-        $hostsdeva  = (("" === trim($hostsdeva))? null : array_map('trim',
-            (explode(";", $hostsdeva))));
-        $hostsdevd  = (("" === trim($hostsdevd))? null : array_map('trim',
-            (explode(";", $hostsdevd))));
-        $hostsproda = (("" === trim($hostsproda))? null : array_map('trim',
-            (explode(";", $hostsproda))));
-        $hostsprodd = (("" === trim($hostsprodd))? null : array_map('trim',
-            (explode(";", $hostsprodd))));
+        $hostsdeva  = (("" === trim($hostsdeva))? null : array_map(
+            'trim',
+            (explode(";", $hostsdeva))
+        ));
+        $hostsdevd  = (("" === trim($hostsdevd))? null : array_map(
+            'trim',
+            (explode(";", $hostsdevd))
+        ));
+        $hostsproda = (("" === trim($hostsproda))? null : array_map(
+            'trim',
+            (explode(";", $hostsproda))
+        ));
+        $hostsprodd = (("" === trim($hostsprodd))? null : array_map(
+            'trim',
+            (explode(";", $hostsprodd))
+        ));
 
 
 
 
         if (JsonListener::exists(FEnv::get("app.config.file", $appname))) {
             $a = json_decode(file_get_contents(
-                FEnv::get("app.config.file", $appname)));
-        }
-        else {
+                FEnv::get("app.config.file", $appname)
+            ));
+        } else {
             $a = new \stdClass();
         }
 
@@ -567,31 +574,10 @@ class AppsMaster extends MasterCore
      * @return Renderer Json Renderer
      * @throws Server500
      */
-    public function getAppConfigActivity(string $appname) {
+    public function getAppConfigActivity(string $appname)
+    {
         $g = AppConfig::getInstance($appname);
         return ((new Renderer())->jsonRenderer(array("code" => 200, "result" =>  $g->getConfig())));
     }
 
-    /** Adding into composer.json the app class and path
-     * @param string $name App name
-     * @throws Server500 if JsonListener failed
-     */
-    private function addComposerApp(string $name) {
-        $composer = JL::open(FEnv::get("framework.root")."composer.json");
-        $composer->autoload->{"psr-4"}->{$name."\\"} = "apps/$name";
-        JL::put(FEnv::get("framework.root")."composer.json",
-            json_encode($composer, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-    }
-
-
-    /** Removing into composer.json the app class and path
-     * @param string $name App name
-     * @throws Server500 if JsonListener failed
-     */
-    private function removeComposerApp(string $name) {
-        $composer = JL::open(FEnv::get("framework.root")."composer.json");
-        unset($composer->autoload->{"psr-4"}->{$name."\\"});
-        JL::put(FEnv::get("framework.root")."composer.json",
-            json_encode($composer, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-    }
 }

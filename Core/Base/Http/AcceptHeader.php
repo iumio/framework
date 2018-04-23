@@ -57,7 +57,12 @@ class AcceptHeader
             $item->setIndex($index++);
 
             return $item;
-        }, preg_split('/\s*(?:,*("[^"]+"),*|,*(\'[^\']+\'),*|,+)\s*/', $headerValue, 0, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE)));
+        }, preg_split(
+            '/\s*(?:,*("[^"]+"),*|,*(\'[^\']+\'),*|,+)\s*/',
+            $headerValue,
+            0,
+            PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE
+        )));
     }
 
     /**
@@ -91,7 +96,8 @@ class AcceptHeader
      */
     public function get($value)
     {
-        return $this->items[$value] ?? $this->items[explode('/', $value)[0].'/*'] ?? $this->items['*/*'] ?? $this->items['*'] ?? null;
+        return $this->items[$value] ?? $this->items[explode('/', $value)[0].'/*'] ??
+            $this->items['*/*'] ?? $this->items['*'] ?? null;
     }
 
     /**

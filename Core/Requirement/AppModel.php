@@ -39,5 +39,7 @@ abstract class AppModel
     /**
      * Get controller
      */
-    protected function getController(){}
+    protected function getController()
+    {
+    }
 }

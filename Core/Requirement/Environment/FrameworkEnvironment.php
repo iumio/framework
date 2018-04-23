@@ -57,7 +57,7 @@ class FrameworkEnvironment
             $current = substr($current, 0, (strlen($current) - 1));
         }
 
-       self::__setPaths($base, $env, $current);
+        self::__setPaths($base, $env, $current);
 
         foreach (self::$framework_paths as $one => $val) {
             $container = FrameworkContainer::getInstance();
@@ -74,7 +74,8 @@ class FrameworkEnvironment
      * @param bool $isfcm If FCM call this function (host part is not integrated if it's a fcm call)
      * @return void
      */
-    protected static function __setPaths(string $base, string $env, string $current, $isfcm = false) {
+    protected static function __setPaths(string $base, string $env, string $current, $isfcm = false)
+    {
 
         self::$framework_paths =
             [
@@ -209,12 +210,12 @@ class FrameworkEnvironment
                     $denied = (array) $hosts->denied;
 
                     if ((in_array("", array_map('trim', $allowed)) && in_array(
-                                "",
-                                array_map('trim', $denied)
-                            )) || (in_array(
-                                "",
-                                array_map('trim', $allowed)
-                            ) &&  in_array("*", $denied))) {
+                        "",
+                        array_map('trim', $denied)
+                    )) || (in_array(
+                        "",
+                        array_map('trim', $allowed)
+                    ) &&  in_array("*", $denied))) {
                         self::displayError((array("explain" => "You are not allowed to access this file.",
                             "solution" => 'Check '.basename(__FILE__).' for more information.',
                             "external" => "yes")));
@@ -223,9 +224,9 @@ class FrameworkEnvironment
                         self::displayError((array("explain" => "You are not allowed to access this file.", "solution" =>
                             'Check '.basename(__FILE__).' for more information.', "external" => "yes")));
                     } elseif ((!in_array(@$_SERVER['REMOTE_ADDR'], $allowed) && in_array(
-                                @$_SERVER['REMOTE_ADDR'],
-                                $denied
-                            )) || in_array(@$_SERVER['REMOTE_ADDR'], $allowed) &&
+                        @$_SERVER['REMOTE_ADDR'],
+                        $denied
+                    )) || in_array(@$_SERVER['REMOTE_ADDR'], $allowed) &&
                         in_array(@$_SERVER['REMOTE_ADDR'], $denied)) {
                         self::displayError((array("explain" => "You are not allowed to access this file.", "solution" =>
                             'Check '.basename(__FILE__).' for more information.', "external" => "yes")));
@@ -247,15 +248,17 @@ class FrameworkEnvironment
      * @return string The location string
      * @throws Server500 If constant name does not exist
      */
-    public static function generateLocation(string $global, string $path) {
+    public static function generateLocation(string $global, string $path)
+    {
         $global = strtoupper($global);
         if (defined($global)) {
             return ($global.$path);
-        }
-        else {
+        } else {
             throw new Server500(new ArrayObject(
                 array("explain" => "Undefined global ".$global.
-                    " for FrameworkEnvironment.", "solution" => "Please Check the global name")));
+                " for FrameworkEnvironment.",
+                "solution" => "Please Check the global name")
+            ));
         }
     }
 
@@ -263,20 +266,19 @@ class FrameworkEnvironment
      * @param string $env Current environment
      * @throws Server500
      */
-    public static function enableComponents(string $env) {
+    public static function enableComponents(string $env)
+    {
         $base = realpath(__DIR__ . "/../../../../../../")."/";
         $f = json_decode(file_get_contents($base."elements/config_files/core/framework.config.json"));
         if (in_array($env, array("dev", "prod"))) {
             if ("dev" === $env) {
                 TaskBar::switchStatus(((true  === $f->taskbar_dev)? "on" : "off"));
-            }
-            elseif ("prod" === $env) {
+            } elseif ("prod" === $env) {
                 TaskBar::switchStatus(((true  === $f->taskbar_prod)? "on" : "off"));
             }
             if (true === $f->debug) {
                 Debug::enabled();
-            }
-            else {
+            } else {
                 Debug::disabled();
             }
         }

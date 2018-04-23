@@ -71,8 +71,12 @@ class ColorManager
      * @param bool $header If header is present
      * @return string Colored string
      */
-    public function getColoredString(string $string, string $foreground_color = null, string $background_color = null,
-        bool $header = true):string {
+    public function getColoredString(
+        string $string,
+        string $foreground_color = null,
+        string $background_color = null,
+        bool $header = true
+    ):string {
         if ($header) {
             $title = "Console Manager - ".CoreManager::getCurrentModule();
             $titleSeparator = $this->copyContent("-", strlen($title) + 10);
@@ -106,8 +110,11 @@ class ColorManager
      * @param string|null $background_color Background color
      * @return string Colored string
      */
-    public function getColoredStringReadLine(string $string, string $foreground_color = null,
-                                             string $background_color = null ):string {
+    public function getColoredStringReadLine(
+        string $string,
+        string $foreground_color = null,
+        string $background_color = null
+    ):string {
         $string = $this->resizeContent($string, 0);
         $colored_string = "";
 

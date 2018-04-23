@@ -49,13 +49,13 @@ class AssetsManager extends ModuleManager implements ModuleManagerInterface
 
         $opt = $options["commands"][0] ?? null;
 
-            if ($opt == "assets:clear") {
-                $this->clearAssets($this->options);
-            } elseif ($opt == "assets:copy") {
-                $this->copyAssets($this->options);
-            } else {
-                Output::displayAsRed("This command doesn't exist. Referer to help command\n");
-            }
+        if ($opt == "assets:clear") {
+            $this->clearAssets($this->options);
+        } elseif ($opt == "assets:copy") {
+            $this->copyAssets($this->options);
+        } else {
+            Output::displayAsRed("This command doesn't exist. Referer to help command\n");
+        }
     }
 
     /** Clear some assets in web directory
@@ -200,24 +200,40 @@ class AssetsManager extends ModuleManager implements ModuleManagerInterface
     private function callDelCreaServer(string $appname, string $env = null)
     {
         if ($appname == '#none' && $env == null) {
-            Server::delete(FEnvFcm::get("framework.root")."/public/components/apps/dev/",
-                'directory');
-            Server::create(FEnvFcm::get("framework.root")."/public/components/apps/dev/",
-                'directory');
-            Server::delete(FEnvFcm::get("framework.root")."/public/components/apps/prod/",
-                'directory');
-            Server::create(FEnvFcm::get("framework.root")."/public/components/apps/prod/",
-                'directory');
+            Server::delete(
+                FEnvFcm::get("framework.root")."/public/components/apps/dev/",
+                'directory'
+            );
+            Server::create(
+                FEnvFcm::get("framework.root")."/public/components/apps/dev/",
+                'directory'
+            );
+            Server::delete(
+                FEnvFcm::get("framework.root")."/public/components/apps/prod/",
+                'directory'
+            );
+            Server::create(
+                FEnvFcm::get("framework.root")."/public/components/apps/prod/",
+                'directory'
+            );
         } elseif ($appname == '#none' && in_array($env, array("dev", "prod", "all"))) {
             if ($env == "all") {
-                Server::delete(FEnvFcm::get("framework.root")."/public/components/apps/dev/",
-                    'directory');
-                Server::create(FEnvFcm::get("framework.root")."/public/components/apps/dev/",
-                    'directory');
-                Server::delete(FEnvFcm::get("framework.root")."/public/components/apps/prod/",
-                    'directory');
-                Server::create(FEnvFcm::get("framework.root")."/public/components/apps/prod/",
-                    'directory');
+                Server::delete(
+                    FEnvFcm::get("framework.root")."/public/components/apps/dev/",
+                    'directory'
+                );
+                Server::create(
+                    FEnvFcm::get("framework.root")."/public/components/apps/dev/",
+                    'directory'
+                );
+                Server::delete(
+                    FEnvFcm::get("framework.root")."/public/components/apps/prod/",
+                    'directory'
+                );
+                Server::create(
+                    FEnvFcm::get("framework.root")."/public/components/apps/prod/",
+                    'directory'
+                );
             } else {
                 Server::delete(FEnvFcm::get("framework.root")."/public/components/apps/".
                     strtolower($env)."/", 'directory');
@@ -285,7 +301,6 @@ class AssetsManager extends ModuleManager implements ModuleManagerInterface
                         $symlink
                     );
                 }
-                
             }
         } elseif ($appname == '#none' && in_array($env, array("dev", "prod", "all"))) {
             if ($env == "all") {

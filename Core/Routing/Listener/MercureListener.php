@@ -99,7 +99,7 @@ class MercureListener implements Listener
 
         foreach ($this->routers as $file) {
             $scope = null;
-            if (($router = fopen(((!$isbase) ? FEnv::get("framework.apps") : 
+            if (($router = fopen(((!$isbase) ? FEnv::get("framework.apps") :
                     FEnv::get("framework.baseapps")) . $this->appName .
                 "/Routing/" . $file, "r"))) {
                 if ($this->analyseMercure($router, $file, $this->appName) == 0) {
@@ -188,7 +188,6 @@ class MercureListener implements Listener
                     "Missing delimiter '%' to detect Activity' for  ".strtoupper($routingArray[$i]['name']).
                     " route : ".$this->appName, "solution" => "Please add the correct delimiter")));
             }
-
         }
 
         return (1);
@@ -231,8 +230,7 @@ class MercureListener implements Listener
                 throw new Server500(new \ArrayObject(array("explain" =>
                     "Unknow error on [parameters] tag in Mercure file",
                     "solution" => "Please check Mercure file")));
-            }
-            elseif (!in_array($one[1], $this->scalar)) {
+            } elseif (!in_array($one[1], $this->scalar)) {
                 throw new Server500(new \ArrayObject(array("explain" =>
                     "Unknow Mercure scalar type [".$one[1]."] on [parameters] tag in Mercure file",
                     "solution" => "Please set the allowed Mercure scalar type : ".json_encode($this->scalar)."")));
@@ -451,7 +449,7 @@ class MercureListener implements Listener
     public function listingRouters(bool $isbase = false):int
     {
         if ($this->appWording() == 1) {
-            $this->routers = scandir((($isbase == false)? FEnv::get("framework.apps") 
+            $this->routers = scandir((($isbase == false)? FEnv::get("framework.apps")
                     : FEnv::get("framework.baseapps")).
                 $this->appName . "/Routing");
             return (1);

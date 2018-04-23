@@ -108,7 +108,9 @@ class BaseApp extends App
         file_put_contents(FEnv::get("framework.root")."elements/config_files/core/apps.json", $f);
 
         Server::delete(FEnv::get("framework.root")."apps/".$this->name, "directory");
-        Server::delete(FEnv::get("framework.root")."public/components/apps/".strtolower($this->name),
-            'directory');
+        Server::delete(
+            FEnv::get("framework.root")."public/components/apps/".strtolower($this->name),
+            'directory'
+        );
     }
 }

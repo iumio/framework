@@ -56,13 +56,14 @@ class FileListener implements FileInterface
      * @return \resource File content
      * @throws Server500|\Exception If file does not exist or not readable | If cannot create file
      */
-    public function open(string $filepath, string $perm = "r", bool $fcreate = false) {
+    public function open(string $filepath, string $perm = "r", bool $fcreate = false)
+    {
         if ($filepath == $this->filepath && $this->file != null) {
             return ($this->file);
         }
 
         if (!file_exists($filepath)) {
-           Server::create($filepath, 'file');
+            Server::create($filepath, 'file');
         }
 
         self::checkPermission($perm, $filepath);
@@ -85,14 +86,15 @@ class FileListener implements FileInterface
      * @return array The file array
      * @throws Server500 If file is not an array
      */
-    public function reverse(int $break = 0):array {
+    public function reverse(int $break = 0):array
+    {
         if (!is_array($this->file)) {
             throw new Server500(new \ArrayObject(array("explain" =>
                 "Cannot reverse file ".$this->filepath." : is not a resource.",
                 "solution" =>
                     "Use your own method to reverse the resource")));
         }
-       return ((($break == 0)? array_reverse($this->file) : array_reverse(array_slice($this->file, -$break))));
+        return ((($break == 0)? array_reverse($this->file) : array_reverse(array_slice($this->file, -$break))));
     }
 
     /** Open file and returning an array of each line
@@ -100,7 +102,8 @@ class FileListener implements FileInterface
      * @return array File array content
      * @throws Server500|\Exception If file does not exist or not readable | If cannot create file
      */
-    public function openFileAsArray(string $filepath):array {
+    public function openFileAsArray(string $filepath):array
+    {
         if ($filepath == $this->filepath && $this->file != null) {
             return ($this->file);
         }
@@ -138,12 +141,12 @@ class FileListener implements FileInterface
      * @return int If the write task is succesfull
      * @throws \Exception If file cannot be created
      */
-    public function put(string $contents, int $length = null, bool $inline = false):int {
+    public function put(string $contents, int $length = null, bool $inline = false):int
+    {
         self::checkPermission($this->perm, $this->filepath);
         if ($length != null) {
             return (fwrite($this->file, $contents . ((!$inline) ? "\n" : ""), $length));
-        }
-        else {
+        } else {
             return (fwrite($this->file, $contents . ((!$inline) ? "\n" : "")));
         }
     }
@@ -151,21 +154,24 @@ class FileListener implements FileInterface
     /** Return file resource
      * @return null|resource Return the file resource when is opened or null if no file was opened
      */
-    public function getFile() {
+    public function getFile()
+    {
         return ($this->file);
     }
 
     /** Return file path
      * @return null|string Return the file path when is opened or null if no file was opened
      */
-    public function getFilePath(){
+    public function getFilePath()
+    {
         return ($this->filepath);
     }
 
     /** Return file permission
      * @return null|string Return the file permission when is opened or null if no file was opened
      */
-    public function getFilePerm() {
+    public function getFilePerm()
+    {
         return ($this->perm);
     }
 
@@ -174,7 +180,8 @@ class FileListener implements FileInterface
      * @return bool|string File contents | If an error was generated
      * @throws Server500
      */
-    public function read(int $size = null) {
+    public function read(int $size = null)
+    {
         if ($this->file == null) {
             throw new Server500(new \ArrayObject(array("explain" =>
                 "Cannot read file for unopened file",
@@ -183,8 +190,7 @@ class FileListener implements FileInterface
         }
         if ($size === null) {
             return (fread($this->file, $this->size()));
-        }
-        else {
+        } else {
             return (fread($this->file, $size));
         }
     }
@@ -195,7 +201,8 @@ class FileListener implements FileInterface
      * @return bool|string File one line content | If an error was generated
      * @throws Server500
      */
-    public function readByLine(int $size = null) {
+    public function readByLine(int $size = null)
+    {
         if ($this->file == null) {
             throw new Server500(new \ArrayObject(array("explain" =>
                 "Cannot read file for unopened file",
@@ -205,11 +212,9 @@ class FileListener implements FileInterface
 
         if ($size === null) {
             return (fgets((($this->tempFile === null)? ($this->file) : $this->tempFile), $this->size()));
-        }
-        else {
+        } else {
             return (fgets((($this->tempFile === null)? ($this->file) : $this->tempFile), $size));
         }
-
     }
 
 
@@ -219,7 +224,8 @@ class FileListener implements FileInterface
      * @return bool|string File one line content | If an error was generated
      * @throws Server500
      */
-    public function readBinaryByLine(int $size = null) {
+    public function readBinaryByLine(int $size = null)
+    {
         if ($this->file == null) {
             throw new Server500(new \ArrayObject(array("explain" =>
                 "Cannot read file for unopened file",
@@ -229,11 +235,9 @@ class FileListener implements FileInterface
 
         if ($size === null) {
             return (fgetss((($this->tempFile === null)? ($this->file) : $this->tempFile), $this->size()));
-        }
-        else {
+        } else {
             return (fgetss((($this->tempFile === null)? ($this->file) : $this->tempFile), $size));
         }
-
     }
 
     /**
@@ -247,8 +251,7 @@ class FileListener implements FileInterface
                 $this->tempFile = $this->file;
             }
             return (feof($this->tempFile));
-        }
-        else {
+        } else {
             return (feof($this->file));
         }
     }
@@ -291,11 +294,11 @@ class FileListener implements FileInterface
      * r  : for readable
      * r+ : for readable and writable
      * w  : for readable and writable
-     * w+ :	for readable and writable
-     * a  :	for readable and writable
+     * w+ : for readable and writable
+     * a  : for readable and writable
      * a+ : for readable and writable
      * x  : for readable and writable
-     * x+ :	for readable and writable
+     * x+ : for readable and writable
      * c  : for readable and writable
      * c+ : for readable and writable
      * rwx : for readable, writable and executable
@@ -321,14 +324,11 @@ class FileListener implements FileInterface
 
         if ($perm === 'r') {
             $r = true;
-        }
-        else if (in_array($perm, array('r+' ,'w' , 'w+' , 'a+' , 'x' , 'x+' , 'c' , 'c+')) ){
+        } elseif (in_array($perm, array('r+' ,'w' , 'w+' , 'a+' , 'x' , 'x+' , 'c' , 'c+'))) {
                 $r = $w = true;
-        }
-        elseif ($perm === 'rwx') {
+        } elseif ($perm === 'rwx') {
             $r = $w = true;
-        }
-        else {
+        } else {
             throw new Server500(new \ArrayObject(array("explain" =>
             "Undefined permission $perm for file $filepath",
             "solution" => "Please set a valid permission [r, r+, w, w+, a+, x, x+, c, c+]")));

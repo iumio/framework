@@ -17,7 +17,6 @@ namespace iumioFramework\Core\Base\File;
 
 use iumioFramework\Core\Exception\Server\Server500;
 
-
 /**
  * Interface
  * @package iumioFramework\Core\Base\File

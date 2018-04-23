@@ -13,6 +13,7 @@
  */
 
 namespace iumioFramework\Core\Requirement\Reflection;
+
 use iumioFramework\Core\Base\Container\FrameworkContainer;
 use iumioFramework\Core\Requirement\Environment\FEnv;
 use iumioFramework\Core\Requirement\FrameworkCore;
@@ -83,7 +84,7 @@ class FrameworkReflection
         try {
             $class = new \ReflectionClass($class);
             if (empty($args)) {
-               return ($class->newInstanceArgs());
+                return ($class->newInstanceArgs());
             } else {
                 return ($class->newInstanceArgs(array($args)));
             }

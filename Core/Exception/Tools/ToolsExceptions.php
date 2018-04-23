@@ -70,11 +70,11 @@ class ToolsExceptions
         // i for iumio
         $str = "i";
         // Create a string with Alphabetic letter
-        $str .= chr(rand( 65, 90 ));
+        $str .= chr(rand(65, 90));
         // Insert the timestamp
         $str .= time();
         // Create an other unique identifier with lenght 5
-        $uniqid = substr(uniqid ("X"), 5);
+        $uniqid = substr(uniqid("X"), 5);
         // concat all
         $str .= substr($uniqid, 5);
 
@@ -118,8 +118,7 @@ class ToolsExceptions
         $a =  array();
 
         $ar = $f->reverse($end);
-        foreach ($ar as $line)
-        {
+        foreach ($ar as $line) {
             $line = trim($line);
             if (isset($line[0]) && $line[0] == "[") {
                 $line = substr_replace($line, '', 0, 1);
@@ -135,8 +134,7 @@ class ToolsExceptions
             if ($uidie != null) {
                 if ($na[1] != $uidie) {
                     continue;
-                }
-                else {
+                } else {
                     $f->close();
                     if (isset($na[11])) {
                         return (
@@ -151,8 +149,7 @@ class ToolsExceptions
                             "line_error" => ((isset($na[13]) ? $na[13] : "N/A"))
                         )
                         );
-                    }
-                    else {
+                    } else {
                         return (
                         array(
                             "time" => $na[0], "uidie" => $na[1],
@@ -167,7 +164,8 @@ class ToolsExceptions
                 }
             }
             if (isset($na[11])) {
-                array_push($a,
+                array_push(
+                    $a,
                     array(
                         "time" => $na[0], "uidie" => $na[1],
                         "client_ip" => $na[2], "code" => $na[3],
@@ -179,9 +177,9 @@ class ToolsExceptions
                         "line_error" => ((isset($na[13]) ? $na[13] : "N/A"))
                     )
                 );
-            }
-            else {
-                array_push($a,
+            } else {
+                array_push(
+                    $a,
                     array(
                         "time" => $na[0], "uidie" => $na[1],
                         "client_ip" => $na[2], "code" => $na[3],
@@ -192,8 +190,6 @@ class ToolsExceptions
                     )
                 );
             }
-
-
         }
         $f->close();
         return ($a);
@@ -218,8 +214,7 @@ class ToolsExceptions
      */
     final public static function errorMap(string $errorlevel):string
     {
-        switch ($errorlevel)
-        {
+        switch ($errorlevel) {
             case 1:
                 return ("Fatal error");
                 break;
@@ -268,7 +263,6 @@ class ToolsExceptions
             default:
                 return ("Error");
                 break;
-
         }
     }
 
@@ -315,8 +309,7 @@ class ToolsExceptions
             throw new Server500(new \ArrayObject(array("explain" => $exception->getMessage(),
                 "trace" => $exception->getTrace(), "line_error" => $exception->getLine(),
                 "file_error" => $exception->getFile(), "type_error" => self::errorMap($exception->getCode()))));
-        }
-        else {
+        } else {
             die($exception->getMessage());
         }
     }

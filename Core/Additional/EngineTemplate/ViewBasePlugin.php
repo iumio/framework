@@ -349,7 +349,7 @@ class ViewBasePlugin
         }
         $im = new \iumioFramework\Core\Masters\MasterCore();
 
-        if (!isset($params['name'])){
+        if (!isset($params['name'])) {
             throw new \Exception("The parameter [name] is missing to generate a valid route", E_ERROR);
         }
         $route = ($im->generateRoute(((isset($params['name']))? $params['name'] : ""), ((isset($params['params']) &&

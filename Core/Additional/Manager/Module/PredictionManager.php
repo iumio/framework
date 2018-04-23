@@ -13,6 +13,7 @@
  */
 
 namespace iumioFramework\Core\Additional\Manager\Module;
+
 use iumioFramework\Core\Additional\Manager\ComManager;
 use iumioFramework\Core\Exception\Server\Server500;
 
@@ -45,18 +46,16 @@ class PredictionManager
         $commands = $f->commands;
 
         foreach ($commands as $command => $val) {
-
             if ($val->type === "single") {
-                if(stristr($command, $name) != FALSE) {
+                if (stristr($command, $name) != false) {
                     $meaning[] = $commands;
                 }
             } elseif ($val->type === "multiple") {
                 foreach ($val->args as $acommand => $aval) {
-                    if(stristr($aval->name, $name) != FALSE) {
+                    if (stristr($aval->name, $name) != false) {
                         $meaning[] = $aval->name;
                     }
                 }
-
             }
         }
         return ($meaning);

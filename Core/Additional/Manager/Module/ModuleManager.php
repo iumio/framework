@@ -13,6 +13,7 @@
  */
 
 namespace iumioFramework\Core\Additional\Manager\Module;
+
 use iumioFramework\Core\Base\Json\JsonListener;
 use iumioFramework\Core\Exception\Server\Server500;
 
@@ -55,10 +56,12 @@ class ModuleManager
      * @return string The environment name [dev, prod]
      * @throws Server500
      */
-    public function getCurrentEnv():string {
+    public function getCurrentEnv():string
+    {
         $f = new JsonListener();
         $result = $f->open(
-            realpath(__DIR__."/../../../../../../../elements/config_files/core/framework.config.json"));
+            realpath(__DIR__."/../../../../../../../elements/config_files/core/framework.config.json")
+        );
         return ($result->default_env);
     }
 }

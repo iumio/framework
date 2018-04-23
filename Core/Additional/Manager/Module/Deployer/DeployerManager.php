@@ -54,11 +54,9 @@ class DeployerManager extends ModuleManager implements ModuleManagerInterface
         $opt = $options["commands"][0] ?? null;
         if ($opt == "deployer:process-deploy") {
             $this->deploy();
-        }
-        else if ($opt == "deployer:process-undeploy") {
+        } elseif ($opt == "deployer:process-undeploy") {
             $this->undeploy();
-        }
-        else {
+        } else {
             Output::displayAsError("Deployer Manager Module Error : Option is not exist.
              Referer to help command to get options list\n");
         }
@@ -82,10 +80,8 @@ class DeployerManager extends ModuleManager implements ModuleManagerInterface
 
         JsonListener::close(FEnvFcm::get("framework.config.core.config.file"));
 
-        for ($i = 0; $i < count($this->requirements); $i++)
-        {
-            switch ($this->requirements[$i]["p"])
-            {
+        for ($i = 0; $i < count($this->requirements); $i++) {
+            switch ($this->requirements[$i]["p"]) {
                 case "RWX":
                     if (is_readable($this->requirements[$i]["path"]) &&
                         is_writable($this->requirements[$i]["path"]) &&
@@ -143,8 +139,7 @@ class DeployerManager extends ModuleManager implements ModuleManagerInterface
                 case "D":
                     if (file_exists($this->requirements[$i]["path"])) {
                         $this->requirements[$i]["status"] = false;
-                    }
-                    else {
+                    } else {
                         $this->requirements[$i]["status"] = true;
                     }
                     break;
@@ -177,8 +172,10 @@ class DeployerManager extends ModuleManager implements ModuleManagerInterface
 
         $configs->default_env = "dev";
         $configs->deployment = null;
-        JsonListener::put(FEnvFcm::get("framework.config.core.config.file"),
-            json_encode($configs, JSON_PRETTY_PRINT));
+        JsonListener::put(
+            FEnvFcm::get("framework.config.core.config.file"),
+            json_encode($configs, JSON_PRETTY_PRINT)
+        );
         JsonListener::close(FEnvFcm::get("framework.config.core.config.file"));
         $asm = new ASM();
         $asm->__render(["commands" => ["assets:clear"], "options" => ["--env=prod", "--noexit"]]);
@@ -211,8 +208,10 @@ class DeployerManager extends ModuleManager implements ModuleManagerInterface
 
         $configs->default_env = "prod";
         $configs->deployment = new \DateTime();
-        JsonListener::put(FEnvFcm::get("framework.config.core.config.file"),
-            json_encode($configs, JSON_PRETTY_PRINT));
+        JsonListener::put(
+            FEnvFcm::get("framework.config.core.config.file"),
+            json_encode($configs, JSON_PRETTY_PRINT)
+        );
         JsonListener::close(FEnvFcm::get("framework.config.core.config.file"));
 
         //ASSETS MANAGER

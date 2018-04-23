@@ -52,7 +52,8 @@ class Access200 extends \Exception
         if (empty($e)) {
             throw new Server500(new \ArrayObject(
                 array("explain" => "Framework Config file is empty : cannot generate this error [".$this->code."]",
-                    "solution" => "Set a valid Framework Config file")));
+                "solution" => "Set a valid Framework Config file")
+            ));
         }
         $w = true;
         if (isset($e->{"200_log"}) && is_bool($e->{"200_log"}) && $e->{"200_log"} == false) {
@@ -79,11 +80,13 @@ class Access200 extends \Exception
 
         $strlog =  implode(" ", $debug);
         $f = new FileListener();
-        $f->open(FEnv::get("framework.logs").strtolower(FEnv::get("framework.env")).".log",
-            "a+", true);
+        $f->open(
+            FEnv::get("framework.logs").strtolower(FEnv::get("framework.env")).".log",
+            "a+",
+            true
+        );
         $f->put($strlog);
         $f->close();
         return (1);
     }
-
 }

@@ -46,7 +46,8 @@ class Server404 extends AbstractServer
         if (empty($e)) {
             throw new Server500(new ArrayObject(
                 array("explain" => "Framework Config file is empty : cannot generate this error [".$this->code."]",
-                    "solution" => "Set a valid Framework Config file")));
+                "solution" => "Set a valid Framework Config file")
+            ));
         }
         $w = true;
         if (isset($e->{"404_log"}) && is_bool($e->{"404_log"}) && $e->{"404_log"} == false) {

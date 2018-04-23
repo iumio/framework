@@ -82,8 +82,7 @@ class JsonListener implements JsonInterface
     {
         if (count($filepath) == 1) {
             return (file_exists($filepath[0]));
-        }
-        else {
+        } else {
             $exists = [];
             foreach ($filepath as $one) {
                 array_push($exists, [$one => file_exists($one)]);

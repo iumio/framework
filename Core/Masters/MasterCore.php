@@ -59,7 +59,7 @@ class MasterCore extends GlobalCoreService
      * @return mixed
      * @throws Server500
      */
-    protected final function get(string $component)
+    final protected function get(string $component)
     {
         switch ($component) {
             case 'request':
@@ -75,7 +75,7 @@ class MasterCore extends GlobalCoreService
                 return (Services::getInstance());
                 break;
             default:
-               throw new Server500(new \ArrayObject(array("explain" =>
+                throw new Server500(new \ArrayObject(array("explain" =>
                    "Cannot call component : Undefined component $component",
                    "solution" => "Call availables components")));
                 break;
@@ -155,8 +155,12 @@ class MasterCore extends GlobalCoreService
      * @throws \Exception
      */
 
-    final public function generateRoute(string $routename, array $parameters = null, string $app_called = null,
-        bool $component = false) :string {
+    final public function generateRoute(
+        string $routename,
+        array $parameters = null,
+        string $app_called = null,
+        bool $component = false
+    ) :string {
 
         $app = (($app_called != null)? $app_called : FEnv::get("app.call"));
 
@@ -177,8 +181,7 @@ class MasterCore extends GlobalCoreService
         } elseif ($iscomponent == 'none') {
             if (FEnv::isset("framework.smarty.called") && FEnv::get("framework.smarty.called") == 1) {
                 throw new \Exception("Cannot determine app type of ".$app);
-            }
-            else {
+            } else {
                 throw new Server500(new \ArrayObject(array("explain" => "Cannot determine app type of " . $app,
                     "solution" => "Please check if your app exist")));
             }
@@ -187,8 +190,7 @@ class MasterCore extends GlobalCoreService
         if (!$rt->routingRegister()) {
             if (FEnv::isset("framework.smarty.called") && FEnv::get("framework.smarty.called") == 1) {
                 throw new \Exception("Cannot open your Mercure file");
-            }
-            else {
+            } else {
                 throw new Server500(new \ArrayObject(array("solution" => "Please check all Mercure file",
                     "explain" => "Cannot open your Mercure file")));
             }
@@ -228,8 +230,7 @@ class MasterCore extends GlobalCoreService
 
         if (FEnv::isset("framework.smarty.called") && FEnv::get("framework.smarty.called") == 1) {
             throw new \Exception("Unable to generate URL for route : $routename");
-        }
-        else {
+        } else {
             throw new Server500(new \ArrayObject(array("solution" => "Please check all Mercure file",
                 "explain" => "Unable to generate URL for route : $routename")));
         }

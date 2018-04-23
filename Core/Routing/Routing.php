@@ -113,7 +113,7 @@ class Routing extends MercureListener
      * @param $webRoute string The URI
      * @param $route array Params app name
      * @return array Similarity and match
-     * @throws 
+     * @throws
      */
     public static function matches(string $appRoute, string $webRoute, array $route):array
     {

@@ -45,8 +45,7 @@ class FrameworkInternalServerManager extends ModuleManager implements ModuleMana
                 Output::displayAsGreen("Running the Framework Inernal Server on http://localhost:8000", "none");
                 $a = new Runner();
                 $a->run();
-            }
-            else {
+            } else {
                 $host = null;
                 $port = null;
                 $secure = false;
@@ -75,11 +74,9 @@ class FrameworkInternalServerManager extends ModuleManager implements ModuleMana
                 }
 
                 if (($a = $this->strlikeInArray("--cert", $this->options["options"])) != null) {
-                   if ($secure) {
-                       $cert = (explode("=", $a))[1];
-                   }
-
-                else {
+                    if ($secure) {
+                        $cert = (explode("=", $a))[1];
+                    } else {
                         Output::displayAsRed("Fis Error : Cannot use certificate without a secure connection.\n
                      Please use the option --secure to use a certificate");
                     }
@@ -95,8 +92,7 @@ class FrameworkInternalServerManager extends ModuleManager implements ModuleMana
                 $a = new Runner();
                 $a->run($host, $port, $secure, $root, $router, $cert, $cluster);
             }
-        }
-        else {
+        } else {
             Output::displayAsError("Fis Manager : Cannot run development server when production 
             environment was settled by default.\n Please set development environment to use server.");
         }

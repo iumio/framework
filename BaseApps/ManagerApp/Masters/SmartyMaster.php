@@ -38,8 +38,10 @@ class SmartyMaster extends MasterCore
      */
     public function smartyActivity()
     {
-        return ($this->render("smartymanager",
-            array("selected" => "smartymanager", "loader_msg" => "Smarty Manager")));
+        return ($this->render(
+            "smartymanager",
+            array("selected" => "smartymanager", "loader_msg" => "Smarty Manager")
+        ));
     }
 
     /**
@@ -116,8 +118,10 @@ class SmartyMaster extends MasterCore
         $file->$config->smarty_debug  = $this->setRealBoolean($sdebug);
         $file->$config->console_debug = $console;
 
-        JL::put(FEnv::get("framework.config")."smarty_config/smarty.json",
-            json_encode($file, JSON_PRETTY_PRINT));
+        JL::put(
+            FEnv::get("framework.config")."smarty_config/smarty.json",
+            json_encode($file, JSON_PRETTY_PRINT)
+        );
 
         return ((new Renderer())->jsonRenderer(array("code" => 200, "msg" => "OK")));
     }

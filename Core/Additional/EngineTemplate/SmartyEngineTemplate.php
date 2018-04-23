@@ -20,7 +20,6 @@ use iumioFramework\Core\Base\Json\JsonListener;
 use iumioFramework\Core\Requirement\Environment\FEnv;
 use iumioFramework\Core\Exception\Server\Server500;
 
-
 /**
  * Class SmartyEngineTemplate
  * @package iumioFramework\Core\Additional\EngineTemplate
@@ -55,7 +54,6 @@ final class SmartyEngineTemplate
             if ($env == "dev") {
                 $envcache = FEnv::get("framework.cache.dev");
                 $compiled = FEnv::get("framework.compiled.dev");
-
             } elseif ($env == "prod") {
                 $envcache = FEnv::get("framework.cache.prod");
                 $compiled = FEnv::get("framework.compiled.prod");
@@ -75,8 +73,7 @@ final class SmartyEngineTemplate
 
             if (self::$appCall != "iumio") {
                 self::$instance->setTemplateDir($dirapp.self::$appCall.'/Front/views');
-            }
-            else {
+            } else {
                 self::$instance->setTemplateDir(FEnv::get("framework.overrides").'Exceptions/views');
             }
             self::$instance->setCompileDir($compiled.$sconfig->getCompiledDirectory());
@@ -109,7 +106,7 @@ final class SmartyEngineTemplate
     final public static function enableSmartyDebug(bool $status)
     {
         $sconfig = new SmartyConfig(FEnv::get("framework.env"));
-        FEnv::set("framework.smarty.debug",  $sconfig->getConsoleDebug());
+        FEnv::set("framework.smarty.debug", $sconfig->getConsoleDebug());
         /*if ($status == true) {
             //define('DISPLAY_SMARTY_DEBUG', $sconfig->getConsoleDebug());
             FEnv::set("framework.smarty.debug",  $sconfig->getConsoleDebug());
@@ -281,7 +278,7 @@ final class SmartyEngineTemplate
     final private function registerExtendedPlugin()
     {
         if (self::$appCall != null) {
-            if (Server::exist( FEnv::get("framework.apps").FEnv::get("app.call")."/Extra/".
+            if (Server::exist(FEnv::get("framework.apps").FEnv::get("app.call")."/Extra/".
                 strtolower(FEnv::get("app.call")).".view.plugin.json")) {
                 $file = JsonListener::open(FEnv::get("framework.apps").FEnv::get("app.call")."/Extra/".
                     strtolower(FEnv::get("app.call")).".view.plugin.json");
@@ -312,9 +309,7 @@ final class SmartyEngineTemplate
                     );
                 }
             }
-
         }
-
     }
 
     /** Return an instance of SmartyEngineTemplate
@@ -325,11 +320,11 @@ final class SmartyEngineTemplate
     {
         if (self::$instance == null) {
             if (self::$appCall != $appFullName) {
-                self::$appCall = $appFullName;;
+                self::$appCall = $appFullName;
+                ;
                 new SmartyEngineTemplate();
             }
         }
         return (self::$instance);
     }
-
 }

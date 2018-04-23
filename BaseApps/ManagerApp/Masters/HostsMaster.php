@@ -171,10 +171,11 @@ class HostsMaster extends MasterCore
         $a->allowed = $allowed;
         $a->denied = $denied;
 
-        JL::put(FEnv::get("framework.config").'hosts/hosts.'.$env.'.json',
-            json_encode($a, JSON_PRETTY_PRINT));
+        JL::put(
+            FEnv::get("framework.config").'hosts/hosts.'.$env.'.json',
+            json_encode($a, JSON_PRETTY_PRINT)
+        );
 
         return ((new Renderer())->jsonRenderer(array("code" => 200, "msg" => "OK")));
     }
-    
 }

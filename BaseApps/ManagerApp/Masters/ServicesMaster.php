@@ -39,8 +39,10 @@ class ServicesMaster extends MasterCore
      */
     public function servicesActivity()
     {
-        return ($this->render("servicesmanager",
-            array("selected" => "servicesmanager", "loader_msg" => "Service Manager")));
+        return ($this->render(
+            "servicesmanager",
+            array("selected" => "servicesmanager", "loader_msg" => "Service Manager")
+        ));
     }
 
 
@@ -163,9 +165,9 @@ class ServicesMaster extends MasterCore
 
         $f = json_decode(file_get_contents(FEnv::get("framework.config.core.services.file")));
         foreach ($f as $one => $val) {
-           if ($one == $name) {
-               return ((new Renderer())->jsonRenderer(array("code" => 500, "msg" => "Service already exist")));
-           }
+            if ($one == $name) {
+                return ((new Renderer())->jsonRenderer(array("code" => 500, "msg" => "Service already exist")));
+            }
         }
 
         $f->$name = new \stdClass();
@@ -248,7 +250,8 @@ class ServicesMaster extends MasterCore
      * @param bool $space_remove Remove space (default set true)
      * @return null|string|string[]
      */
-    private function clean(string $string, bool $space_remove = true) {
+    private function clean(string $string, bool $space_remove = true)
+    {
         $string = trim($string);
         if ($space_remove) {
             $string = str_replace(' ', '-', $string);

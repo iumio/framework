@@ -91,8 +91,10 @@ class IpUtils
             return self::$checkedIps[$cacheKey] = false;
         }
 
-        return self::$checkedIps[$cacheKey] = 0 === substr_compare(sprintf('%032b',
-                ip2long($requestIp)), sprintf('%032b', ip2long($address)), 0, $netmask);
+        return self::$checkedIps[$cacheKey] = 0 === substr_compare(sprintf(
+            '%032b',
+            ip2long($requestIp)
+        ), sprintf('%032b', ip2long($address)), 0, $netmask);
     }
 
     /**
@@ -118,7 +120,8 @@ class IpUtils
         }
 
         if (!((extension_loaded('sockets') && defined('AF_INET6')) || @inet_pton('::1'))) {
-            throw new \RuntimeException('Unable to check Ipv6. Check that PHP was not compiled with option "disable-ipv6".');
+            throw new \RuntimeException('Unable to check Ipv6.
+             Check that PHP was not compiled with option "disable-ipv6".');
         }
 
         if (false !== strpos($ip, '/')) {

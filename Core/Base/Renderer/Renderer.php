@@ -14,11 +14,11 @@
  */
 
 namespace iumioFramework\Core\Base\Renderer;
+
 use iumioFramework\Core\Additional\EngineTemplate\SmartyEngineTemplate;
 use iumioFramework\Core\Base\Http\HttpResponse;
 use iumioFramework\Core\Requirement\Environment\FEnv;
 use iumioFramework\Core\Exception\Server\Server500;
-
 
 /**
  * Class Renderer
@@ -89,7 +89,7 @@ class Renderer implements RendererInterface
         $taskbar = \iumioFramework\Core\Additional\TaskBar\TaskBar::getTaskBar();
         if ($taskbar !== "#none") {
             $pos = strpos($viewRs, "</body>");
-            $viewRs = $this->strAdd($viewRs, $taskbar, $pos );
+            $viewRs = $this->strAdd($viewRs, $taskbar, $pos);
         }
         $this->display_elements = array("graphic" =>
             ($viewRs));
@@ -130,7 +130,8 @@ class Renderer implements RendererInterface
      * @param string $type allowed type
      * @return bool If exist
      */
-    private function allowedTypeExist(string $type):bool {
+    private function allowedTypeExist(string $type):bool
+    {
         foreach ($this->allowed_text_render as $one) {
             if ($one["type"] === $type) {
                 return (true);
@@ -142,7 +143,8 @@ class Renderer implements RendererInterface
     /** Merge all text render
      * @return array Array this contact text and render type
      */
-    private function assemblyTextRender():array {
+    private function assemblyTextRender():array
+    {
         $str = "";
         $type = "text";
 
@@ -191,7 +193,7 @@ class Renderer implements RendererInterface
         $feed = new \DOMDocument();
         $feed->preserveWhitespace = true;
         $result = dom_import_simplexml($xmlElem);
-        if(!$result) {
+        if (!$result) {
             throw new Server500(new \ArrayObject(array("explain" => "Renderer: xml element is invalid.".
                 ((isset(error_get_last()["message"])? " : ".error_get_last()["message"] : "" )), "solution" =>
                 "Please send a valid xml element to renderer")));
@@ -239,21 +241,20 @@ class Renderer implements RendererInterface
      * @return Renderer A renderer object
      * @throws Server500 If renderer is not callable
      */
-    public function registerCustomRenderer($callback, array $args = null):Renderer {
+    public function registerCustomRenderer($callback, array $args = null):Renderer
+    {
         if (is_callable($callback)) {
             $end = substr($callback, (strlen($callback) - 8));
             if ($end === "Renderer") {
                 $this->display_elements["custom"] = $callback;
                 $this->display_elements["args"] = $args;
                 return ($this);
-            }
-            else {
+            } else {
                 throw new Server500(new \ArrayObject(array("explain" =>
                     "Renderer name must be contain [Renderer] keyword at the end to be valid : $callback",
                     "solution" => "Please set a valid renderer name")));
             }
-        }
-        else {
+        } else {
             throw new Server500(new \ArrayObject(array("explain" =>
                 "Cannot register $callback custom renderer : Is not callable", "solution" =>
                 "Please set a callable renderer")));
@@ -282,14 +283,13 @@ class Renderer implements RendererInterface
 
         if ($this->display_elements['excel'] === true) {
             header('Content-Type: application/vnd.ms-excel');
-        }
-        else {
+        } else {
             header('Content-Transfer-Encoding: binary');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
             header('Pragma: public');
         }
-       if ($this->display_elements["name"] != NULL) {
+        if ($this->display_elements["name"] != null) {
             header('Content-Disposition: attachment; filename='.$this->display_elements["name"].'.csv');
             header('Content-Transfer-Encoding: binary');
             header('Expires: 0');
@@ -299,15 +299,13 @@ class Renderer implements RendererInterface
 
         $u = 0;
         echo (chr(0xEF) . chr(0xBB) . chr(0xBF));
-        foreach ($this->display_elements['csv'] as $one)
-        {
+        foreach ($this->display_elements['csv'] as $one) {
             if ($this->display_elements['keys_show'] && $u === 0) {
                 echo implode(";", (array_keys($one))) . "\n";
             }
             if (is_array($one)) {
                 echo (implode(";", $one)) . "\n";
-            }
-            else {
+            } else {
                 echo ($one)."\n";
             }
             $u++;
@@ -320,52 +318,45 @@ class Renderer implements RendererInterface
      */
     public function pushRender()
     {
-        if (isset($this->display_elements["graphic"]) ) {
+        if (isset($this->display_elements["graphic"])) {
             echo $this->display_elements["graphic"];
-        }
-        elseif (isset($this->display_elements["json"]) && $this->display_elements["json"] != "") {
+        } elseif (isset($this->display_elements["json"]) && $this->display_elements["json"] != "") {
             if (isset($this->display_elements["json"]['code'])) {
-                @header($_SERVER['SERVER_PROTOCOL'] . ' ' .
+                @header(
+                    $_SERVER['SERVER_PROTOCOL'] . ' ' .
                     (($this->display_elements["json"]['code'] == 000) ? 500 :
                         $this->display_elements["json"]['code']) . ' ' .
                     HttpResponse::getPhrase($this->display_elements["json"]['code']),
-                    true, $this->display_elements["json"]['code']);
+                    true,
+                    $this->display_elements["json"]['code']
+                );
                 header('Expires: 0');
                 header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
                 header('Pragma: public');
-
             }
             echo json_encode($this->display_elements["json"], JSON_PRETTY_PRINT);
-        }
-        elseif (isset($this->display_elements["xml"]) && $this->display_elements["xml"] != "") {
+        } elseif (isset($this->display_elements["xml"]) && $this->display_elements["xml"] != "") {
             header('Content-type: text/xml');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
             header('Pragma: public');
             echo ($this->display_elements["xml"]);
             if ($this->display_elements["name"] != null) {
-              header('Content-Disposition: attachment; filename="'.$this->display_elements["name"].'.xml"');
+                header('Content-Disposition: attachment; filename="'.$this->display_elements["name"].'.xml"');
             }
-        }
-        elseif (isset($this->display_elements["text"]) && $this->display_elements["text"] != "") {
+        } elseif (isset($this->display_elements["text"]) && $this->display_elements["text"] != "") {
             $rs = $this->assemblyTextRender();
             header("Content-Type: text/".$rs["type"]);
             echo ($rs["text"]);
-        }
-        elseif (isset($this->display_elements["csv"]) && $this->display_elements["csv"] != "")
-        {
+        } elseif (isset($this->display_elements["csv"]) && $this->display_elements["csv"] != "") {
             $this->buildCsv();
-        }
-        elseif (isset($this->display_elements["custom"])) {
+        } elseif (isset($this->display_elements["custom"])) {
             if ($this->display_elements["custom"] == null) {
                 $this->display_elements["custom"];
-            }
-            else {
+            } else {
                 $this->display_elements["custom"]($this->display_elements["args"]);
             }
-
-        }
-        else {
+        } else {
             throw new Server500(new \ArrayObject(array("explain" => "Renderer: This renderer is not valid. ".
                 json_encode($this->display_elements), "solution" =>
                 "Please use a valid renderer.")));
@@ -373,7 +364,4 @@ class Renderer implements RendererInterface
         $this->display_elements = array();
         exit(1);
     }
-
 }
-
-

@@ -37,8 +37,10 @@ class CacheMaster extends MasterCore
      */
     public function cacheActivity()
     {
-        return ($this->render("cachemanager",
-            array("selected" => "cachemanager", "loader_msg" => "Cache Manager")));
+        return ($this->render(
+            "cachemanager",
+            array("selected" => "cachemanager", "loader_msg" => "Cache Manager")
+        ));
     }
 
     /** Clear cache system with specific environment

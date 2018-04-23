@@ -13,8 +13,8 @@
  **/
 
 namespace iumioFramework\Core\Requirement\Patterns\Singleton;
-use iumioFramework\Core\Exception\Server\Server500;
 
+use iumioFramework\Core\Exception\Server\Server500;
 
 /**
  * Class SingletonMulPattern
@@ -90,5 +90,4 @@ abstract class SingletonMulPattern
         // LOCKED THE UNSERIALIZE
         return (null);
     }
-
 }

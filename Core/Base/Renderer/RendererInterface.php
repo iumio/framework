@@ -14,6 +14,7 @@
  */
 
 namespace iumioFramework\Core\Base\Renderer;
+
 use iumioFramework\Core\Exception\Server\Server500;
 
 /**
@@ -24,7 +25,8 @@ use iumioFramework\Core\Exception\Server\Server500;
  * @link https://framework.iumio.com
  * @author   RAFINA Dany <dany.rafina@iumio.com>
  */
-interface RendererInterface {
+interface RendererInterface
+{
 
     /** Render a graphic element on screen (Smarty Only)
      * @param string $view view name
@@ -76,5 +78,4 @@ interface RendererInterface {
      * @return mixed
      */
     public function pushRender();
-
 }

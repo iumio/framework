@@ -14,6 +14,7 @@
  */
 
 namespace iumioFramework\Core\Additional\Zip;
+
 use iumioFramework\Core\Exception\Server\Server500;
 
 use \ZipArchive;

@@ -225,7 +225,8 @@ class DatabasesMaster extends MasterCore
      * @param bool $space_remove Remove space (default set true)
      * @return null|string|string[]
      */
-    private function clean(string $string, bool $space_remove = true) {
+    private function clean(string $string, bool $space_remove = true)
+    {
         $string = trim($string);
         if ($space_remove) {
             $string = str_replace(' ', '-', $string);

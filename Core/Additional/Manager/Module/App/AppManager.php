@@ -24,7 +24,6 @@ use iumioFramework\Core\Additional\Manager\FEnvFcm;
 use iumioFramework\Core\Additional\Manager\Module\ModuleManagerInterface;
 use iumioFramework\Core\Additional\Manager\Module\App\OutputManagerOverride as Output;
 
-
 /**
  * Class AppManager
  * @package iumioFramework\Core\Additional\Manager\Module\App
@@ -67,18 +66,18 @@ class AppManager extends ModuleManager implements ModuleManagerInterface
 
         $opt = $options["commands"][0] ?? null;
 
-            if ($opt == "app:create") {
-                $this->stepNewProject();
-            } elseif ($opt == "app:remove") {
-                $this->stepRemoveProject();
-            } elseif ($opt == "app:enabled") {
-                $this->stepEnabledProject();
-            } elseif ($opt == "app:disabled") {
-                $this->stepDisabledProject();
-            } else {
-                Output::outputAsError("App Manager Error \n
+        if ($opt == "app:create") {
+            $this->stepNewProject();
+        } elseif ($opt == "app:remove") {
+            $this->stepRemoveProject();
+        } elseif ($opt == "app:enabled") {
+            $this->stepEnabledProject();
+        } elseif ($opt == "app:disabled") {
+            $this->stepDisabledProject();
+        } else {
+            Output::outputAsError("App Manager Error \n
                    This command doesn't exist. Referer to help comannd\n");
-            }
+        }
     }
 
     /** Check app name format
@@ -163,8 +162,11 @@ class AppManager extends ModuleManager implements ModuleManagerInterface
                 Output::displayAsRed("Your app name is invalid. Please Retry.", "none", false);
             } elseif ($this->checkAppExist($this->params['appname']) == true) {
                 $e = false;
-                Output::displayAsRed("This app name is already exist, Please enter an other app name.",
-                    "none", false);
+                Output::displayAsRed(
+                    "This app name is already exist, Please enter an other app name.",
+                    "none",
+                    false
+                );
             } else {
                 $e = true;
                 continue;
@@ -233,8 +235,11 @@ class AppManager extends ModuleManager implements ModuleManagerInterface
             } elseif ($this->checkAppExist($this->params['appname']) == false &&
                 $this->checkAppRegister($this->params['appname']) == false) {
                 $e = false;
-                Output::displayAsRed("This app not exist, Please enter an existed app name",
-                    "none", false);
+                Output::displayAsRed(
+                    "This app not exist, Please enter an existed app name",
+                    "none",
+                    false
+                );
             } else {
                 $e = true;
                 continue;
@@ -311,7 +316,7 @@ class AppManager extends ModuleManager implements ModuleManagerInterface
         Output::outputAsReadLine("Which number ? : ", "none");
         $this->params['capp'] = $this->listener();
 
-        while (!is_numeric($this->params['capp'] ) || !isset($this->params['applist'][$this->params['capp'] - 1])) {
+        while (!is_numeric($this->params['capp']) || !isset($this->params['applist'][$this->params['capp'] - 1])) {
             Output::displayAsRed("Your choose is incorrect. Please retry", "none", false);
             $this->showEnabledAppsRegister();
             Output::outputAsReadLine("Which number ? : ", "none");
@@ -621,33 +626,6 @@ class AppManager extends ModuleManager implements ModuleManagerInterface
         Output::displayAsGreen("The application has been deleted. To create a new application,
          use [app create] .", "none", false);
     }
-
-    /** Adding into composer.json the app class and path
-     * @param string $name App name
-     * @throws Server500 if JsonListener failed
-     */
-    final private function addComposerApp(string $name) {
-        $composer = JsonListener::open(FEnvFcm::get("framework.root")."composer.json");
-        $composer->autoload->{"psr-4"}->{$name."\\"} = "apps/$name";
-        JsonListener::put(FEnvFcm::get("framework.root")."composer.json",
-            json_encode($composer, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-    }
-
-
-    /** Removing into composer.json the app class and path
-     * @param string $name App name
-     * @throws Server500 if JsonListener failed
-     */
-    final private function removeComposerApp(string $name) {
-        $composer = JsonListener::open(FEnvFcm::get("framework.root")."composer.json");
-        unset($composer->autoload->{"psr-4"}->{$name."\\"});
-        JsonListener::put(FEnvFcm::get("framework.root")."composer.json",
-            json_encode($composer, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-    }
-
-
-
-
 
     public function __alter()
     {

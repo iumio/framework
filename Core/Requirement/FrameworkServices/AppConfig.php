@@ -67,11 +67,11 @@ class AppConfig extends SingletonMulPattern
      * @return null|\stdClass None if app does not have a config file | The file content if app content a config file
      * @throws \iumioFramework\Core\Exception\Server\Server500 FEnv
      */
-    protected function openAppConfig(string $name) {
+    protected function openAppConfig(string $name)
+    {
         if (JL::exists(FEnv::get("app.config.file", $name))) {
             return (JL::open(FEnv::get("app.config.file", $name)));
-        }
-        else {
+        } else {
             return (null);
         }
     }
@@ -81,7 +81,8 @@ class AppConfig extends SingletonMulPattern
      * @throws Server403 Display the message for denied host
      * @throws Server500 For FEnv
      */
-    private function checkHosts():bool {
+    private function checkHosts():bool
+    {
         if (null === $this->config) {
             return (true);
         }
@@ -94,8 +95,7 @@ class AppConfig extends SingletonMulPattern
                 if (null !== $dd) {
                     if (false != in_array("*", $dd)) {
                         $result = false;
-                    }
-                    elseif (false != in_array($ip, $dd) ) {
+                    } elseif (false != in_array($ip, $dd)) {
                         $result = false;
                     }
                 }
@@ -105,21 +105,18 @@ class AppConfig extends SingletonMulPattern
                 if (null !== $dd) {
                     if (true == in_array("*", $dd) && $result) {
                         $result = true;
-                    }
-                    elseif (true === in_array($ip, $dd) && false === $result) {
+                    } elseif (true === in_array($ip, $dd) && false === $result) {
                         $result = true;
                     }
                 }
             }
-        }
-        elseif ("prod" === $current_env) {
+        } elseif ("prod" === $current_env) {
             if (property_exists($this->config, "hosts_denied_prod")) {
                 $dd = $this->config->hosts_denied_prod;
                 if (null !== $dd) {
                     if (false != in_array("*", $dd)) {
                         $result = false;
-                    }
-                    elseif (false != in_array($ip, $dd) ) {
+                    } elseif (false != in_array($ip, $dd)) {
                         $result = false;
                     }
                 }
@@ -129,8 +126,7 @@ class AppConfig extends SingletonMulPattern
                 if (null !== $dd) {
                     if (true == in_array("*", $dd) && $result) {
                         $result = true;
-                    }
-                    elseif (true === in_array($ip, $dd) && false === $result) {
+                    } elseif (true === in_array($ip, $dd) && false === $result) {
                         $result = true;
                     }
                 }
@@ -150,7 +146,8 @@ class AppConfig extends SingletonMulPattern
      * @throws Server403 Forbideen error
      * @throws Server500 Fatal error
      */
-    public function checkRequirements():bool {
+    public function checkRequirements():bool
+    {
         $this->checkHosts();
         return (true);
     }
@@ -159,7 +156,8 @@ class AppConfig extends SingletonMulPattern
      * @return bool True or false for visibility for each env
      * @throws Server500 Fenv
      */
-    public function checkVisibility():bool {
+    public function checkVisibility():bool
+    {
         if (null === $this->config) {
             return (true);
         }
@@ -167,14 +165,11 @@ class AppConfig extends SingletonMulPattern
         if (property_exists($this->config, "visibility_$current_env")) {
             if (false === $this->config->{"visibility_$current_env"}) {
                 return (false);
-            }
-            elseif (true === $this->config->{"visibility_$current_env"}) {
+            } elseif (true === $this->config->{"visibility_$current_env"}) {
                 return (true);
-            }
-            elseif (null == $this->config->{"visibility_$current_env"}) {
+            } elseif (null == $this->config->{"visibility_$current_env"}) {
                 return (true);
-            }
-            else {
+            } else {
                 throw new Server500(new \ArrayObject(array("explain" => "Parse Error on ".$this->app.
                     " config.json file : Cannot determine the visibility of $current_env environment",
                     "solution" => "Set the correct visibility [true, false]")));
@@ -214,5 +209,4 @@ class AppConfig extends SingletonMulPattern
     {
         $this->config = $config;
     }
-
 }
