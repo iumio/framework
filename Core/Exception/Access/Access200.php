@@ -55,7 +55,6 @@ class Access200 extends \Exception
                 "solution" => "Set a valid Framework Config file")
             ));
         }
-        $w = true;
         if (isset($e->{"200_log"}) && is_bool($e->{"200_log"}) && $e->{"200_log"} == false) {
             return (1);
         }

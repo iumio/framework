@@ -25,56 +25,55 @@
                         <div class="col-md-6">
                             <div class="h350 card">
                                 <div class="header">
-                                    <h4 class="title">iumio Framework instance</h4>
-                                    <p class="category">Informations about iumio Framework instance</p>
+                                    <h4 class="title">Framework instance</h4>
+                                    <p class="category">Informations about framework instance</p>
                                 </div>
                                 {nocache}
-                                <div class="content"  style="overflow: auto;padding-left: 40px;max-height: 220px;">
-                                    <ul class="break-word col-md-12">
-                                        <li>Edition name : iumio Framework {framework_info name='EDITION_FULLNAME'} </li>
+                                    <div class="content"  style="overflow: auto;padding-left: 40px;max-height: 220px;">
+                                        <p class="category">Edition informations</p>
+                                        <ul class="break-word col-md-12">
+                                            <li>Name & Version : iumio Framework {framework_info name='EDITION_FULLNAME'}  {framework_info name='EDITION_STAGE'} {framework_info name='EDITION_VERSION'} ({framework_info name='EDITION_BUILD'})</li>
 
-                                        <li>Edition version : {framework_info name='EDITION_STAGE'} {framework_info name='EDITION_VERSION'} ({framework_info name='EDITION_BUILD'}) </li>
+                                            <li>Installation date : {$fi->installation}</li>
 
-                                        <li>Installation date : {$fi->installation}</li>
+                                            {if isset($fi->deployment) and ($fi->deployment != null) }<li>Deployment date : {$fi->deployment}</li>{/if}
 
-                                        {if isset($fi->deployment) and ($fi->deployment != null) }<li>Deployment date : {$fi->deployment}</li>{/if}
+                                            <li>Installation location : {framework_info name='LOCATION'}</li>
 
-                                        <li>Installation location : {framework_info name='LOCATION'}</li>
+                                            <li>U3i : {framework_info name='EDITION_U3I'}</li>
 
-                                        <li>U3i : {framework_info name='EDITION_U3I'}</li>
+                                            <li>Current environment : {$fi->default_env}</li>
 
-                                        <li>Current environment : {$fi->default_env}</li>
+                                        </ul>
 
-                                    </ul>
+                                        <p class="category">Core informations</p>
 
-                                    <p class="category">Core Informations</p>
+                                        <ul class="break-word col-md-12">
+                                            <li>Name : {framework_info name='CORE_NAME'} </li>
 
-                                    <ul class="break-word col-md-12">
-                                        <li>Name : {framework_info name='CORE_NAME'} </li>
+                                            <li>Version : {framework_info name='CORE_STAGE'} {framework_info name='CORE_VERSION'} build {framework_info name='CORE_BUILD'}</li>
+                                        </ul>
 
-                                        <li>Version : {framework_info name='CORE_STAGE'} {framework_info name='CORE_VERSION'} ({framework_info name='CORE_BUILD'}) </li>
-                                    </ul>
-
-                                </div>
+                                    </div>
                                 {/nocache}
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="card h350">
                                 <div class="header">
-                                    <h4 class="title">Server Informations</h4>
+                                    <h4 class="title">Server informations</h4>
                                     <p class="category">Informations about server instance</p>
                                 </div>
                                 <div class="content" style="overflow: auto;padding-left: 40px;max-height: 220px;">
                                     {nocache}
-                                    <ul class="col-md-12">
-                                        <li>Server : {system_info name='SERVER_SOFTWARE' }</li>
-                                        <li>PHP version : {system_info name='PHP_VERSION' }</li>
-                                        <li>Domain : {system_info name='SERVER_NAME'}</li>
-                                        <li>Protocol : {system_info name='SERVER_PROTOCOL'}</li>
-                                        <li>Port : {system_info name='SERVER_PORT'}</li>
-                                        <li>Use SSL : {if $https} Yes {else} No {/if} </li>
-                                    </ul>
+                                        <ul class="col-md-12">
+                                            <li>Server : {system_info name='SERVER_SOFTWARE' }</li>
+                                            <li>PHP version : {system_info name='PHP_VERSION' }</li>
+                                            <li>Domain : {system_info name='SERVER_NAME'}</li>
+                                            <li>Protocol : {system_info name='SERVER_PROTOCOL'}</li>
+                                            <li>Port : {system_info name='SERVER_PORT'}</li>
+                                            <li>Use SSL : {if $https} Yes {else} No {/if} </li>
+                                        </ul>
                                     {/nocache}
                                 </div>
                             </div>
@@ -83,7 +82,7 @@
                             <div class="card h350">
                                 <div class="header">
                                     <h4 class="title">Logs events</h4>
-                                    <p class="category">Last events logs for <strong>{nocache}{$env}{/nocache}</strong> (10)</p>
+                                    <p class="category">Last events for <strong>{nocache}{$env}{/nocache}</strong> (10)</p>
                                 </div>
                                 <div class="content" style="overflow: auto;max-height: 220px">
                                     <ul class="lastlog elemcard" attr-href="{nocache}{route name='iumio_manager_logs_get'}{/nocache}">
@@ -96,8 +95,8 @@
                         <div class="col-md-6">
                             <div class="card h350">
                                 <div class="header">
-                                    <h4 class="title">iumio Framework Statistics</h4>
-                                    <p class="category">Statistics about iumio Framework instance</p>
+                                    <h4 class="title">Framework statistics</h4>
+                                    <p class="category">Statistics about framework instance</p>
                                 </div>
                                 <div class="content dashboardStats elemcard"  attr-href="{nocache}{route name='iumio_manager_dashboard_get_statistics'}{/nocache}" style="overflow: auto;padding-left: 40px">
                                     <ul class="col-md-6">
@@ -107,7 +106,7 @@
                                         <li>Routes  : <span class="dashb-route">0</span></li>
                                         <li>Routes disabled : <span class="dashb-routedisa">0</span></li>
                                         <li>Routes with public visibility : <span class="dashb-routevisi">0</span></li>
-                                        <li>Databases connected : <span class="dashb-dbco">0</span></li>
+                                        <li>Databases registered : <span class="dashb-dbco">0</span></li>
 
                                     </ul>
                                     <ul class="col-md-6">
@@ -123,7 +122,7 @@
                                         <li>
                                             <strong>prod</strong>
                                             <ul>
-                                                <li>Requests successful : <span class="dashb-reqsuc-prod">0</span></li>
+                                                <li>Successful requests: <span class="dashb-reqsuc-prod">0</span></li>
                                                 <li>Events : <span class="dashb-err-prod">0</span></li>
                                                 <li>Critical events (500) : <span class="dashb-errcri-prod">0</span></li>
                                                 <li>Others events : <span class="dashb-erroth-prod">0</span></li>

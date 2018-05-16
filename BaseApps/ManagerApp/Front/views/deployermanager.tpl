@@ -24,6 +24,7 @@
                             <div class="card">
                                 <div class="header">
                                     <h4 class="title">Options</h4>
+                                    <p class="category">Click on one of the buttons to perform an action.</p>
                                 </div>
                                 <div class="content">
                                     <div class="row center-block text-center manager-options">
@@ -40,7 +41,7 @@
                             <div class="card ">
                                 <div class="header">
                                     <h4 class="title">Deployment requirements</h4>
-                                    <p class="category">Things required to deploy properly</p>
+                                    <p class="category">This is the list of each element required to deploy properly. All elements must be fixed to perform a deployment.</p>
                                 </div>
                                 <div class="content iumio-overflow-x">
                                     <div class="table-full-width">

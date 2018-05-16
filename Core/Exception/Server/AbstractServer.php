@@ -37,8 +37,8 @@ abstract class AbstractServer extends \Exception implements ServerInterface
     protected $env = null;
     protected $external = false;
     protected $time = false;
-    protected $color_class = array(500 => "navbar-ct-red", "default" => "navbar-ct-orange", 200 => "navvar-ct-green");
-    protected $color_class_checked = "navbar-ct-orange";
+    protected $color_class = array(500 => "fgm-danger", "default" => "fgm-warning", 200 => "navvar-ct-green");
+    protected $color_class_checked = "fgm-warning";
     protected $uidie = null;
     protected $client_ip = null;
     protected $inlog = true;

@@ -23,7 +23,7 @@
                             <div class="card">
                                 <div class="header">
                                     <h4 class="title">List of smarty configurations</h4>
-                                    <p class="category">Referer to smarty.json</p>
+                                    <p class="category">This is the configuration list for each smarty engine template environment. You have the main information on them. You can also perform actions on each configuration.</p>
                                 </div>
                                 <div class="content table-responsive table-full-width">
                                     <table class="table table-hover table-striped">

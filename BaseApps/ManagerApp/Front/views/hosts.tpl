@@ -23,7 +23,7 @@
                             <div class="card">
                                 <div class="header">
                                     <h4 class="title">List of your hosts declarations</h4>
-                                    <p class="category">Referer to hosts.dev.json or hosts.prod.json</p>
+                                    <p class="category">This is the hosts declarations list for each environment. You have the main information on them such as allowed hosts, denied hosts, etc. You can also perform actions on each configuration.<br> </p>
                                 </div>
                                 <div class="content table-responsive table-full-width">
                                     <table class="table table-hover table-striped">

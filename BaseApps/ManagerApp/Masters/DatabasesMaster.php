@@ -96,7 +96,7 @@ class DatabasesMaster extends MasterCore
     {
         $remove = false;
         $file = JL::open(FEnv::get("framework.config.db.file"));
-        foreach ($file as $one => $val) {
+        foreach ($file as $one) {
             if ($one == $dbconfiguration) {
                 unset($file->$one);
                 $remove = true;
@@ -197,11 +197,6 @@ class DatabasesMaster extends MasterCore
                 "msg" => "Error on databases parameters : A parameter is empty")));
         }
 
-
-        if (!filter_var($host, FILTER_VALIDATE_IP)) {
-            return ((new Renderer())->jsonRenderer(array("code" => 500,
-                "msg" => "$host is a valid IP address")));
-        }
         $file = JL::open(FEnv::get("framework.config.db.file"));
         if (isset($file->$config)) {
             return ((new Renderer())->jsonRenderer(array("code" => 500, "msg" => "Error on databases parameters")));

@@ -96,10 +96,10 @@ class TaskBar
 <div id="iumioTaskBarBlank">
 </div>
 <ul class="iumioTaskBar">
-  <li class="flogo iumioTaskBarPulse">
+  <li class="flogo iumioTaskBarPulse" id="iumioTaskBarReduce">
     <img src="'. FEnv::get("host.web.components.libs.framework").'img/logo_white_small.png"/>
   </li>
-  <li>
+  <li class="iumioTaskBarAppName">
     <a class="active" href="#">
       <strong>'.
                 \iumioFramework\Core\Requirement\FrameworkCore::getInfo('EDITION_VERSION')." ".
@@ -305,20 +305,10 @@ class TaskBar
       </li>
     </ul>
   </li>
-  <li style="float: right; list-style: none" class="" id="iumioTaskBarReduce">
-    <a class="" style="font-size: 15px">
-        <
-    </a>
-  </li>
 </ul>
-<ul class="iumioTaskBar iumioTaskBarVSmall" style="display: none; width: 114px; padding: 0px 0px 0 0;">
+<ul class="iumioTaskBar iumioTaskBarVSmall" id="iumioTaskBarRestore" style="display: none; width: 114px; padding: 0px 0px 0 0;">
   <li class="flogo iumioTaskBarPulse">
     <img src="'. FEnv::get("host.web.components.libs.framework").'/img/logo_white_small.png"/>  
-  </li>
-  <li id="iumioTaskBarRestore" style="color: black;list-style: none; ">
-    <a class="" style="font-size: 15px">
-    >
-    </a>
   </li>
 </ul>';
             $str .= "\n".self::getJsTaskBar()."\n";

@@ -330,6 +330,7 @@ class Renderer implements RendererInterface
                     true,
                     $this->display_elements["json"]['code']
                 );
+                header('Content-type: application/json');
                 header('Expires: 0');
                 header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
                 header('Pragma: public');

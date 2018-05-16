@@ -2,17 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="180x180"
-          href="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs.framework") ?>assets/images/favicon.ico/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32"
-          href="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs.framework") ?>assets/images/favicon.ico/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16"
-          href="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs.framework") ?>assets/images/favicon.ico/favicon-16x16.png">
-    <link rel="manifest" href="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs.framework") ?>assets/images/favicon.ico/manifest.json">
-    <link rel="mask-icon" href="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs.framework") ?>assets/images/favicon.ico/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="theme-color" content="#ffffff">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
+    <link rel="icon" type="image/png" href="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs.framework") ?>assets/images/favicon.ico/favicon.ico">
     <title><?= $this->code.' '.strtolower(ucfirst($this->codeTitle)).' - Environment '.(ucfirst(strtolower($this->env))) ?></title>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -39,101 +29,39 @@
     <link href="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs").'/iumio-manager/' ?>css/pe-icon-7-stroke.css" rel="stylesheet" />
 
 </head>
-<body>
-<div class="se-pre-con"> <h3 class='validform'><?= 'Error '.$this->code.' '.strtolower(ucfirst($this->codeTitle)).' - Environment '.(ucfirst(strtolower($this->env))) ?></h3> </div>
+<body style="background: rgba(203, 203, 210, 0.15);">
+<div class="se-pre-con"> <h3 class='validform'><?= 'An exception was generated - Environment '.(strtoupper(strtolower($this->env))) ?></h3> </div>
 <div class="wrapper">
-
-            <div class="sidebar" data-color="blue">
-                <div class="sidebar-wrapper">
-                    <div class="logo">
-                        <a href="https://framework.iumio.com" class="simple-text">
-                            <img class="img-responsive img-responsive-iumio-framework" src="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs.framework").'img/' ?>iumio.logo.white.framework.png" />
-                            <h6>Error <?= $this->code ?></h6>
-                        </a>
-                    </div>
-            <ul class="nav">
-                <li>
-                    <a href="<?=
-                    (new \iumioFramework\Core\Masters\MasterCore())->generateRoute(
-                        "iumio_manager_index",
-                        null,
-                        "ManagerApp",
-                        true
-                    ) ?>">
-                        <i class="pe-7s-edit"></i>
-                        <p>Manager</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="<?=
-                    (new \iumioFramework\Core\Masters\MasterCore())->generateRoute(
-                        "iumio_manager_app_manager",
-                        null,
-                        "ManagerApp",
-                        true
-                    ) ?>">
-                        <i class="pe-7s-config"></i>
-                        <p>Apps</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="<?=
-                    (new \iumioFramework\Core\Masters\MasterCore())->generateRoute(
-                        "iumio_manager_app_manager",
-                        null,
-                        "ManagerApp",
-                        true
-                    ) ?>">
-                        <i class="pe-7s-link"></i>
-                        <p>Routing</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="<?=
-                    (new \iumioFramework\Core\Masters\MasterCore())->generateRoute(
-                        "iumio_manager_app_manager",
-                        null,
-                        "ManagerApp",
-                        true
-                    ) ?>">
-                        <i class="pe-7s-news-paper"></i>
-                        <p>Logs</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://framework.iumio.com">
-                        <i class="pe-7s-world"></i>
-                        <p>Website</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://framework.iumio.com/doc">
-                        <i class="pe-7s-news-paper"></i>
-                        <p>Documentation</p>
-                    </a>
-                </li>
-
-            </ul>
+    <nav class="navbar navbar-default navbar-fixed fgm-black" style="font-size: 14px;color: white;min-height: 0px;margin-bottom: 0px">
+        <div class="container">
+            <div class="col-md-6">
+                <a href="#"><i class="fa fa-pagelines"></i> <strong>Framework exception page</strong></a>
+            </div>
+            <div class="col-md-3 text-center">
+                <a href="https://learn.framework.iumio.com"><i class="fa fa-book"></i> Framework documentation</a>
+            </div>
+            <div class="col-md-3 text-right">
+                <a href="https://framework.iumio.com"><i class="fa fa-book"></i> Framework website</a>
+            </div>
         </div>
-    </div>
+    </nav>
 
-    <div class="main-panel">
-        <nav class="navbar navbar-default navbar-fixed <?= $this->color_class_checked ?>">
-            <div class="container-fluid">
-                <div class="navbar-header w100">
-                    <a class="navbar-brand text-center center-block w100 fw900" href="#">
-                        <?= $this->code.' '.$this->codeTitle ?></a>
-                    <button type="button" class="navbar-toggle btn-exception-iumio-menu"
-                            data-toggle="collapse" data-target="#navigation-example-2">
-                        Menu
-                    </button>
-                </div>
-                <div class="collapse navbar-collapse text-center ">
+    <nav class="navbar navbar-default navbar-fixed <?= $this->color_class_checked ?>">
+        <div class="container">
+            <div class="col-md-8">
+                <div class="navbar-header w100 ">
+                    <h4>An error was generated</h4>
+                    <h5><?= $this->code.' '.$this->codeTitle ?></h5>
+                    <p style="overflow: auto"><?= $this->explain ?></p>
                 </div>
             </div>
-        </nav>
+            <div class="col-md-4" style="text-align: center;">
+                <img src="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs.framework").'img/' ?>iumio.logo.white.framework.png" width="140" style="padding-top: 40px"/>
+            </div>
+        </div>
+    </nav>
 
-
+    <div class="container">
         <div class="content">
             <div class="container-fluid">
 
@@ -141,14 +69,14 @@
                     <div class="col-md-4">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title text-center">Event characteristics</h4>
+                                <h4 class="title text-center">Characteristics</h4>
                                 <p></p>
                                 <hr>
                                 <p class="category fs16"><i class="pe-7s-config"></i> Uidie : <strong><?= $this->uidie ?></strong></p>
                                 <hr>
                                 <p class="category fs16"><i class="pe-7s-target"></i> Event code : <?= $this->code ?> <?= $this->codeTitle ?></p>
                                 <hr>
-                                <p class="category fs16"><i class="pe-7s-clock"></i> Date : <?php echo (new \DateTime($this->time))->format("l, F d Y").
+                                <p class="category fs16"><i class="pe-7s-clock"></i> Date : <?php echo (new \DateTime($this->time))->format("d/m/Y").
                                         ' at '.(new \DateTime($this->time))->format("H:i:s") ?></p>
                                 <hr>
                                 <p class="category fs16"><i class="pe-7s-magnet"></i> Method : <?php echo  $_SERVER['REQUEST_METHOD'] ?></p>
@@ -169,7 +97,7 @@
                     <div class="col-md-8">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title text-center">Event details</h4>
+                                <h4 class="title text-center">Details</h4>
                             </div>
                             <div class="content" style="padding-top: 0px">
                                 <hr>
@@ -191,6 +119,26 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-8">
+                        <div class="card" style="height: 310px">
+                            <div class="header">
+                                <h4 class="title">Event Logs</h4>
+                                <p class="category">Last events</p>
+                            </div>
+                            <div class="content" style="overflow: auto;max-height: 220px">
+                                <ul class="errorlastlog" attr-href="<?php $master =
+                                    new \iumioFramework\Core\Masters\MasterCore();
+                                    echo $master->generateRoute(
+                                        "iumio_manager_logs_get",
+                                        null,
+                                        "ManagerApp"
+                                    ) ?>">
+
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="col-md-12">
                         <div class="card">
@@ -200,69 +148,46 @@
                             </div>
                             <div class="content text-center">
                                 <?php
-                                            $trace = null;
-                                            $trace = ($this->trace != null)? $this->trace : $this->getTrace();
-                                            foreach ($trace as $one) {
+                                    $trace = null;
+                                    $trace = ($this->trace != null)? $this->trace : $this->getTrace();
+                                    foreach ($trace as $one) {
                                         ?>
-                                    <div class="content text-center card-content-new">
-                                        <?php if (isset($one['file'])) { ?>
-                                        <div class="typo-line">
+                                        <div class="content text-center card-content-new">
+                                            <?php if (isset($one['file'])) { ?>
+                                                <div class="typo-line">
                                             <span class="break-word"><p class="category">File</p>
                                                 <?= ((isset($one['file']))? $one['file'] : "*") ?></span>
-                                        </div>
-                                        <?php } ?>
-                                        <div class="typo-line">
+                                                </div>
+                                            <?php } ?>
+                                            <div class="typo-line">
                                             <span class="break-word"><p class="category">Function
                                                     <?= (isset($one['line']))? "& Line" : "" ?></p><?= (($one['class'] ?? '')).
                                                 ($one['type'] ?? ''). $one['function'] ?> <?= (isset($one['line']))?
                                                     "on line ". $one['line'] : "" ?></span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <hr>
-                                <?php } ?>
+                                        <hr>
+                                    <?php } ?>
 
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title">Event Logs</h4>
-                                <p class="category">Last events</p>
-                            </div>
-                            <div class="content">
-                                <ul class="errorlastlog" attr-href="<?php $master =
-                                    new \iumioFramework\Core\Masters\MasterCore();
-                                echo $master->generateRoute(
-                                    "iumio_manager_logs_get",
-                                    null,
-                                    "ManagerApp"
-                                ) ?>">
-
-                                </ul>
-
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
-
-        <footer class="footer">
-            <div class="container-fluid">
-                <p class="copyright pull-right">
-                    &copy; <?= date('Y') ?> <a href="https://framework.iumio.com">
-                        iumio Framework</a>, let's create more simply
-                </p>
-            </div>
-        </footer>
-        <?= (\iumioFramework\Core\Additional\TaskBar\TaskBar::getTaskBar() != "#none")?
-            \iumioFramework\Core\Additional\TaskBar\TaskBar::getTaskBar() : "" ?>
     </div>
-</div>
 
+    <footer class="footer">
+        <div class="container">
+            <p class="copyright pull-right">
+                &copy; <?= date('Y') ?> <a href="https://framework.iumio.com">
+                    iumio Framework</a>, let's create more simply
+            </p>
+        </div>
+    </footer>
+</div>
+<?= (\iumioFramework\Core\Additional\TaskBar\TaskBar::getTaskBar() != "#none")?
+    \iumioFramework\Core\Additional\TaskBar\TaskBar::getTaskBar() : "" ?>
 </body>
 
 <!--   Core JS Files   -->
@@ -275,8 +200,6 @@
 <!--  Notifications Plugin    -->
 <script src="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs").'iumio-manager/' ?>js/bootstrap-notify.js"></script>
 
-<!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
-<script src="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs").'iumio-manager/' ?>js/light-bootstrap-dashboard.js"></script>
 
 <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 <script src="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs").'iumio-manager/' ?>js/demo.js"></script>

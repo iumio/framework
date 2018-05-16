@@ -22,11 +22,12 @@
                             <div class="card">
                                 <div class="header">
                                     <h4 class="title">Options</h4>
+                                    <p class="category">Click on one of the buttons to perform an action.</p>
                                 </div>
                                 <div class="content">
                                     <div class="row center-block text-center manager-options">
                                         <div class="col-md-12">
-                                            <a class="btn-default btn clearcache"   attr-href="{nocache}{route name='iumio_manager_cache_manager_remove_all'}{/nocache}">Clear all cache</a>
+                                            <a class="btn-default btn clearcache"   attr-href="{nocache}{route name='iumio_manager_cache_manager_remove_all'}{/nocache}">Clear all caches</a>
                                         </div>
 
                                     </div>
@@ -37,7 +38,7 @@
                             <div class="card">
                                 <div class="header">
                                     <h4 class="title">Cache list</h4>
-                                    <p class="category">Referer to cache directory</p>
+                                    <p class="category">This is the cache list for each environment. You have the main information on them such as the size of the directory, permissions, etc. You can also perform actions on each cache environment.</p>
                                 </div>
                                 <div class="content table-responsive table-full-width">
                                     <table class="table table-hover table-striped">

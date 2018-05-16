@@ -22,7 +22,7 @@
                             <div class="card">
                                 <div class="header">
                                     <h4 class="title">Apps statistics</h4>
-                                    <p class="category">Statistics</p>
+                                    <p class="category">The current statistics of your all applications</p>
                                 </div>
                                 <div class="content dashboardStats" attr-href="{nocache}{route name='iumio_manager_dashboard_get_statistics'}{/nocache}">
                                     <ul>
@@ -45,7 +45,7 @@
                             <div class="card">
                                 <div class="header">
                                     <h4 class="title">Options</h4>
-                                    <p class="category">Create and import an app</p>
+                                    <p class="category">Click on one of the buttons to perform an action.</p>
                                 </div>
                                 <div class="content">
                                     <div class="row center-block text-center manager-options">
@@ -62,8 +62,8 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="header">
-                                    <h4 class="title">List of your apps</h4>
-                                    <p class="category">Referer to apps.json</p>
+                                    <h4 class="title">Apps list</h4>
+                                    <p class="category">This is your list of applications. You have the main information on these. You can also perform actions on each application. (Refer to the apps.json file)</p>
                                 </div>
                                 <div class="content table-responsive table-full-width">
                                     <table class="table table-hover table-striped">

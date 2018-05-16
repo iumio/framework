@@ -156,19 +156,19 @@ class AppManager extends ModuleManager implements ModuleManagerInterface
 
         $this->params['appname'] = ucfirst($this->listener());
 
-        $e = false;
-        while ($e == false) {
+        $elem = false;
+        while ($elem == false) {
             if ($this->checkAppName($this->params['appname']) != 1) {
                 Output::displayAsRed("Your app name is invalid. Please Retry.", "none", false);
             } elseif ($this->checkAppExist($this->params['appname']) == true) {
-                $e = false;
+                $elem = false;
                 Output::displayAsRed(
                     "This app name is already exist, Please enter an other app name.",
                     "none",
                     false
                 );
             } else {
-                $e = true;
+                $elem = true;
                 continue;
             }
 
@@ -228,20 +228,20 @@ class AppManager extends ModuleManager implements ModuleManagerInterface
 
         $this->params['appname'] = ucfirst($this->listener());
 
-        $e = false;
-        while ($e == false) {
+        $elem = false;
+        while ($elem == false) {
             if ($this->checkAppName($this->params['appname']) != 1) {
                 Output::displayAsRed("Your app name is invalid. Please Retry.", "none", false);
             } elseif ($this->checkAppExist($this->params['appname']) == false &&
                 $this->checkAppRegister($this->params['appname']) == false) {
-                $e = false;
+                $elem = false;
                 Output::displayAsRed(
                     "This app not exist, Please enter an existed app name",
                     "none",
                     false
                 );
             } else {
-                $e = true;
+                $elem = true;
                 continue;
             }
 
@@ -350,11 +350,11 @@ class AppManager extends ModuleManager implements ModuleManagerInterface
      */
     final protected function checkAppRegister(string $appname):bool
     {
-        $f = json_decode(file_get_contents(FEnvFcm::get("framework.config.core.apps.file")));
-        if (empty($f)) {
+        $file = json_decode(file_get_contents(FEnvFcm::get("framework.config.core.apps.file")));
+        if (empty($file)) {
             return (false);
         }
-        foreach ($f as $one => $val) {
+        foreach ($file as $val) {
             if ($val->name == $appname) {
                 return (true);
             }
@@ -369,13 +369,13 @@ class AppManager extends ModuleManager implements ModuleManagerInterface
      */
     final protected function showAppsRegister()
     {
-        $f = json_decode(file_get_contents(FEnvFcm::get("framework.config.core.apps.file")));
+        $file = json_decode(file_get_contents(FEnvFcm::get("framework.config.core.apps.file")));
         $i = 1;
-        if (count($f) == 0) {
+        if (count($file) == 0) {
             Output::outputAsError("Ops! You have no app registered. Please create an app with app");
         }
         $str = "";
-        foreach ($f as $one => $val) {
+        foreach ($file as $val) {
             $str .= $i.") ".$val->name.(($val->enabled == "yes")? " : Enabled" : "Disabled")."\n";
             array_push($this->params['applist'], $val->name);
             $i++;
@@ -393,14 +393,14 @@ class AppManager extends ModuleManager implements ModuleManagerInterface
     final protected function showEnabledAppsRegister():int
     {
         $this->params['applist'] = array();
-        $f = json_decode(file_get_contents(FEnvFcm::get("framework.config.core.apps.file")));
+        $file = json_decode(file_get_contents(FEnvFcm::get("framework.config.core.apps.file")));
         $i = 1;
-        if ((is_string($f) && strlen($f) < 3) || (count((array) $f) == 0)) {
+        if ((is_string($file) && strlen($file) < 3) || (count((array) $file) == 0)) {
             Output::outputAsError("Ops! You do not have an enabled application.");
             return (false);
         }
         $str = "";
-        foreach ($f as $one => $val) {
+        foreach ($file as $val) {
             if ($val->enabled == "yes") {
                 $str .= $i . ") " . $val->name . " : Enabled"  . "\n";
                 array_push($this->params['applist'], $val->name);
@@ -425,14 +425,14 @@ class AppManager extends ModuleManager implements ModuleManagerInterface
     final protected function showDisabledAppsRegister():int
     {
         $this->params['applist'] = array();
-        $f = json_decode(file_get_contents(FEnvFcm::get("framework.config.core.apps.file")));
+        $file = json_decode(file_get_contents(FEnvFcm::get("framework.config.core.apps.file")));
         $i = 1;
-        if ((is_string($f) && strlen($f) < 3) || (count((array)  $f) == 0)) {
+        if ((is_string($file) && strlen($file) < 3) || (count((array)  $file) == 0)) {
             Output::displayAsRed("Ops! You do not have a disabled app.");
             return (false);
         }
         $str = "";
-        foreach ($f as $one => $val) {
+        foreach ($file as $val) {
             if ($val->enabled == "no") {
                 $str .= $i . ") " . $val->name . " : Disabled" . "\n";
                 array_push($this->params['applist'], $val->name);
@@ -464,45 +464,45 @@ class AppManager extends ModuleManager implements ModuleManagerInterface
         $napp = FEnvFcm::get("framework.apps").$appname;
 
         // APP
-        $f = file_get_contents($napp."/{appname}.php.local");
-        $str = str_replace("{appname}", $appname, $f);
+        $file = file_get_contents($napp."/{appname}.php.local");
+        $str = str_replace("{appname}", $appname, $file);
         file_put_contents($napp."/{appname}.php.local", $str);
         rename($napp."/{appname}.php.local", $napp."/$appname.php");
 
         // Mercure
-        $f = file_get_contents($napp."/Routing/default.merc");
-        $str = str_replace("{appname}", $appname, $f);
+        $file = file_get_contents($napp."/Routing/default.merc");
+        $str = str_replace("{appname}", $appname, $file);
         file_put_contents($napp."/Routing/default.merc", $str);
 
         // MASTER
-        $f = file_get_contents($napp."/Masters/DefaultMaster.php.local");
-        $str = str_replace("{appname}", $appname, $f);
+        $file = file_get_contents($napp."/Masters/DefaultMaster.php.local");
+        $str = str_replace("{appname}", $appname, $file);
         file_put_contents($napp."/Masters/DefaultMaster.php.local", $str);
         rename($napp."/Masters/DefaultMaster.php.local", $napp."/Masters/DefaultMaster.php");
 
         // REGISTER TO APP CORE
-        $f = JsonListener::open(FEnvFcm::get("framework.config.core.apps.file"));
-        if (empty($f)) {
-            var_dump($f);
-            $f = new \stdClass();
+        $file = JsonListener::open(FEnvFcm::get("framework.config.core.apps.file"));
+        if (empty($file)) {
+            var_dump($file);
+            $file = new \stdClass();
         }
 
         $lastapp = 0;
 
-        foreach ($f as $one => $val) {
+        foreach ($file as $val) {
             $lastapp++;
         }
 
-        $f->$lastapp = new \stdClass();
-        $f->$lastapp->name = $this->params['appname'];
-        $f->$lastapp->enabled = (($this->params['enabled'] != "")? $this->params['enabled'] : "yes");
-        $f->$lastapp->prefix = trim(stripslashes($this->params['prefix']));
-        $f->$lastapp->class = "\\".$this->params['appname']."\\".$this->params['appname'];
+        $file->$lastapp = new \stdClass();
+        $file->$lastapp->name = $this->params['appname'];
+        $file->$lastapp->enabled = (($this->params['enabled'] != "")? $this->params['enabled'] : "yes");
+        $file->$lastapp->prefix = trim(stripslashes($this->params['prefix']));
+        $file->$lastapp->class = "\\".$this->params['appname']."\\".$this->params['appname'];
         $ndate = new \DateTime('UTC');
-        $f->$lastapp->creation = $ndate;
-        $f->$lastapp->update = $ndate;
-        $f = json_encode($f, JSON_PRETTY_PRINT);
-        file_put_contents(FEnvFcm::get("framework.config.core.apps.file"), $f);
+        $file->$lastapp->creation = $ndate;
+        $file->$lastapp->update = $ndate;
+        $file = json_encode($file, JSON_PRETTY_PRINT);
+        file_put_contents(FEnvFcm::get("framework.config.core.apps.file"), $file);
         $this->initialJSON();
         if ($this->params['template'] == "yes") {
             $asm = new AssetsManager();
@@ -522,13 +522,13 @@ class AppManager extends ModuleManager implements ModuleManagerInterface
      */
     final protected function initialJSON()
     {
-        $f = json_decode(file_get_contents(FEnvFcm::get("framework.config.core.config.file")));
-        if (isset($f->installation) && $f->installation == null) {
-            $f->installation = new \DateTime();
-            $f->default_env =  "dev";
-            $f->location = realpath(__DIR__."../../../../../../../../").DIRECTORY_SEPARATOR;
-            $rs = json_encode($f, JSON_PRETTY_PRINT);
-            file_put_contents(FEnvFcm::get("framework.config.core.config.file"), $rs);
+        $file = json_decode(file_get_contents(FEnvFcm::get("framework.config.core.config.file")));
+        if (isset($file->installation) && $file->installation == null) {
+            $file->installation = new \DateTime();
+            $file->default_env =  "dev";
+            $file->location = realpath(__DIR__."../../../../../../../../").DIRECTORY_SEPARATOR;
+            $result = json_encode($file, JSON_PRETTY_PRINT);
+            file_put_contents(FEnvFcm::get("framework.config.core.config.file"), $result);
         }
     }
 
@@ -541,17 +541,17 @@ class AppManager extends ModuleManager implements ModuleManagerInterface
         $appname = $this->params['capp'];
         Output::displayAsGreen("Processing to enabled app : $appname  will be enabled \n", "none", false);
         sleep(1);
-        $f = json_decode(file_get_contents(FEnvFcm::get("framework.config.core.apps.file")));
+        $file = json_decode(file_get_contents(FEnvFcm::get("framework.config.core.apps.file")));
 
-        foreach ($f as $one => $val) {
+        foreach ($file as $val) {
             if ($val->name == $this->params['capp']) {
                 $val->update = new \DateTime();
                 $val->enabled = "yes";
             }
         }
 
-        $f = json_encode($f, JSON_PRETTY_PRINT);
-        file_put_contents(FEnvFcm::get("framework.config.core.apps.file"), $f);
+        $file = json_encode($file, JSON_PRETTY_PRINT);
+        file_put_contents(FEnvFcm::get("framework.config.core.apps.file"), $file);
         Output::displayAsGreen("Now, the ".$this->params['capp']." is enabled", "none", false);
     }
 
@@ -564,17 +564,17 @@ class AppManager extends ModuleManager implements ModuleManagerInterface
         $appname = $this->params['capp'];
         Output::displayAsGreen("Processing to enabled app : $appname  will be enabled \n", "none", false);
         sleep(1);
-        $f = json_decode(file_get_contents(FEnvFcm::get("framework.config.core.apps.file")));
+        $file = json_decode(file_get_contents(FEnvFcm::get("framework.config.core.apps.file")));
 
-        foreach ($f as $one => $val) {
+        foreach ($file as $val) {
             if ($val->name == $this->params['capp']) {
                 $val->update = new \DateTime();
                 $val->enabled = "no";
             }
         }
 
-        $f = json_encode($f, JSON_PRETTY_PRINT);
-        file_put_contents(FEnvFcm::get("framework.config.core.apps.file"), $f);
+        $file = json_encode($file, JSON_PRETTY_PRINT);
+        file_put_contents(FEnvFcm::get("framework.config.core.apps.file"), $file);
         Output::displayAsGreen("Now, the ".$this->params['capp']." is disabled.", "none", false);
     }
 
@@ -592,21 +592,21 @@ class AppManager extends ModuleManager implements ModuleManagerInterface
 
         // DELETE TO APP CORE
 
-        $f = json_decode(file_get_contents(FEnvFcm::get("framework.config.core.apps.file")));
-        if (!empty($f)) {
-            foreach ($f as $one => $val) {
+        $file = json_decode(file_get_contents(FEnvFcm::get("framework.config.core.apps.file")));
+        if (!empty($file)) {
+            foreach ($file as $one => $val) {
                 if ($val->name == $appname) {
-                    unset($f->$one);
+                    unset($file->$one);
                     break;
                 }
             }
 
-            $f = array_values((array)$f);
-            $filetemp = $f;
-            $f = json_encode((object) $f, JSON_PRETTY_PRINT);
+            $file = array_values((array)$file);
+            $filetemp = $file;
+            $file = json_encode((object) $file, JSON_PRETTY_PRINT);
 
-            file_put_contents(FEnvFcm::get("framework.config.core.apps.file"), $f);
-            if (strlen($f) < 3) {
+            file_put_contents(FEnvFcm::get("framework.config.core.apps.file"), $file);
+            if (strlen($file) < 3) {
                 file_put_contents(FEnvFcm::get("framework.config.core.apps.file"), "");
             }
         }
@@ -618,10 +618,10 @@ class AppManager extends ModuleManager implements ModuleManagerInterface
         Server::delete(FEnvFcm::get("framework.apps")."$appname", "directory");
         if (empty($filetemp)) {
             $base = __DIR__."/../../../../../../";
-            $e = json_decode(file_get_contents($base."elements/config_files/core/framework.config.json"));
-            $e->installation = null;
-            $e->deployment = null;
-            file_put_contents($base."elements/config_files/core/framework.config.json", json_encode($e));
+            $elem = json_decode(file_get_contents($base."elements/config_files/core/framework.config.json"));
+            $elem->installation = null;
+            $elem->deployment = null;
+            file_put_contents($base."elements/config_files/core/framework.config.json", json_encode($elem));
         }
         Output::displayAsGreen("The application has been deleted. To create a new application,
          use [app create] .", "none", false);

@@ -23,11 +23,12 @@
                             <div class="card">
                                 <div class="header">
                                     <h4 class="title">Options</h4>
+                                    <p class="category">Click on one of the buttons to perform an action.</p>
                                 </div>
                                 <div class="content">
                                     <div class="row center-block text-center manager-options">
                                         <div class="col-md-12">
-                                            <a class="btn-default btn clearcompile"  attr-href="{nocache}{route name='iumio_manager_compile_manager_remove_all'}{/nocache}">Clear all compiled</a>
+                                            <a class="btn-default btn clearcompile"  attr-href="{nocache}{route name='iumio_manager_compile_manager_remove_all'}{/nocache}">Clear all</a>
                                         </div>
 
                                     </div>
@@ -37,8 +38,8 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="header">
-                                    <h4 class="title">Compiled list</h4>
-                                    <p class="category">Referer to compilation directory</p>
+                                    <h4 class="title">Compiled environments list</h4>
+                                    <p class="category">This is the compiled environments list. You have the main information on them such as the size of the directory, permissions, etc. You can also perform actions on each compiled environment.</p>
                                 </div>
                                 <div class="content table-responsive table-full-width">
                                     <table class="table table-hover table-striped">

@@ -66,11 +66,11 @@ class VersionManager extends ModuleManager implements ModuleManagerInterface
      */
     private function editionVersion()
     {
-        $e = JsonListener::open(FEnvFcm::get("framework.config.core.config.file"));
-        $date = new \DateTime($e->installation->date);
+        $element = JsonListener::open(FEnvFcm::get("framework.config.core.config.file"));
+        $date = new \DateTime($element->installation->date);
         $date = $date->format("Y-m-d H:i:s");
-        $str = "iumio Framework ".$e->edition_fullname."\nVersion : ".
-            $e->edition_version." build ".$e->edition_build."\nInstallation date : $date";
+        $str = "iumio Framework ".$element->edition_fullname."\nVersion : ".
+            $element->edition_version." build ".$element->edition_build."\nInstallation date : $date";
         Output::displayAsGreen($str);
     }
 
@@ -91,10 +91,10 @@ class VersionManager extends ModuleManager implements ModuleManagerInterface
     private function selfVersion()
     {
 
-        $e = JsonListener::open(FEnvFcm::get("framework.fcm.config.commands.file"));
+        $element = JsonListener::open(FEnvFcm::get("framework.fcm.config.commands.file"));
         $str = "iumio Framework Console Manager"."\nVersion : ".
-            $e->version."\nAuthors : ";
-        foreach ($e->authors as $one) {
+            $element->version."\nAuthors : ";
+        foreach ($element->authors as $one) {
             $str.= $one->name. " <".$one->email.">\n\n";
         }
         Output::displayAsGreen($str);

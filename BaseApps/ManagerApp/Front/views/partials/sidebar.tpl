@@ -1,46 +1,46 @@
 <div class="sidebar" data-color="blue">
 <div class="sidebar-wrapper">
     <div class="logo">
-        <a href="https://framework.iumio.com" class="simple-text">
+        <a href="https://framework.iumio.com" class="simple-text fgm-header-container">
             <img class="img-responsive img-responsive-iumio-framework" src="{img_iumio name='iumio.logo.white.framework.png'}" />
-            <h6>Graphic Manager (Fgm)</h6>
+            <h6 class="fgm-sidebar-title">Framework Graphic Manager</h6>
         </a>
     </div>
 
     <ul class="nav sidebar-list">
         <li class="{if $selected == "dashboard"}active{/if}">
             <a href="{route name='iumio_manager_index' component='yes'}">
-                <i class="pe-7s-graph"></i>
+                <i class="fa fa-dashboard"></i>
                 <p>Dashboard</p>
             </a>
         </li>
         <li class="{if $selected == "appmanager"}active{/if}">
             <a href="{route name='iumio_manager_app_manager' component='yes'}">
-                <i class="pe-7s-config"></i>
+                <i class="fa fa-cubes"></i>
                 <p>Apps</p>
             </a>
         </li>
         <li class="{if $selected == "cachemanager"}active{/if}">
             <a href="{route name='iumio_manager_cache_manager' component='yes'}">
-                <i class="pe-7s-back-2"></i>
+                <i class="fa fa-folder-open"></i>
                 <p>Cache</p>
             </a>
         </li>
         <li class="{if $selected == "compilemanager"}active{/if}">
             <a href="{route name='iumio_manager_compile_manager' component='yes'}">
-                <i class="pe-7s-angle-right"></i>
+                <i class="fa fa-compress"></i>
                 <p>Compiled</p>
             </a>
         </li>
         <li class="{if $selected == "assetsmanager"}active{/if}">
             <a href="{route name='iumio_manager_assets_manager' component='yes'}">
-                <i class="pe-7s-star"></i>
+                <i class="fa fa-file"></i>
                 <p>Assets</p>
             </a>
         </li>
         <li class="{if $selected == "smartymanager"}active{/if}">
             <a href="{route name='iumio_manager_smarty_manager' component='yes'}">
-                <i class="pe-7s-note2"></i>
+                <i class="fa fa-eye"></i>
                 <p>Smarty</p>
             </a>
         </li>
@@ -52,19 +52,19 @@
         </li>
         <li class="{if $selected == "logsmanager"}active{/if}">
             <a href="{route name='iumio_manager_logs_manager' component='yes'}">
-                <i class="pe-7s-news-paper"></i>
+                <i class="fa fa-list"></i>
                 <p>Logs</p>
             </a>
         </li>
         <li class="{if $selected == "databasesmanager"}active{/if}">
             <a href="{route name='iumio_manager_databases_manager' component='yes'}">
-                <i class="pe-7s-paperclip"></i>
+                <i class="fa fa-database"></i>
                 <p>Databases</p>
             </a>
         </li>
         <li class="{if $selected == "hostsmanager"}active{/if}">
             <a href="{route name='iumio_manager_hosts_manager' component='yes'}">
-                <i class="pe-7s-target"></i>
+                <i class="fa fa-laptop"></i>
                 <p>Hosts</p>
             </a>
         </li>

@@ -23,7 +23,7 @@
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Services statistics</h4>
-                                <p class="category">Statistics</p>
+                                <p class="category">The current statistics of your services</p>
                             </div>
                             <div class="content dashboardStats" attr-href="{nocache}{route name='iumio_manager_dashboard_get_statistics'}{/nocache}">
                                 <ul>
@@ -49,6 +49,7 @@
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Options</h4>
+                                <p class="category">Click on one of the buttons to perform an action.</p>
                             </div>
                             <div class="content">
                                 <div class="row center-block text-center manager-options">
@@ -63,7 +64,7 @@
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">List of your services</h4>
-                                <p class="category">Referer to services.json</p>
+                                <p class="category">This is the services declarations list. You have the main information on them such as status, namespace, etc. You can also perform actions on each service.<br> </p>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">
@@ -75,22 +76,6 @@
                                     <th>Delete</th>
                                     </thead>
                                     <tbody class="serviceslist" attr-href="{nocache}{route name='iumio_manager_services_manager_get_all'}{/nocache}">
-                                    <!--<tr>
-                                        <td>0</td>
-                                        <td>DakotaRice</td>
-                                        <td>Yes</td>
-                                        <td>A/A</td>
-                                        <td><button>E</button></td>
-                                        <td><button>D</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>MinervaHooper</td>
-                                        <td>No</td>
-                                        <td>B/B</td>
-                                        <td><button>E</button></td>
-                                        <td><button>D</button></td>
-                                    </tr>-->
                                     </tbody>
                                 </table>
 

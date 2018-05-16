@@ -22,8 +22,8 @@
                     <div class="col-md-6">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Logs events statistics for Dev environment</h4>
-                                <p class="category">Statistics</p>
+                                <h4 class="title">Logs statistics for dev environment</h4>
+                                <p class="category">The current statistics of your dev logs</p>
                             </div>
                             <div class="content dashboardStats" attr-href="{nocache}{route name='iumio_manager_dashboard_get_statistics'}{/nocache}">
                                 <ul>
@@ -45,8 +45,8 @@
                     <div class="col-md-6">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Logs events statistics for Prod environment</h4>
-                                <p class="category">Statistics</p>
+                                <h4 class="title">Logs statistics for prod environment</h4>
+                                <p class="category">The current statistics of your prod logs</p>
                             </div>
                             <div class="content dashboardStats2" attr-href="{nocache}{route name='iumio_manager_dashboard_get_statistics'}{/nocache}">
                                 <ul>
@@ -69,14 +69,15 @@
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Options</h4>
+                                <p class="category">Click on one of the buttons to perform an action.</p>
                             </div>
                             <div class="content">
                                 <div class="row center-block text-center manager-options">
                                     <div class="col-md-6">
-                                        <a class="btn-default btn clearlogs"  attr-href="{nocache}{route name='iumio_manager_logs_manager_clear' params=['env' => "dev"]}{/nocache}" attr-env="dev">Clear logs - dev</a>
+                                        <a class="btn-default btn clearlogs"  attr-href="{nocache}{route name='iumio_manager_logs_manager_clear' params=['env' => "dev"]}{/nocache}" attr-env="dev">Clear logs for dev</a>
                                     </div>
                                     <div class="col-md-6">
-                                        <a class="btn-default btn clearlogs"  attr-href="{nocache}{route name='iumio_manager_logs_manager_clear' params=['env' => "prod"]}{/nocache}" attr-env="prod">Clear logs - prod</a>
+                                        <a class="btn-default btn clearlogs"  attr-href="{nocache}{route name='iumio_manager_logs_manager_clear' params=['env' => "prod"]}{/nocache}" attr-env="prod">Clear logs for prod</a>
                                     </div>
                                 </div>
                             </div>
@@ -85,8 +86,8 @@
                     <div class="col-md-6">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Logs list for Dev environment (<span class="iumiocountlog">0</span>)</h4>
-                                <p class="category">Referer to dev.log</p>
+                                <h4 class="title">Logs list for dev environment (<span class="iumiocountlog">0</span>)</h4>
+                                <p class="category">This is the logs list for dev environment. You have the main information on them such as the IP referer, event type, etc. <br> You can also click on the "uidie" to show these details. (dev.log)</p>
                             </div>
                             <div class="content table-responsive table-full-width iumio-unlimited-log-display">
                                 <table class="table table-hover table-striped">
@@ -98,22 +99,6 @@
                                     <th>Method</th>
                                     </thead>
                                     <tbody class="logslist" attr-href="{nocache}{route name='iumio_manager_logs_manager_get_all' params=['env' => "dev"]}{/nocache}">
-                                    <!--<tr>
-                                        <td>0</td>
-                                        <td>DakotaRice</td>
-                                        <td>Yes</td>
-                                        <td>A/A</td>
-                                        <td><button>E</button></td>
-                                        <td><button>D</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>MinervaHooper</td>
-                                        <td>No</td>
-                                        <td>B/B</td>
-                                        <td><button>E</button></td>
-                                        <td><button>D</button></td>
-                                    </tr>-->
                                     </tbody>
                                 </table>
                                 <div class="col-md-12 text-center loader-iumio-m pulse animated" style="display: none">
@@ -128,8 +113,8 @@
                     <div class="col-md-6">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Logs list for Prod environment (<span class="iumiocountlog2">0</span>)</h4>
-                                <p class="category">Referer to prod.log</p>
+                                <h4 class="title">Logs list for prod environment (<span class="iumiocountlog2">0</span>)</h4>
+                                <p class="category">This is the logs list for prod environment. You have the main information on them such as the IP referer, event type, etc. <br> You can also click on the "uidie" to show these details. (prod.log)</p>
                             </div>
                             <div class="content table-responsive table-full-width iumio-unlimited-log-display2">
                                 <table class="table table-hover table-striped">
@@ -141,22 +126,6 @@
                                     <th>Method</th>
                                     </thead>
                                     <tbody class="logslist2" attr-href="{nocache}{route name='iumio_manager_logs_manager_get_all' params=['env' => "prod"]}{/nocache}">
-                                    <!--<tr>
-                                        <td>0</td>
-                                        <td>DakotaRice</td>
-                                        <td>Yes</td>
-                                        <td>A/A</td>
-                                        <td><button>E</button></td>
-                                        <td><button>D</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>MinervaHooper</td>
-                                        <td>No</td>
-                                        <td>B/B</td>
-                                        <td><button>E</button></td>
-                                        <td><button>D</button></td>
-                                    </tr>-->
                                     </tbody>
                                 </table>
                                 <div class="col-md-12 text-center loader-iumio-m2 pulse animated" style="display: none">

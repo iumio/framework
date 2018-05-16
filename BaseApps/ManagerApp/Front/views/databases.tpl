@@ -23,6 +23,7 @@
                             <div class="card">
                                 <div class="header">
                                     <h4 class="title">Options</h4>
+                                    <p class="category">Click on one of the buttons to perform an action.</p>
                                 </div>
                                 <div class="content">
                                     <div class="row center-block text-center manager-options">
@@ -38,7 +39,7 @@
                             <div class="card">
                                 <div class="header">
                                     <h4 class="title">List of your databases declarations</h4>
-                                    <p class="category">Referer to databases.json</p>
+                                    <p class="category">This is the databases configurations list. You have the main information on them such as the host, the driver, etc. You can also perform actions on each configuration.<br> </p>
                                 </div>
                                 <div class="content table-responsive table-full-width">
                                     <table class="table table-hover table-striped">

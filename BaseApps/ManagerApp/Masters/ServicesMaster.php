@@ -97,19 +97,19 @@ class ServicesMaster extends MasterCore
     public function getStatisticsServices():array
     {
 
-        $f = $this->getAllServices();
-        $fs = 0;
+        $services = $this->getAllServices();
+        $counter = 0;
         $senable = 0;
 
-        foreach ($f as $one => $val) {
+        foreach ($services as $val) {
             if ($val->status == "enabled") {
                 $senable++;
             }
 
-            $fs++;
+            $counter++;
         }
 
-        return (array("number" => $fs, "enabled" => $senable));
+        return (array("number" => $counter, "enabled" => $senable));
     }
 
 
@@ -122,7 +122,7 @@ class ServicesMaster extends MasterCore
     {
         $removeservice = false;
         $file = JL::open(FEnv::get("framework.config.core.services.file"));
-        foreach ($file as $one => $val) {
+        foreach ($file as $one) {
             if ($one == $servicename) {
                 unset($file->$one);
                 $removeservice  = true;
@@ -134,8 +134,8 @@ class ServicesMaster extends MasterCore
             return ((new Renderer())->jsonRenderer(array("code" => 500, "msg" => "Service does not exist")));
         }
 
-        $f = json_encode($file, JSON_PRETTY_PRINT);
-        file_put_contents(FEnv::get("framework.config.core.services.file"), $f);
+        $render = json_encode($file, JSON_PRETTY_PRINT);
+        file_put_contents(FEnv::get("framework.config.core.services.file"), $render);
 
         return ((new Renderer())->jsonRenderer(array("code" => 200, "msg" => "OK")));
     }
@@ -163,18 +163,18 @@ class ServicesMaster extends MasterCore
         }
 
 
-        $f = json_decode(file_get_contents(FEnv::get("framework.config.core.services.file")));
-        foreach ($f as $one => $val) {
+        $fcore = json_decode(file_get_contents(FEnv::get("framework.config.core.services.file")));
+        foreach ($fcore as $one => $val) {
             if ($one == $name) {
                 return ((new Renderer())->jsonRenderer(array("code" => 500, "msg" => "Service already exist")));
             }
         }
 
-        $f->$name = new \stdClass();
-        $f->$name->namespace = $namespace;
-        $f->$name->status = $status;
-        $f = json_encode($f, JSON_PRETTY_PRINT);
-        file_put_contents(FEnv::get("framework.config.core.services.file"), $f);
+        $fcore->$name = new \stdClass();
+        $fcore->$name->namespace = $namespace;
+        $fcore->$name->status = $status;
+        $fcore = json_encode($fcore, JSON_PRETTY_PRINT);
+        file_put_contents(FEnv::get("framework.config.core.services.file"), $fcore);
 
         return ((new Renderer())->jsonRenderer(array("code" => 200, "msg" => "OK")));
     }

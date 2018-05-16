@@ -23,7 +23,7 @@
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Routing statistics</h4>
-                                <p class="category">Statistics</p>
+                                <p class="category">The current statistics of your all applications</p>
                             </div>
                             <div class="content dashboardStats" attr-href="{nocache}{route name='iumio_manager_dashboard_get_statistics'}{/nocache}">
                                 <ul>
@@ -46,7 +46,7 @@
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Options</h4>
-                                <p class="category">Manage routing files</p>
+                                <p class="category">Click on one of the buttons to perform an action.</p>
                             </div>
                             <div class="content">
                                 <div class="row center-block text-center manager-options">
@@ -62,7 +62,7 @@
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">List of your routing files</h4>
-                                <p class="category">Referer to *.merc</p>
+                                <p class="category">This is the list of routing files for each application. You have the main information about them as the number of routes and what application they belong to. You can also perform actions on each configuration.</p>
                             </div>
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover table-striped">

@@ -102,10 +102,10 @@ class CompiledManager extends ModuleManager implements ModuleManagerInterface
      */
     private function deleteAllCompiled()
     {
-        $a = array("dev", "prod");
+        $env = array("dev", "prod");
         Output::displayAsSuccess("Hey, I delete compiled for all environment", "none");
-        for ($i = 0; $i < count($a); $i++) {
-            $this->callDelCreaServer($a[$i]);
+        for ($i = 0; $i < count($env); $i++) {
+            $this->callDelCreaServer($env[$i]);
         }
         if (in_array("--noexit", $this->options["options"])) {
             Output::displayAsEndSuccess("Compiled was deleted for all environment.", "none");
