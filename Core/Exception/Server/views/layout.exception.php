@@ -49,7 +49,7 @@
     <nav class="navbar navbar-default navbar-fixed <?= $this->color_class_checked ?>">
         <div class="container">
             <div class="col-md-8">
-                <div class="navbar-header w100 ">
+                <div class="navbar-header w100 layout-error-text">
                     <h4>An error was generated</h4>
                     <h5><?= $this->code.' '.$this->codeTitle ?></h5>
                     <p style="overflow: auto"><?= $this->explain ?></p>
