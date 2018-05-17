@@ -98,8 +98,8 @@ class JsonListener implements JsonInterface
     public static function close(string $filepath):int
     {
         if (self::$file != null) {
-            $filepath = null;
-            $file = null;
+            self::$filepath = null;
+            self::$file = null;
         }
         return (1);
     }

@@ -164,7 +164,7 @@ class ServicesMaster extends MasterCore
 
 
         $fcore = json_decode(file_get_contents(FEnv::get("framework.config.core.services.file")));
-        foreach ($fcore as $one => $val) {
+        foreach ($fcore as $one) {
             if ($one == $name) {
                 return ((new Renderer())->jsonRenderer(array("code" => 500, "msg" => "Service already exist")));
             }

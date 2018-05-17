@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  *
  *  * This is an iumio Framework component
@@ -12,33 +13,22 @@
  *
  */
 
-namespace iumioFramework\Core\Requirement;
+namespace iumioFramework\Core\Base\Server;
+
+use iumioFramework\Core\Base\Http\ParameterRequest;
 
 /**
- * Abstract Class AppModel
- * @package iumioFramework\Core\Requirement
+ * Class GlobalServer
+ * @package iumioFramework\Core\Base|Server
  * @category Framework
  * @licence  MIT License
  * @link https://framework.iumio.com
  * @author   RAFINA Dany <dany.rafina@iumio.com>
  */
-
-abstract class AppModel
+class GlobalServer extends ParameterRequest
 {
-    protected $coname;
-
-    /**
-     *  Get router
-     */
-    public function routingGet()
+    public function __construct(array $server = [])
     {
-        return ;
-    }
-
-    /**
-     * Get controller
-     */
-    protected function getController()
-    {
+        parent::__construct((empty($server))? $_SERVER : $server);
     }
 }

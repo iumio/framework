@@ -1,0 +1,5 @@
+route:
+  name : iumio_manager_locale_manager
+  path :  /_manager/locale
+  activity : Locale%locale
+endroute

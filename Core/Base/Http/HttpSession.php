@@ -143,7 +143,6 @@ class HttpSession implements SessionInterfaceRequest
                 "Session Error : Your session name is not a string value", "solution" =>
                 "Please check your value type")));
         }
-        return (false);
     }
 
     /**

@@ -14,6 +14,9 @@
 
 namespace ManagerApp\Masters;
 
+use iumioFramework\Core\Base\Container\FrameworkContainer;
+use iumioFramework\Core\Base\Http\ServerRequest;
+use iumioFramework\Core\Base\Server\GlobalServer;
 use iumioFramework\Core\Base\Renderer\Renderer;
 use iumioFramework\Core\Requirement\Environment\FEnv;
 use iumioFramework\Core\Exception\Server\AbstractServer;
@@ -42,10 +45,10 @@ class DashboardMaster extends MasterCore
         $file = JL::open(FEnv::get("framework.config.core.config.file"));
         $date =  new \DateTime($file->installation->date);
         $file->installation = $date->format('Y/m/d');
-
+        $serv = new GlobalServer();
         return($this->render("index", array("env" => strtolower(FEnv::get("framework.env")),
             "selected" => "dashboard", "fi" => $file,
-            'https' => isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on',
+            'https' => null !== $serv->get("HTTPS") && 'on' === $serv->get("HTTPS"),
             "loader_msg" => "Framework Graphic Manager - Dashboard")));
     }
 

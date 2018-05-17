@@ -101,7 +101,7 @@ class ArgsManager
                     return (array("name" => $command, "class" => $val->class, "desc" => $val->desc));
                 }
             } elseif ($val->type === "multiple") {
-                foreach ($val->args as $acommand => $aval) {
+                foreach ($val->args as $aval) {
                     if ($aval->name === $name) {
                         return (array("name" => $aval->name, "class" => $val->class, "desc" => $aval->desc));
                     }

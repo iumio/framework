@@ -53,9 +53,9 @@ class CacheManager extends ModuleManager implements ModuleManagerInterface
             if (empty($options["options"])) {
                 $this->deleteCache("dev");
             } elseif (in_array("--env=dev", $options["options"])) {
-                $this->deleteCache("dev", "yes");
+                $this->deleteCache("dev");
             } elseif (in_array("--env=prod", $options["options"])) {
-                $this->deleteCache("prod", "yes");
+                $this->deleteCache("prod");
             } elseif (in_array("--env=all", $options["options"])) {
                 $this->deleteAllCache();
             } else {
@@ -69,11 +69,10 @@ class CacheManager extends ModuleManager implements ModuleManagerInterface
 
     /** Delete a cache from a specific environment
      * @param string $env Environment name
-     * @param string $isdefault If no environment option
      * @throws Server500
      * @throws \Exception
      */
-    private function deleteCache(string $env, string $isdefault = null)
+    private function deleteCache(string $env)
     {
         Output::displayAsSuccess("Hey, I delete cache from $env environment ", "none");
         $this->callDelCreaServer($env);

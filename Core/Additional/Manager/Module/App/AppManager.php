@@ -483,15 +483,10 @@ class AppManager extends ModuleManager implements ModuleManagerInterface
         // REGISTER TO APP CORE
         $file = JsonListener::open(FEnvFcm::get("framework.config.core.apps.file"));
         if (empty($file)) {
-            var_dump($file);
             $file = new \stdClass();
         }
 
-        $lastapp = 0;
-
-        foreach ($file as $val) {
-            $lastapp++;
-        }
+        $lastapp = count((array) $file);
 
         $file->$lastapp = new \stdClass();
         $file->$lastapp->name = $this->params['appname'];

@@ -44,7 +44,7 @@ class ModuleManager
         if (isset($haystack["options"])) {
             $haystack = $haystack["options"];
         }
-        foreach ($haystack as $one => $value) {
+        foreach ($haystack as $value) {
             if (strpos($value, $needle) !== false) {
                 return ($value);
             }
