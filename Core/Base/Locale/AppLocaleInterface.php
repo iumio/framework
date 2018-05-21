@@ -15,13 +15,6 @@
 
 namespace iumioFramework\Core\Base\Locale;
 
-use iumioFramework\Core\Additional\EngineTemplate\SmartyEngineTemplate;
-use iumioFramework\Core\Base\Http\HttpResponse;
-use iumioFramework\Core\Base\Http\ParameterRequest;
-use iumioFramework\Core\Base\Json\JsonListener;
-use iumioFramework\Core\Requirement\Environment\FEnv;
-use iumioFramework\Core\Exception\Server\Server500;
-
 /**
  * Class AppLocaleInterface
  * @package iumioFramework\Core\Base\Locale
@@ -33,7 +26,7 @@ use iumioFramework\Core\Exception\Server\Server500;
 interface AppLocaleInterface
 {
     /**
-     * Apply all modification frim AppLocale object
+     * Apply all modification of AppLocale object
      * @return bool
      */
     public function apply():bool;
@@ -41,7 +34,7 @@ interface AppLocaleInterface
     public function isEnabled(): bool;
 
     /**
-     * 
+     *
      * @param bool $enabled
      */
     public function setEnabled(bool $enabled);
@@ -55,6 +48,7 @@ interface AppLocaleInterface
      * @param array $values
      */
     public function setValues(array $values);
+    
     /**
      * @return string|null
      */
@@ -64,4 +58,18 @@ interface AppLocaleInterface
      * @param string|null $transtype
      */
     public function setTranstype(?string $transtype);
+    
+    public function getAppname():?string;
+    
+    public function setAppname(?string $appname):void;
+
+    /**
+     * @return string|null
+     */
+    public function getPrefer(): ?string;
+    
+    /**
+     * @param string|null $prefer
+     */
+    public function setPrefer(?string $prefer): void;
 }

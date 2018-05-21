@@ -64,7 +64,8 @@ final class SmartyEngineTemplate
             }
 
             if (self::$appCall != "iumio") {
-                $dirapp = FEnv::get((FEnv::get("app.is_components")) ? 'framework.baseapps' : 'framework.apps');
+                $dirapp = FEnv::get((FEnv::get("app.is_components")) ?
+                    'framework.baseapps' : 'framework.apps');
                 Server::create($dirapp . self::$appCall . '/Front/views', "directory");
             }
 
@@ -84,10 +85,12 @@ final class SmartyEngineTemplate
             self::$instance->debugging = $sconfig->getDebug();
             self::$instance->compile_check = $sconfig->getCompileCheck();
             self::$instance->setForceCompile($sconfig->getForceCompile());
-            self::$instance->debug_tpl = 'file:' . FEnv::get("framework.additional") . 'TaskBar/views/iumioTaskBar.tpl';
+            self::$instance->debug_tpl = 'file:' . FEnv::get("framework.additional") .
+                'TaskBar/views/iumioTaskBar.tpl';
             self::enableSmartyDebug($sconfig->getSmartyDebug());
             self::$instance->caching = $sconfig->getCache();
 
+            $this->registerBaseBlock();
             $this->registerBasePlugins();
             $this->registerExtendedPlugin();
         } catch (\Exception $exception) {
@@ -107,13 +110,6 @@ final class SmartyEngineTemplate
     {
         $sconfig = new SmartyConfig(FEnv::get("framework.env"));
         FEnv::set("framework.smarty.debug", $sconfig->getConsoleDebug());
-        /*if ($status == true) {
-            //define('DISPLAY_SMARTY_DEBUG', $sconfig->getConsoleDebug());
-            FEnv::set("framework.smarty.debug",  $sconfig->getConsoleDebug());
-        } elseif ($status == false) {
-            FEnv::set("framework.smarty.debug",  $sconfig->getConsoleDebug());
-            //define('DISPLAY_SMARTY_DEBUG', $sconfig->getConsoleDebug());
-        }*/
     }
 
     /**
@@ -270,6 +266,22 @@ final class SmartyEngineTemplate
 
         return (1);
     }
+
+
+    /**
+     * Register base block for smarty views
+     */
+    final protected function registerBaseBlock():int
+    {
+        self::$instance->registerPlugin(
+            \Smarty::PLUGIN_BLOCK,
+            'trans',
+            ["iumioFramework\Core\Additional\EngineTemplate\ViewBasePlugin" , "translate"]
+        );
+        return (1);
+    }
+
+
 
     /**
      * Register an new plugin for smarty template

@@ -151,7 +151,8 @@ class ServicesMaster extends MasterCore
         $namespace = $this->get("request")->get("namespace");
 
         if ($name == "") {
-            return ((new Renderer())->jsonRenderer(array("code" => 500, "msg" => "Service name is empty : $namespace")));
+            return ((new Renderer())->jsonRenderer(array("code" => 500,
+                "msg" => "Service name is empty : $namespace")));
         }
 
         if ($status == "" || !in_array($status, array("enabled", "disabled"))) {

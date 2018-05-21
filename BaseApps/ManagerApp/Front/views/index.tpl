@@ -40,7 +40,7 @@
 
                                             <li>Installation location : {framework_info name='LOCATION'}</li>
 
-                                            <li>U3i : {framework_info name='EDITION_U3I'}</li>
+                                            <li>U3i : <span class="u3i" attr-href="{nocache}{route name='iumio_manager_dashboard_edit_u3i'}{/nocache}" style="cursor: pointer">{framework_info name='EDITION_U3I'}</span></li>
 
                                             <li>Current environment : {$fi->default_env}</li>
 

@@ -87,7 +87,7 @@
                                 <hr>
                                 <p class="category fs16"><i class="pe-7s-user"></i> Referer IP : { <?php echo  $this->client_ip ?>}</p>
                                 <hr>
-                                <?php if ($this->type_error != null) { ?><p class="category fs16"><i class="pe-7s-close-circle"></i> Type : <?= $this->type_error ?></p><hr/><?php } ?>
+                                <?= (($this->type_error != null)? '<p class="category fs16"><i class="pe-7s-close-circle"></i> Type : '.$this->type_error.'</p><hr/>' : "") ?>
                             </div>
                             <div class="content text-center">
                             </div>
@@ -148,28 +148,26 @@
                             </div>
                             <div class="content text-center">
                                 <?php
-                                    $trace = null;
-                                    $trace = ($this->trace != null)? $this->trace : $this->getTrace();
-                                    foreach ($trace as $one) {
-                                        ?>
-                                        <div class="content text-center card-content-new">
-                                            <?php if (isset($one['file'])) { ?>
-                                                <div class="typo-line">
-                                            <span class="break-word"><p class="category">File</p>
-                                                <?= ((isset($one['file']))? $one['file'] : "*") ?></span>
-                                                </div>
-                                            <?php } ?>
+                                $trace = null;
+                                $trace = ($this->trace != null)? $this->trace : $this->getTrace();
+                                foreach ($trace as $one) { ?>
+                                    <div class="content text-center card-content-new">
+                                        <?php if (isset($one['file'])) { ?>
                                             <div class="typo-line">
-                                            <span class="break-word"><p class="category">Function
-                                                    <?= (isset($one['line']))? "& Line" : "" ?></p><?= (($one['class'] ?? '')).
-                                                ($one['type'] ?? ''). $one['function'] ?> <?= (isset($one['line']))?
-                                                    "on line ". $one['line'] : "" ?></span>
+                                        <span class="break-word">
+                                            <p class="category">File</p>
+                                            <?= ((isset($one['file']))? $one['file'] : "*") ?>
+                                        </span>
                                             </div>
+                                        <?php } ?>
+                                        <div class="typo-line">
+                                        <span class="break-word"><p class="category">Function
+                                                <?= (isset($one['line']))? "& Line" : "" ?></p><?= (($one['class'] ?? '')).($one['type'] ?? ''). $one['function'] ?> <?= (isset($one['line']))? "on line ". $one['line'] : "" ?></span>
                                         </div>
-                                        <hr>
-                                    <?php } ?>
-
-                            </div>
+                                    </div>
+                                    <hr>
+                                <?php } ?>
+                            </div>cl
                         </div>
                     </div>
                 </div>

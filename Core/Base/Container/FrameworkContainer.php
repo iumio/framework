@@ -17,8 +17,8 @@ namespace iumioFramework\Core\Base\Container;
 use Invoker\ParameterResolver\Container\ParameterNameContainerResolver;
 use Invoker\ParameterResolver\Container\TypeHintContainerResolver;
 use iumioFramework\Core\Requirement\Environment\FEnv;
-use iumioFramework\Core\Requirement\FrameworkCore;
 use iumioFramework\Core\Exception\Server\Server500;
+use iumioFramework\Core\Requirement\FrameworkServices\FrameworkTools;
 use PHPMailer\PHPMailer\PHPMailer;
 
 /**
@@ -50,7 +50,7 @@ class FrameworkContainer
             ));
         }
 
-        $config = FrameworkCore::getEditionInfo();
+        $config = FrameworkTools::getEditionInfo();
         $autowired = $config->autowiring ?? false;
         $annotation = $config->annotation ?? false;
         $builder = new \DI\ContainerBuilder();

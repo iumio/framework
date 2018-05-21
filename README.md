@@ -43,7 +43,7 @@ We need any help to continue the framework development and create a new communit
 About Us
 --------
 
-iumio Framework is a product by [iumio][5], created by [RAFINA Dany][6] and co-founded by [HURON Kevin][7]
+iumio Framework is a component of [iumio][5], created by [RAFINA Dany][6] and co-founded by [HURON Kevin][7]
 
 [1]: https://framework.iumio.com
 [2]: https://framework.iumio.com/SE/install

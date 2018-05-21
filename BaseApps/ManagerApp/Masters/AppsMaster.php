@@ -290,7 +290,8 @@ class AppsMaster extends MasterCore
     {
         $sourcePath = $_FILES['file']['tmp_name'];
         if ("zip" != pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION)) {
-            return ((new Renderer())->jsonRenderer(array("code" => 500, "msg" => "Your package must be a zip package")));
+            return ((new Renderer())->jsonRenderer(array("code" => 500,
+                "msg" => "Your package must be a zip package")));
         }
         $date = new \DateTime();
         $datex = $date->format('ymdhis').rand(0, 34);
@@ -304,7 +305,8 @@ class AppsMaster extends MasterCore
                 $zip->extractTo(FEnv::get("framework.bin").'import/'.$datex);
                 $f =  JL::open(FEnv::get("framework.bin").'import/'.$datex.'/register.json');
                 if (empty($f)) {
-                    return ((new Renderer())->jsonRenderer(array("code" => 500, "msg" => "Missing file register.json")));
+                    return ((new Renderer())->jsonRenderer(array("code" => 500,
+                        "msg" => "Missing file register.json")));
                 }
                 $appname = $f->name;
 
@@ -352,7 +354,8 @@ class AppsMaster extends MasterCore
                     "Your package is not a valid iumio app package")));
             }
         } else {
-            return ((new Renderer())->jsonRenderer(array("code" => 500, "msg" => "Your package must be a zip package")));
+            return ((new Renderer())->jsonRenderer(array("code" => 500,
+                "msg" => "Your package must be a zip package")));
         }
         return ((new Renderer())->jsonRenderer(array("code" => 200, "msg" => "OK")));
     }
@@ -579,5 +582,4 @@ class AppsMaster extends MasterCore
         $g = AppConfig::getInstance($appname);
         return ((new Renderer())->jsonRenderer(array("code" => 200, "result" =>  $g->getConfig())));
     }
-
 }

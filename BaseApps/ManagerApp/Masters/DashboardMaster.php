@@ -14,8 +14,7 @@
 
 namespace ManagerApp\Masters;
 
-use iumioFramework\Core\Base\Container\FrameworkContainer;
-use iumioFramework\Core\Base\Http\ServerRequest;
+use iumioFramework\Core\Base\Http\HttpListener;
 use iumioFramework\Core\Base\Server\GlobalServer;
 use iumioFramework\Core\Base\Renderer\Renderer;
 use iumioFramework\Core\Requirement\Environment\FEnv;
@@ -50,6 +49,22 @@ class DashboardMaster extends MasterCore
             "selected" => "dashboard", "fi" => $file,
             'https' => null !== $serv->get("HTTPS") && 'on' === $serv->get("HTTPS"),
             "loader_msg" => "Framework Graphic Manager - Dashboard")));
+    }
+
+    /**
+     * Edit framework U3i
+     * @param string $u3i Unique identifier of iumio instance
+     * @return Renderer
+     * @throws \Exception
+     */
+    public function editU3iActivity()
+    {
+        $request = HttpListener::createFromGlobals();
+        $u3i = ($request->get("u3i"));
+        $file = JL::open(FEnv::get("framework.config.core.config.file"));
+        $file->u3i = $u3i;
+        JL::put(FEnv::get("framework.config.core.config.file"), json_encode($file, JSON_PRETTY_PRINT));
+        return ((new Renderer())->jsonRenderer(array("code" => 200, "msg" => "OK")));
     }
 
     /** Get the last debug logs (limited by 10)

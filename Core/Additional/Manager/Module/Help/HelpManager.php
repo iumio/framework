@@ -117,7 +117,7 @@ class HelpManager extends ModuleManager implements ModuleManagerInterface
                         if (isset($val->options)) {
                             foreach ($val->options as $one) {
                                 $opt = "    " . $one->name;
-                                $nopt .= "\033[0;34m" . $opt . $this->putSpace($opt, $space) . "\033[0m" . $one->desc . "\n";
+                                $nopt .= "\033[0;34m".$opt.$this->putSpace($opt, $space) . "\033[0m".$one->desc."\n";
                                 $nopt .= "      " . "\033[0;33musage : " . $one->usage . "\033[0m\n\n";
                             }
                         }

@@ -15,12 +15,10 @@
 
 namespace iumioFramework\Core\Base\Locale;
 
-use iumioFramework\Core\Additional\EngineTemplate\SmartyEngineTemplate;
-use iumioFramework\Core\Base\Http\HttpResponse;
-use iumioFramework\Core\Base\Http\ParameterRequest;
 use iumioFramework\Core\Base\Json\JsonListener;
 use iumioFramework\Core\Requirement\Environment\FEnv;
 use iumioFramework\Core\Exception\Server\Server500;
+use iumioFramework\Core\Requirement\FrameworkServices\AppConfig;
 
 /**
  * Class AppLocale
@@ -35,7 +33,7 @@ class AppLocale implements AppLocaleInterface
     /**
      * @var $enabled bool
      */
-    private $enabled;
+    private $enabled = false;
 
     /**
      * @var $values array
@@ -47,28 +45,57 @@ class AppLocale implements AppLocaleInterface
      */
     private $transtype;
 
+    /**
+     * @var $prefer string|null
+     */
+    private $prefer;
+
+    /**
+     * @var null|string $appname the app name
+     */
+    private $appname = null;
+
 
     /**
      * AppLocale constructor.
      * @param string|null $appname appname
+     * @throws
      */
     public function __construct(?string $appname = null)
     {
         if (null !== $appname) {
-            $file = JsonListener::open(FEnv::get("app.config.file"));
-            $this->enabled = (property_exists($file, "locale_enabled"))? $file->locale_enabled : false;
-            $this->values = (property_exists($file, "locale_values"))? (array)$file->locale_values : [];
-            $this->transtype = (property_exists($file, "trans_type"))? $file->trans_type : null;
+            $this->appname = $appname;
+            if (true ===
+               JsonListener::exists(FEnv::get("framework.root")."apps/$appname/config.json")) {
+                $file = JsonListener::open(FEnv::get("framework.root") . "apps/$appname/config.json");
+                $this->enabled = (property_exists(
+                    $file,
+                    "locale_enabled"
+                )) ? (bool)$file->locale_enabled : false;
+                $this->values = (property_exists($file, "locale_values")) ? (array)$file->locale_values : [];
+                $this->transtype = (property_exists($file, "trans_type")) ? $file->trans_type : null;
+                $this->prefer = (property_exists($file, "prefer_locale")) ? $file->prefer_locale : null;
+            }
         }
     }
 
+    /** Apply object persist
+     * @return bool
+     * @throws Server500
+     */
     public function apply(): bool
     {
-        $file = JsonListener::open(FEnv::get("app.config.file"));
+        $path = FEnv::get("framework.root")."apps/".$this->appname."/config.json";
+        if (false === JsonListener::exists($path)) {
+            AppConfig::createHimSelf($this->appname);
+        }
+       
+        $file = JsonListener::open($path);
         $file->locale_enabled = $this->enabled;
         $file->locale_values = $this->values;
         $file->trans_type = $this->transtype;
-        return (JsonListener::put("app.config.file", json_encode($file)));
+        $file->prefer_locale = $this->prefer;
+        return (JsonListener::put($path, json_encode($file, JSON_PRETTY_PRINT)));
     }
 
     /**
@@ -118,9 +145,36 @@ class AppLocale implements AppLocaleInterface
     {
         $this->transtype = $transtype;
     }
-    
-    
 
+    /**
+     * @return null|string
+     */
+    public function getAppname(): ?string
+    {
+        return $this->appname;
+    }
 
-    
+    /**
+     * @param null|string $appname
+     */
+    public function setAppname(?string $appname): void
+    {
+        $this->appname = $appname;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPrefer(): ?string
+    {
+        return $this->prefer;
+    }
+
+    /**
+     * @param string|null $prefer
+     */
+    public function setPrefer(?string $prefer): void
+    {
+        $this->prefer = $prefer;
+    }
 }

@@ -80,6 +80,18 @@
                 <p>Deployer</p>
             </a>
         </li>
+        <li class="{if $selected == "localemanager"}active{/if}">
+            <a href="{route name='iumio_manager_locale_manager' component='yes'}">
+                <i class="fa fa-location-arrow"></i>
+                <p>Locale</p>
+            </a>
+        </li>
+        <li class="{if $selected == "composermanager"}active{/if}">
+            <a href="{route name='iumio_manager_composer_manager' component='yes'}">
+                <i class="fa fa-puzzle-piece"></i>
+                <p>Composer</p>
+            </a>
+        </li>
         {*<li class="{if $selected == "apimanager"}active{/if}">
             <a href="{route name='iumio_manager_api_manager' component='yes'}">
                 <i class="pe-7s-airplay"></i>

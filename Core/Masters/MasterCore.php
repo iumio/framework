@@ -19,7 +19,6 @@ use iumioFramework\Core\Base\Container\FrameworkContainer;
 use iumioFramework\Core\Requirement\Environment\FEnv;
 use iumioFramework\Core\Routing\Routing;
 use iumioFramework\Core\Additional\EngineTemplate\SmartyEngineTemplate;
-use iumioFramework\Core\Requirement\Environment\FrameworkEnvironment;
 use iumioFramework\Core\Requirement\FrameworkServices\Services;
 use iumioFramework\Core\Requirement\FrameworkCore;
 use iumioFramework\Core\Requirement\FrameworkServices\GlobalCoreService;
@@ -74,6 +73,9 @@ class MasterCore extends GlobalCoreService
             case 'service':
                 return (Services::getInstance());
                 break;
+            case 'locale':
+                return (FEnv::get("app.locale.context"));
+                break;
             default:
                 throw new Server500(new \ArrayObject(array("explain" =>
                    "Cannot call component : Undefined component $component",
@@ -97,7 +99,6 @@ class MasterCore extends GlobalCoreService
         $r = new Renderer();
         return ($r->graphicRenderer($view, $options, $iscached));
     }
-
 
     /** Change views Render extension
      * @param string $ext new extention
@@ -161,139 +162,10 @@ class MasterCore extends GlobalCoreService
         string $app_called = null,
         bool $component = false
     ) :string {
-
-        $app = (($app_called != null)? $app_called : FEnv::get("app.call"));
-
-        $file = JL::open(FEnv::get("framework.config.core.apps.file"));
-        $prefix = null;
-        foreach ($file as $one) {
-            if ($one->name == $app && $one->prefix != "") {
-                $prefix = $one->prefix;
-            }
-        }
-        JL::close(FEnv::get("framework.config.core.apps.file"));
-
-        $iscomponent = (self::getCore())->detectAppType($app);
-
-        $component = false;
-        if ($iscomponent == 'base') {
-            $component = true;
-        } elseif ($iscomponent == 'none') {
-            if (FEnv::isset("framework.smarty.called") && FEnv::get("framework.smarty.called") == 1) {
-                throw new \Exception("Cannot determine app type of ".$app);
-            } else {
-                throw new Server500(new \ArrayObject(array("explain" => "Cannot determine app type of " . $app,
-                    "solution" => "Please check if your app exist")));
-            }
-        }
-        $rt = new Routing($app, $prefix, $component);
-        if (!$rt->routingRegister()) {
-            if (FEnv::isset("framework.smarty.called") && FEnv::get("framework.smarty.called") == 1) {
-                throw new \Exception("Cannot open your Mercure file");
-            } else {
-                throw new Server500(new \ArrayObject(array("solution" => "Please check all Mercure file",
-                    "explain" => "Cannot open your Mercure file")));
-            }
-        }
-
-        foreach ($rt->routes() as $one) {
-            if ($one['routename'] == $routename) {
-                $one['path'] = $this->analysePath(
-                    $one['routename'],
-                    $one['path'],
-                    ((is_array($parameters))? $parameters : array())
-                );
-
-                if (isset($one['path'][0]) && $one['path'][0] != "/") {
-                    $one['path'] = "/".$one['path'];
-                }
-                $url = $one['path'];
-
-                $base = (isset($_SERVER['SCRIPT_NAME']) && $_SERVER['SCRIPT_NAME'] != "")? $_SERVER['SCRIPT_NAME'] : "";
-
-                if (strpos($_SERVER['REQUEST_URI'], FrameworkEnvironment::getFileEnv(FEnv::get("framework.env"))) == false) {
-                    $rm = explode('/', $base);
-                    $rm = array_values(Routing::removeEmptyData($rm));
-                    $rm = array_values($rm);
-                    $key = array_search(FrameworkEnvironment::getFileEnv(FEnv::get("framework.env")), $rm);
-                    unset($rm[$key]);
-                    $rm = array_values($rm);
-                    $base = implode("/", $rm);
-                    if (isset($base[0]) && $base[0] != "/") {
-                        $base = "/".$base;
-                    }
-                }
-
-                return ($base.$url);
-            }
-        }
-
-        if (FEnv::isset("framework.smarty.called") && FEnv::get("framework.smarty.called") == 1) {
-            throw new \Exception("Unable to generate URL for route : $routename");
-        } else {
-            throw new Server500(new \ArrayObject(array("solution" => "Please check all Mercure file",
-                "explain" => "Unable to generate URL for route : $routename")));
-        }
+        return (Routing::generateRoute($routename, $parameters, $app_called, $component));
     }
 
-    /** Analyse path to change dynamic parameters with specific parameters array
-     * @param string $routename The route name
-     * @param string $path The route path
-     * @param array $parameters Parameters to change
-     * @return string The new path
-     * @throws Server500 If parameters count does not match or parameter missing
-     */
-    final protected function analysePath(string $routename, string $path, array $parameters):string
-    {
-        $arraypath = explode("/", $path);
-        $arrayElem = array();
-        $narray = array();
-        foreach ($arraypath as $one) {
-            if (preg_match("/{(.*?)}/", $one)) {
-                $nstr = str_replace("{", "", $one);
-                $nstr = str_replace("}", "", $nstr);
-                array_push($arrayElem, $nstr);
-            }
-        }
 
-        $countchange = 0;
-        if (count($parameters) != count($arrayElem)) {
-            throw new Server500(new \ArrayObject(array("explain" =>
-                "Parameters count does not matches for $routename route",
-                "solution" => "Please check your parameters declaration")));
-        }
-
-
-
-        foreach ($arrayElem as $uno) {
-            if (isset($parameters[$uno]) && $parameters[$uno] != "") {
-                if (gettype($parameters[$uno]) == "object" || gettype($parameters[$uno]) == "array") {
-                    throw new Server500(new \ArrayObject(array("explain" => "Cannot generate route [".
-                        $routename."] :  Invalid type [".gettype($parameters[$uno])."] for route parameters",
-                        "solution" => "Define a valid parameter type ([object] and [array] is not allowed)")));
-                }
-
-                $narray["{".$uno."}"] = $parameters[$uno];
-                $countchange++;
-            }
-        }
-
-        if (count($parameters) != $countchange) {
-            throw new Server500(new \ArrayObject(array("explain" => "Parameter(s) missing for $routename route",
-                "solution" => "Please check your parameters declaration")));
-        }
-
-
-        for ($i = 0; $i < count($arraypath); $i++) {
-            if (isset($narray[$arraypath[$i]])) {
-                $arraypath[$i] = $narray[$arraypath[$i]];
-            }
-        }
-
-        $path = implode("/", $arraypath);
-
-        return ($path);
-    }
 
     /** Return instance of specific master in current app
      * @param string $mastername master name

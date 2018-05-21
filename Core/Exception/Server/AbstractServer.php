@@ -128,7 +128,7 @@ abstract class AbstractServer extends \Exception implements ServerInterface
         } elseif ($this->external || FEnv::get("framework.env") == "prod") {
             @include_once(FEnv::get("framework.exceptions_view").'html/'.$code.'.html');
         } else {
-            @include_once  FEnv::get("framework.exceptions_view").'layout.exception.php';
+            @include_once  FEnv::get("framework.exceptions_view").'layout.exception.html.php';
         }
 
         exit(1);

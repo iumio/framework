@@ -248,6 +248,7 @@ class HttpListener
         array $server = array(),
         $content = null
     ) {
+
         $this->request = new ParameterRequest($request);
         $this->query = new ParameterRequest($query);
         $this->attributes = new ParameterRequest($attributes);
@@ -275,7 +276,6 @@ class HttpListener
      */
     public static function createFromGlobals()
     {
-        //exit('IMA4');
         // With the php's bug #66606, the php's built-in web server
         // stores the Content-Type and Content-Length header values in
         // HTTP_CONTENT_TYPE and HTTP_CONTENT_LENGTH fields.

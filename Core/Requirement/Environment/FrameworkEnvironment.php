@@ -91,8 +91,10 @@ class FrameworkEnvironment
                 "framework.config.core.config.file" =>  $base."elements/config_files/core/framework.config.json",
                 "framework.config.db.file" =>  $base."elements/config_files/db/databases.json",
                 "framework.config.autoloader" =>  $base."elements/config_files/engine_autoloader/",
-                "framework.config.autoloader.dev.file" =>  $base."elements/config_files/engine_autoloader/map.class.dev.json",
-                "framework.config.autoloader.prod.file" =>  $base."elements/config_files/engine_autoloader/map.class.prod.json",
+                "framework.config.autoloader.dev.file" =>
+                    $base."elements/config_files/engine_autoloader/map.class.dev.json",
+                "framework.config.autoloader.prod.file" =>
+                    $base."elements/config_files/engine_autoloader/map.class.prod.json",
                 "framework.config.hosts.dev.file" =>  $base."elements/config_files/hosts/hosts.dev.json",
                 "framework.config.hosts.prod.file" =>  $base."elements/config_files/hosts/hosts.prod.json",
                 "framework.config.smarty.file" =>  $base."elements/config_files/smarty_config/smarty.json",
@@ -163,7 +165,6 @@ class FrameworkEnvironment
 
     /** Display an Error
      * @param array $options Error options
-     * @param array $options
      * @throws Server403
      */
     public static function displayError(array $options)

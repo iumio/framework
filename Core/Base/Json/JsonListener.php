@@ -43,7 +43,7 @@ class JsonListener implements JsonInterface
         }
 
         if (!file_exists($filepath)) {
-            throw new Server500(new \ArrayObject(array("explain" => "Cannot open file $filepath : File does not exit",
+            throw new Server500(new \ArrayObject(array("explain" => "Cannot open file $filepath : File does not exist",
                 "solution" => "Please set the correct filepath")));
         }
 

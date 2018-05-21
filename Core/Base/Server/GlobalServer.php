@@ -16,6 +16,7 @@
 namespace iumioFramework\Core\Base\Server;
 
 use iumioFramework\Core\Base\Http\ParameterRequest;
+use iumioFramework\Core\Exception\Server\Server500;
 
 /**
  * Class GlobalServer
@@ -29,6 +30,30 @@ class GlobalServer extends ParameterRequest
 {
     public function __construct(array $server = [])
     {
-        parent::__construct((empty($server))? $_SERVER : $server);
+        parent::__construct((empty($server)) ? $_SERVER : $server);
+    }
+
+    /** Get info about current server
+     * @param string $infoname info name
+     * @return string info result
+     * @throws Server500 Error generate
+     */
+    final public static function getServerInfo(string $infoname):string
+    {
+        $rs = 'none';
+        switch ($infoname) {
+            case 'PHP_VERSION':
+                $rs = phpversion();
+                break;
+            default:
+                try {
+                    $rs = $_SERVER[$infoname];
+                } catch (\Exception $e) {
+                    throw new Server500(new \ArrayObject(array("explain" =>
+                        "Core Error: The server info $infoname does not exist", "solution" => "Check your keyword")));
+                }
+                break;
+        }
+        return ($rs);
     }
 }

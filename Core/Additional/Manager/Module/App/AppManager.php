@@ -175,7 +175,11 @@ class AppManager extends ModuleManager implements ModuleManagerInterface
             Output::outputAsReadLine($this->stage[0], "none");
             $this->params['appname'] = ucfirst($this->listener());
         }
-        Output::displayAsGreen("Great! Your app name is ".$this->params['appname'], "none", false);
+        Output::displayAsGreen(
+            "Great! Your app name is ".$this->params['appname'],
+            "none",
+            false
+        );
         Output::outputAsReadLine($this->stage[1], "none");
         $this->params['template'] = $this->listener();
         while ($this->checkBooleanResponse($this->params['template']) != 1) {
@@ -296,7 +300,11 @@ class AppManager extends ModuleManager implements ModuleManagerInterface
         }
         $this->params['capp'] = $this->params['applist'][$this->params['capp'] - 1];
 
-        Output::displayAsGreen("Ok ! You choose ".$this->params['capp']." to be enabled", "none", false);
+        Output::displayAsGreen(
+            "Ok ! You choose ".$this->params['capp']." to be enabled",
+            "none",
+            false
+        );
         $this->enabledAppProcess();
     }
 
@@ -324,7 +332,11 @@ class AppManager extends ModuleManager implements ModuleManagerInterface
         }
         $this->params['capp'] = $this->params['applist'][$this->params['capp'] - 1];
 
-        Output::displayAsGreen("Ok ! You choose ".$this->params['capp']." to be disabled", "none", false);
+        Output::displayAsGreen(
+            "Ok ! You choose ".$this->params['capp']." to be disabled",
+            "none",
+            false
+        );
         $this->disabledAppProcess();
     }
 
@@ -501,7 +513,8 @@ class AppManager extends ModuleManager implements ModuleManagerInterface
         $this->initialJSON();
         if ($this->params['template'] == "yes") {
             $asm = new AssetsManager();
-            $asm->__render(["commands" => ["assets:copy"], "options" => ["--symlink", "--noexit", "--appname=". $this->params['appname']]]);
+            $asm->__render(["commands" => ["assets:copy"], "options" => ["--symlink", "--noexit", "--appname=".
+                $this->params['appname']]]);
         }
 
         // $this->addComposerApp($this->params['appname']);
@@ -534,7 +547,11 @@ class AppManager extends ModuleManager implements ModuleManagerInterface
     final protected function enabledAppProcess()
     {
         $appname = $this->params['capp'];
-        Output::displayAsGreen("Processing to enabled app : $appname  will be enabled \n", "none", false);
+        Output::displayAsGreen(
+            "Processing to enabled app : $appname  will be enabled \n",
+            "none",
+            false
+        );
         sleep(1);
         $file = json_decode(file_get_contents(FEnvFcm::get("framework.config.core.apps.file")));
 
@@ -557,7 +574,11 @@ class AppManager extends ModuleManager implements ModuleManagerInterface
     final protected function disabledAppProcess()
     {
         $appname = $this->params['capp'];
-        Output::displayAsGreen("Processing to enabled app : $appname  will be enabled \n", "none", false);
+        Output::displayAsGreen(
+            "Processing to enabled app : $appname  will be enabled \n",
+            "none",
+            false
+        );
         sleep(1);
         $file = json_decode(file_get_contents(FEnvFcm::get("framework.config.core.apps.file")));
 

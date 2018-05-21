@@ -14,6 +14,7 @@
 
 namespace iumioFramework\Core\Requirement\FrameworkServices;
 
+use iumioFramework\Core\Base\Json\JsonListener;
 use iumioFramework\Core\Exception\Server\Server403;
 use iumioFramework\Core\Exception\Server\Server500;
 use iumioFramework\Core\Exception\Tools\ToolsExceptions;
@@ -208,5 +209,37 @@ class AppConfig extends SingletonMulPattern
     public function setConfig(\stdClass $config)
     {
         $this->config = $config;
+    }
+
+    /**
+     * Create the config.json if does not exist
+     * @param string $appname The app name
+     * @return bool
+     * @throws Server500
+     */
+    public static function createHimSelf(string $appname):bool
+    {
+        if (false == JL::exists(FEnv::get("framework.root")."apps/".
+            $appname."/config.json")) {
+            $file = new \stdClass();
+            $file->visibility_dev = null;
+            $file->visibility_prod = null;
+            $file->hosts_allowed_dev = null;
+            $file->hosts_denied_dev = null;
+            $file->hosts_allowed_prod = null;
+            $file->hosts_denied_prod = null;
+            $file->locale_enabled = false;
+            $file->prefer_locale = null;
+            $file->locale_values = null;
+            $file->trans_type = null;
+
+            JsonListener::put(
+                FEnv::get("framework.root")."apps/". $appname."/config.json",
+                json_encode($file, JSON_PRETTY_PRINT)
+            );
+            return (JL::exists(FEnv::get("framework.root")."apps/".
+                $appname."/config.json"));
+        }
+        return (false);
     }
 }

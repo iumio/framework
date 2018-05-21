@@ -17,6 +17,7 @@ namespace iumioFramework\Core\Routing\Listener;
 use iumioFramework\Core\Base\Container\FrameworkContainer;
 use iumioFramework\Core\Requirement\Environment\FEnv;
 use iumioFramework\Core\Exception\Server\Server500;
+use iumioFramework\Core\Requirement\FrameworkCore;
 
 /**
  * Class MercureListener
@@ -103,11 +104,11 @@ class MercureListener implements Listener
                     FEnv::get("framework.baseapps")) . $this->appName .
                 "/Routing/" . $file, "r"))) {
                 if ($this->analyseMercure($router, $file, $this->appName) == 0) {
-                    exit();
+                    die();
                 }
                 rewind($router);
                 $mercurearray = array("activity" => "", "path" => "", "name" => "", "visibility" => "private",
-                    "m_allow" => "ALL", "r_parameters" => array());
+                    "m_allow" => "ALL", "r_parameters" => array(), "app_proprietary" => $this->appName);
                 $start = 0;
                 $end = 0;
                 while ($listen = fgets($router, 1024)) {
@@ -138,17 +139,19 @@ class MercureListener implements Listener
                     if ($start === 1 && $end === 1) {
                         $this->checkIfKeyExist($mercurearray, $file, $this->appName);
                         $mercurearray = array("method" => "", "path" => "", "name" => "", "visibility" =>
-                            "private", "m_allow" => "ALL", "r_parameters" => array());
+                            "private", "m_allow" => "ALL", "r_parameters" => array(),
+                            "app_proprietary" => $this->appName);
                         $start = $end = 0;
                     }
                 }
                 $this->close($router);
             }
         }
-
+        
         for ($i = 0; $i < count($routingArray); $i++) {
             $routingArray[$i]['path'] = (($this->prefix == null ||
-                    $this->prefix == "") ? "" : $this->prefix) . $routingArray[$i]['path'];
+                    $this->prefix == "") ? "" : "/".$this->prefix) . $routingArray[$i]['path'];
+
 
             $method = explode('%', $routingArray[$i]['activity']);
             if (count($method) == 2) {
@@ -175,13 +178,14 @@ class MercureListener implements Listener
                         $routingArray[$i]['path'], "controller" => $controller, "method" => $function .
                         "Activity", "visibility" => $routingArray[$i]['visibility'], "params" => $params,
                         "m_allow" => $this->methodAllowedTransform($routingArray[$i]['m_allow']), "r_parameters" =>
-                            $routingArray[$i]['r_parameters']));
+                            $routingArray[$i]['r_parameters'],
+                        "app_proprietary" => $routingArray[$i]['app_proprietary']));
                 } else {
                     array_push($this->router, array("routename" =>  $routingArray[$i]['name'], "path" =>
                         $routingArray[$i]['path'], "controller" => $controller, "method" => $function .
                         "Activity", "visibility" => $routingArray[$i]['visibility'], "m_allow" =>
                         $this->methodAllowedTransform($routingArray[$i]['m_allow']), "r_parameters" =>
-                        $routingArray[$i]['r_parameters']));
+                        $routingArray[$i]['r_parameters'], "app_proprietary" => $routingArray[$i]['app_proprietary']));
                 }
             } else {
                 throw new Server500(new \ArrayObject(array("explain" =>
@@ -567,8 +571,8 @@ class MercureListener implements Listener
             case "string":
                 return (is_string($value));
                 break;
-            case "is":
-                return (is_string($value));
+            case "object":
+                return (is_object($value));
                 break;
         }
         throw new Server500(new \ArrayObject(array("explain" =>

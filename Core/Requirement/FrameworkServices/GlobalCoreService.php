@@ -14,6 +14,8 @@
 
 namespace iumioFramework\Core\Requirement\FrameworkServices;
 
+use iumioFramework\Core\Base\Locale\Locale;
+
 /**
  * Class GlobalCoreService
  * @package iumioFramework\Core\Requirement\FrameworkServices

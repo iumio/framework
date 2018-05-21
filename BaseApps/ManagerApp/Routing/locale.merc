@@ -3,3 +3,39 @@ route:
   path :  /_manager/locale
   activity : Locale%locale
 endroute
+
+route:
+  name : iumio_manager_locale_manager_framework_change_status
+  path :  /_manager/locale/framework/changestatus/{status}/
+  activity : Locale%changeStatus
+endroute
+
+route:
+  name : iumio_manager_locale_manager_framework_change_status_app
+  path :  /_manager/locale/{appname}/changestatus/{status}/
+  activity : Locale%changeStatusLocalApp
+endroute
+
+route:
+  name : iumio_manager_locale_manager_get_one
+  path :  /_manager/locale/get/one/{appname}
+  activity : Locale%getOneLocale
+endroute
+
+route:
+  name : iumio_manager_locale_manager_edit_one
+  path :  /_manager/locale/edit/one/{appname}
+  activity : Locale%editLocale
+endroute
+
+
+route:
+  name : iumio_manager_locale_manager_get_all
+  path :  /_manager/locale/framework/get/all/
+  activity : Locale%getAll
+endroute
+
+
+
+
+

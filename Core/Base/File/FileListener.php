@@ -316,7 +316,7 @@ class FileListener implements FileInterface
 
         if (!file_exists($filepath)) {
             throw new Server500(new \ArrayObject(array("explain" =>
-                "Cannot access to the file $filepath : File does not exit",
+                "Cannot access to the file $filepath : File does not exist",
                 "solution" =>
                     "Please set the correct filepath or 
                     set to true the parameter [fcreate] of JsonListener::open function.")));

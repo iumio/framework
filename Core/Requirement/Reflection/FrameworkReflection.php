@@ -16,7 +16,7 @@ namespace iumioFramework\Core\Requirement\Reflection;
 
 use iumioFramework\Core\Base\Container\FrameworkContainer;
 use iumioFramework\Core\Requirement\Environment\FEnv;
-use iumioFramework\Core\Requirement\FrameworkCore;
+use iumioFramework\Core\Requirement\FrameworkServices\FrameworkTools;
 
 /**
  * Class FrameworkReflection
@@ -44,6 +44,7 @@ class FrameworkReflection
         FEnv::set("app.activity_called", array("class" => $class, "method" => $method));
         $container = FrameworkContainer::getInstance();
         $call = $container->get($class);
+       
         $rs = $container->call($class."::".$method, $args);
         return ($rs);
     }
@@ -57,7 +58,7 @@ class FrameworkReflection
      */
     public function __simple(string $class, array $args)
     {
-        $config = FrameworkCore::getEditionInfo();
+        $config = FrameworkTools::getEditionInfo();
         $autowired = $config->autowiring ?? false;
         $annotation = $config->annotation ?? false;
         $container = FrameworkContainer::getInstance();

@@ -14,6 +14,7 @@
 
 namespace iumioFramework\Core\Additional\EngineTemplate;
 
+use iumioFramework\Core\Base\Locale\Locale;
 use iumioFramework\Core\Requirement\Environment\FEnv;
 use iumioFramework\Core\Requirement\Environment\FrameworkEnvironment;
 use iumioFramework\Core\Exception\Server\Server500;
@@ -61,7 +62,7 @@ class ViewBasePlugin
      */
     final public static function sinfo(array $params):string
     {
-        return (\iumioFramework\Core\Requirement\FrameworkCore::getServerInfo($params['name']));
+        return (\iumioFramework\Core\Base\Server\GlobalServer::getServerInfo($params['name']));
     }
 
     /** Get bootstrap javascript
@@ -82,7 +83,8 @@ class ViewBasePlugin
      */
     final public static function skel():string
     {
-        return ("<script type='text/javascript' src='".FEnv::get("host.web.components.libs")."skel/skel.min.js'></script>");
+        return ("<script type='text/javascript' src='".FEnv::get("host.web.components.libs").
+            "skel/skel.min.js'></script>");
     }
 
 
@@ -92,7 +94,8 @@ class ViewBasePlugin
      */
     final public static function util():string
     {
-        return ("<script type='text/javascript' src='".FEnv::get("host.web.components.libs")."dwr/util.js'></script>");
+        return ("<script type='text/javascript' src='".FEnv::get("host.web.components.libs").
+            "dwr/util.js'></script>");
     }
 
     /** Get bootstrap css
@@ -152,7 +155,8 @@ class ViewBasePlugin
     {
         return ("<script type='text/javascript' src='".
             FEnv::get("host.web.components.apps").strtolower(FEnv::get("framework.env"))."/".
-            strtolower(FEnv::get("app.call"))."/".((isset($params['path']))? $params['path']."." : "")."js'></script>");
+            strtolower(FEnv::get("app.call"))."/".
+            ((isset($params['path']))? $params['path']."." : "")."js'></script>");
     }
 
     /** Get css libs file
@@ -207,7 +211,10 @@ class ViewBasePlugin
 
         $base = (isset($_SERVER['SCRIPT_NAME']) && $_SERVER['SCRIPT_NAME'] != "")? $_SERVER['SCRIPT_NAME'] : "";
 
-        if (strpos($_SERVER['REQUEST_URI'], FrameworkEnvironment::getFileEnv(FEnv::get("framework.env"))) == false) {
+        if (strpos(
+            $_SERVER['REQUEST_URI'],
+            FrameworkEnvironment::getFileEnv(FEnv::get("framework.env"))
+        ) == false) {
             $rm = explode('/', $base);
             $rm = array_values(Routing::removeEmptyData($rm));
             $rm = array_values($rm);
@@ -356,6 +363,25 @@ class ViewBasePlugin
             !empty($params['params']))? $params['params']  : null), null, ((isset($params['component']) &&
             $params['component'] == "yes")? true  : false)));
         return ($route);
+    }
+    
+    /** Translate a element
+     * @param array $params
+     * @param string $content
+     * @param $smarty
+     * @param $repeat
+     * @return mixed
+     */
+    final public static function translate(array $params, string $content = null)
+    {
+        if (!FEnv::isset("framework.smarty.called")) {
+            FEnv::set("framework.smarty.called", 1);
+        }
+
+        if (isset($content)) {
+            $locale = Locale::getInstance();
+            return ($locale->trans($content, $params['lang'] ?? null));
+        }
     }
 
     /** Get iumio taskbar
