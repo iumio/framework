@@ -88,6 +88,43 @@ class DashboardMaster extends MasterCore
         return ((new Renderer())->jsonRenderer(array("code" => 200, "results" => $lastn)));
     }
 
+    /**
+     * Edit framework 200 event
+     * @return Renderer
+     * @throws \Exception
+     */
+    public function edit200EventActivity()
+    {
+        $request = HttpListener::createFromGlobals();
+        $mode = ($request->get("mode"));
+        $file = JL::open(FEnv::get("framework.config.core.config.file"));
+        if (!in_array($mode, ["true", "false"])) {
+            return ((new Renderer())->jsonRenderer(array("code" => 500,
+                "results" => "Undefined value for 200 Event : $mode ")));
+        }
+        $file->{"200_log"} = (bool)$mode;
+        JL::put(FEnv::get("framework.config.core.config.file"), json_encode($file, JSON_PRETTY_PRINT));
+        return ((new Renderer())->jsonRenderer(array("code" => 200, "msg" => "OK")));
+    }
+
+    /**
+     * Edit framework 404 event
+     * @return Renderer
+     * @throws \Exception
+     */
+    public function edit404EventActivity()
+    {
+        $request = HttpListener::createFromGlobals();
+        $mode = ($request->get("mode"));
+        $file = JL::open(FEnv::get("framework.config.core.config.file"));
+        if (!in_array($mode, [true, false])) {
+            return ((new Renderer())->jsonRenderer(array("code" => 500,
+                "results" => "Undefined value for 404 Event : $mode ")));
+        }
+        $file->{"404_log"} = (bool)$mode;
+        JL::put(FEnv::get("framework.config.core.config.file"), json_encode($file, JSON_PRETTY_PRINT));
+        return ((new Renderer())->jsonRenderer(array("code" => 200, "msg" => "OK")));
+    }
 
     /**
      * Get default App

@@ -22,6 +22,17 @@ route:
   activity : Dashboard%getDefaultApp
 endroute
 
+route:
+  name : iumio_manager_dashboard_edit_200_event
+  path :  /_manager/dashboard/framework/edit/200/event
+  activity : Dashboard%edit200Event
+endroute
+
+route:
+  name : iumio_manager_dashboard_edit_404_event
+  path :  /_manager/dashboard/framework/edit/404/event
+  activity : Dashboard%edit404Event
+endroute
 
 route:
   name : iumio_manager_dashboard_edit_u3i

@@ -44,6 +44,9 @@
 
                                             <li>Current environment : {$fi->default_env}</li>
 
+                                            <li>404 error on log :   <span class="event404" attr-href="{nocache}{route name='iumio_manager_dashboard_edit_404_event'}{/nocache}" style="cursor: pointer">{if isset($fi->{'404_log'}) and (true === $fi->{'404_log'})}Enabled{else}Disabled{/if}</span></li>
+
+                                            <li>HTTP 200 Event on log :  <span class="event200" attr-href="{nocache}{route name='iumio_manager_dashboard_edit_200_event'}{/nocache}" style="cursor: pointer">{if isset($fi->{'200_log'}) and (true === $fi->{'200_log'})}Enabled{else}Disabled{/if}</span></li>
                                         </ul>
 
                                         <p class="category">Core informations</p>
@@ -145,6 +148,3 @@
         </div>
     </div>
 {/block}
-
-
-
