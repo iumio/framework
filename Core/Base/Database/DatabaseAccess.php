@@ -45,11 +45,19 @@ class DatabaseAccess
                     "Add database informations in databases.json")));
             }
             if ($databaseName == "#none") {
+                if (!property_exists($file, "default")) {
+                    throw new Server500(new \ArrayObject(array("explain" => "Undefined default database",
+                        "solution" => "Please call a valid database configuration")));
+                }
                 $dns = $file->default->db_driver.":dbname=".$file->default->db_name.";host=".$file->default->db_host;
                 $user = $file->default->db_user;
                 $passwd = $file->default->db_password;
                 self::$co_instance = new \PDO($dns, $user, $passwd);
             } else {
+                if (!property_exists($file, $databaseName)) {
+                    throw new Server500(new \ArrayObject(array("explain" => "Undefined database named [$databaseName]",
+                        "solution" => "Please call a valid database configuration name")));
+                }
                 $dns = $file->$databaseName->db_driver.
                     ":dbname=".$file->$databaseName->db_name.";host=".$file->$databaseName->db_host;
                 $user = $file->$databaseName->db_user;

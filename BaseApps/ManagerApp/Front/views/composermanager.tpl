@@ -39,6 +39,7 @@
                                 <div class="header">
                                     <h4 class="title">List of composer dependencies</h4>
                                     <p class="category">This is the composer dependencies list. You have the main information on them such as the name, versions etc.</p>
+                                    <div class="search-block col-md-4" style="padding: 10px 0px 10px 0px"><input type="text" id="composer-seach" placeholder="Search by name" class="form-control" /> </div>
                                 </div>
                                 <div class="content table-responsive table-full-width">
                                     <table class="table table-hover table-striped">
