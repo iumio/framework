@@ -46,10 +46,10 @@ abstract class FrameworkCore extends GlobalCoreService
     protected $environment;
     private static $runtime_parameters = null;
 
-    public const CORE_VERSION = '0.9.0';
+    public const CORE_VERSION = '0.9.1';
     public const CORE_NAME = 'SUN';
     public const CORE_STAGE = 'RC';
-    public const CORE_BUILD = 201790;
+    public const CORE_BUILD = 201791;
     protected static $edition = array();
 
     /**
@@ -131,6 +131,7 @@ abstract class FrameworkCore extends GlobalCoreService
             if ($rt->routingRegister() == true) {
                 $callback = FrameworkTools::manage($request, $rt->routes());
                 if ($callback != null) {
+                    (AppConfig::getInstance($def['name']))->checkRequirements();
                     Routing::checkRouteMatchesMethod($callback, strtoupper($request->getMethod()));
                     $method = $callback['method'];
                     $controller = $callback['controller'];
