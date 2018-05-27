@@ -42,7 +42,7 @@ class MercureManager extends ModuleManager implements ModuleManagerInterface
         $this->options = $options;
         if (!isset($options["commands"])) {
             Output::displayAsError("Version Manager Module Error : Option is not exist. 
-            Referer to help command to get options list\n");
+            Referer to help command to get options list \n");
         }
 
         $opt = $options["commands"][0] ?? null;
