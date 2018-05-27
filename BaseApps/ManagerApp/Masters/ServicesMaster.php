@@ -257,6 +257,6 @@ class ServicesMaster extends MasterCore
         if ($space_remove) {
             $string = str_replace(' ', '-', $string);
         }
-        return preg_replace('/[^A-Za-z0-9\-]/', '', $string);
+        return preg_replace('/[^A-Za-z0-9\-][_]/', '', $string);
     }
 }
