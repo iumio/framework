@@ -42,7 +42,7 @@ class OutputManager
     final public static function displayAsSuccess(string $message, string $exit = "yes", bool $header = true)
     {
         $colors = self::getManagerColorInstance();
-        echo "\n\n".$colors->getColoredString($message, "black", "green", $header);
+        echo "\n\n".$colors->getColoredString($message, "green", "transparent", $header);
         if ($exit == "yes") {
             exit();
         }
@@ -55,7 +55,7 @@ class OutputManager
     final public static function displayAsNotice(string $message, string $exit = "yes")
     {
         $colors = self::getManagerColorInstance();
-        echo "\n\n".$colors->getColoredString($message, "black", "yellow");
+        echo "\n\n".$colors->getColoredString($message, "yellow", "transparent");
         if ($exit == "yes") {
             exit();
         }
@@ -68,7 +68,7 @@ class OutputManager
     final public static function displayAsError(string $message, string $exit = "yes")
     {
         $colors = self::getManagerColorInstance();
-        echo "\n\n".$colors->getColoredString($message, "white", "red");
+        echo "\n\n".$colors->getColoredString($message, "red", "transparent");
         if ($exit == "yes") {
             exit();
         }
@@ -81,7 +81,12 @@ class OutputManager
     public static function displayAsNormal(string $message, string $exit = "yes")
     {
         $colors = self::getManagerColorInstance();
-        echo "\n\n".$colors->getColoredString($message, "black", "green", false);
+        echo "\n\n".$colors->getColoredString(
+            $message,
+            "green",
+            "transparent",
+            false
+        );
         if ($exit == "yes") {
             exit();
         }
@@ -162,7 +167,7 @@ class OutputManager
     {
         $colors = self::getManagerColorInstance();
         self::clear();
-        echo "\n".$colors->getColoredString($message, "black", "green");
+        echo "\n".$colors->getColoredString($message, "green", "transparent");
         if ($exit == "yes") {
             exit();
         }

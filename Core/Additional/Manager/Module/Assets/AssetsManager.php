@@ -103,8 +103,12 @@ class AssetsManager extends ModuleManager implements ModuleManagerInterface
             Output::displayAsGreen("Hey, I'll clean the $appname assets for ".
                 (($env != null && $env != "all")? strtoupper($env)." environment" : "all environments"), "none");
             $this->callDelCreaServer($appname, $env);
-                Output::displayAsGreen("$appname assets for ".(($env != null && $env != "all")?
-                        strtoupper($env)." environment" : "all environments")." have been deleted.", "yes", false);
+            Output::displayAsGreen(
+                "$appname assets for ".(($env != null && $env != "all")?
+                    strtoupper($env)." environment" : "all environments")." have been deleted.",
+                ((in_array("--noexit", $options["options"]))? "no" : "yes"),
+                false
+            );
             return (null);
         }
 

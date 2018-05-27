@@ -42,7 +42,6 @@ class FrameworkInternalServerManager extends ModuleManager implements ModuleMana
     {
         if ($this->getCurrentEnv() === "dev") {
             if (empty($this->options["options"])) {
-                Output::displayAsGreen("Running the Framework Inernal Server on http://localhost:8000", "none");
                 $a = new Runner();
                 $a->run();
             } else {
@@ -77,24 +76,20 @@ class FrameworkInternalServerManager extends ModuleManager implements ModuleMana
                     if ($secure) {
                         $cert = (explode("=", $a))[1];
                     } else {
-                        Output::displayAsRed("Fis Error : Cannot use certificate without a secure connection.\n
-                     Please use the option --secure to use a certificate");
+                        Output::displayAsRed("FIS Error : Cannot use certificate without a secure connection.\n
+                 Please use the option --secure to use a certificate");
                     }
                 }
 
                 if (($a = $this->strlikeInArray("--cluster", $this->options["options"]) != null)) {
                     $cluster = (explode("=", $a))[1];
                 }
-
-                Output::displayAsGreen("Running the Framework Internal Server on ".
-                    (($secure)? "https" : "http")."://".((is_null($host))? "localhost" : $host).
-                    ":".((is_null($port))? "8000" : $port)."", "none");
                 $a = new Runner();
                 $a->run($host, $port, $secure, $root, $router, $cert, $cluster);
             }
         } else {
             Output::displayAsError("Fis Manager : Cannot run development server when production 
-            environment was settled by default.\n Please set development environment to use server.");
+        environment was settled by default.\n Please set development environment to use server.");
         }
     }
 
@@ -108,7 +103,7 @@ class FrameworkInternalServerManager extends ModuleManager implements ModuleMana
         $this->options = $options;
         if (!isset($options["commands"])) {
             Output::displayAsError("Fis Manager Error : Option is not exist. 
-            Referer to help command to get options list\n");
+        Referer to help command to get options list\n");
         }
 
         $opt = $options["commands"][0] ?? null;
@@ -116,7 +111,7 @@ class FrameworkInternalServerManager extends ModuleManager implements ModuleMana
             $this->runServer();
         } else {
             Output::displayAsError("Fis Manager Error : Option is not exist. 
-            Referer to help command to get options list\n");
+        Referer to help command to get options list\n");
         }
     }
 

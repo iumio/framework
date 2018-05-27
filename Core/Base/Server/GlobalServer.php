@@ -40,7 +40,6 @@ class GlobalServer extends ParameterRequest
      */
     final public static function getServerInfo(string $infoname):string
     {
-        $rs = 'none';
         switch ($infoname) {
             case 'PHP_VERSION':
                 $rs = phpversion();

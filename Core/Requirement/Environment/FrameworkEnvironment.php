@@ -147,7 +147,7 @@ class FrameworkEnvironment
             self::$framework_paths["host.web.components.libs.framework"] = $current."/components/libs/iumio-framework/";
         }
     }
-    
+
     /** Get environment file
      * @param string $env Environment name
      * @return string Environment file
@@ -257,8 +257,8 @@ class FrameworkEnvironment
         } else {
             throw new Server500(new ArrayObject(
                 array("explain" => "Undefined global ".$global.
-                " for FrameworkEnvironment.",
-                "solution" => "Please Check the global name")
+                    " for FrameworkEnvironment.",
+                    "solution" => "Please Check the global name")
             ));
         }
     }
@@ -277,7 +277,8 @@ class FrameworkEnvironment
             } elseif ("prod" === $env) {
                 TaskBar::switchStatus(((true  === $f->taskbar_prod)? "on" : "off"));
             }
-            if (true === $f->debug) {
+            if (property_exists($f, "debug") &&
+                property_exists($f->debug, $env) && true === $f->debug->$env) {
                 Debug::enabled();
             } else {
                 Debug::disabled();

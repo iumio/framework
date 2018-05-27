@@ -118,20 +118,19 @@ abstract class AbstractServer extends \Exception implements ServerInterface
             return($this->displayConsole($code, $message));
         }
 
-        if (ob_get_contents()) {
+        /*if (false != ob_get_length()) {
             ob_end_clean();
-        }
+        }*/
         @header($_SERVER['SERVER_PROTOCOL'] .' '.
             (($code == 000)? 500 : $code).' '.HttpResponse::getPhrase($code), true, $code);
         if ($this->checkExceptionOverride($code)) {
             $this->displayOverride($code, $message);
         } elseif ($this->external || FEnv::get("framework.env") == "prod") {
-            @include_once(FEnv::get("framework.exceptions_view").'html/'.$code.'.html');
+            (@include_once(FEnv::get("framework.exceptions_view").'html/'.$code.'.html'));
         } else {
-            @include_once  FEnv::get("framework.exceptions_view").'layout.exception.html.php';
+            (@include_once  FEnv::get("framework.exceptions_view").'layout.exception.html.php');
         }
-
-        exit(1);
+        die();
     }
 
     /** Display on console

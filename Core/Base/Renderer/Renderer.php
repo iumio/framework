@@ -67,31 +67,6 @@ class Renderer implements RendererInterface
     {
         $si = SmartyEngineTemplate::getSmartyInstance(FEnv::get("app.call"));
 
-        /*
-         *function fetch($resource_name, $cache_id = null, $compile_id = null, $display = false) {
-        $l = getTranslatedString(array("CONTEXT" => "SYSTEM", "ITEMSTRING" => "SYSTEM_LANG_CODE"));
-        if(parent::template_exists($resource_name . "." . $l)) {
-            return parent::fetch($resource_name . "." . $l, $cache_id, $compile_id, $display);
-        } else {
-            return parent::fetch($resource_name, $cache_id, $compile_id, $display);
-        }
-    }
-         */
-        /* $smartyConfig = new SmartyEngineConfiguration(IUMIO_ENV);
-
-         $id_compile = $id_cache = ($view.strtolower(IUMIO_ENV.APP_CALL));
-
-         $si->assign($options);
-
-         if ($smartyConfig->getCache() == 1 && $iscached == true) {
-
-             return ($si->display($view . SmartyEngineTemplate::$viewExtention, $id_cache, $id_compile));
-         }
-         elseif ($smartyConfig->getCache() == 1 && $iscached == false) {
-
-             $si->clearCache($view . SmartyEngineTemplate::$viewExtention, $id_cache);
-         }*/
-
         $si->assign($options);
 
         $viewRs = $si->fetch($view . SmartyEngineTemplate::$viewExtention);

@@ -6,13 +6,13 @@ endroute
 
 route:
   name : iumio_manager_locale_manager_framework_change_status
-  path :  /_manager/locale/framework/changestatus/{status}/
+  path :  /_manager/locale/framework/changestatus/{status}
   activity : Locale%changeStatus
 endroute
 
 route:
   name : iumio_manager_locale_manager_framework_change_status_app
-  path :  /_manager/locale/{appname}/changestatus/{status}/
+  path :  /_manager/locale/{appname}/changestatus/{status}
   activity : Locale%changeStatusLocalApp
 endroute
 
@@ -31,11 +31,6 @@ endroute
 
 route:
   name : iumio_manager_locale_manager_get_all
-  path :  /_manager/locale/framework/get/all/
+  path :  /_manager/locale/framework/get/all
   activity : Locale%getAll
 endroute
-
-
-
-
-

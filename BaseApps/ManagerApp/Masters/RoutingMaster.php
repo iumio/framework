@@ -174,7 +174,7 @@ class RoutingMaster extends MasterCore
                     $listen = explode(':', $listen);
                     if (!in_array($listen[0], $this->keywords)) {
                         new Server500(new \ArrayObject(array("explain" =>
-                            "Unknown keyword '$listen[0]' in $filename : ".$appname,
+                            "Unknown keyword '$listen[0]' in $filename.merc : ".$appname,
                             "solution" => "Please add the correct keyword : ".json_encode($this->keywords))));
                     }
                     if (count($listen) > 1) {
@@ -407,7 +407,7 @@ class RoutingMaster extends MasterCore
      */
     public function removeActivity(string $filename, string $appname)
     {
-        Server::delete(FEnv::get("framework.root")."apps/$appname/Routing/$filename", "file");
+        Server::delete(FEnv::get("framework.root")."apps/$appname/Routing/$filename.merc", "file");
         return ((new Renderer())->jsonRenderer(array("code" => 200, "msg" => "OK")));
     }
 

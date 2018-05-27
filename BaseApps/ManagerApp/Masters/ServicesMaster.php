@@ -122,7 +122,7 @@ class ServicesMaster extends MasterCore
     {
         $removeservice = false;
         $file = JL::open(FEnv::get("framework.config.core.services.file"));
-        foreach ($file as $one) {
+        foreach ($file as $one => $value) {
             if ($one == $servicename) {
                 unset($file->$one);
                 $removeservice  = true;

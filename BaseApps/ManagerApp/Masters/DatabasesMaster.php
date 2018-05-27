@@ -96,7 +96,7 @@ class DatabasesMaster extends MasterCore
     {
         $remove = false;
         $file = JL::open(FEnv::get("framework.config.db.file"));
-        foreach ($file as $one) {
+        foreach ($file as $one => $value) {
             if ($one == $dbconfiguration) {
                 unset($file->$one);
                 $remove = true;

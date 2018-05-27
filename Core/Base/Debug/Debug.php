@@ -47,7 +47,6 @@ class Debug implements DebugInterface
             "framework.logs.debug.prod.file");
         if (self::$logstatus == true) {
             self::input($message);
-
             if ($interface == 'file') {
                 $debug = array();
                 $debug['time'] = self::$logformat['time'];
@@ -60,8 +59,9 @@ class Debug implements DebugInterface
                     $file_debug,
                     json_encode($log, JSON_PRETTY_PRINT)
                 );
-                
+
                 JL::close($file_debug);
+                return ((new Renderer())->textRenderer(" "));
             } elseif ($interface == 'screen') {
                 return (new Renderer())->textRenderer("<br>Time : " . self::$logformat['time'] .
                     " ### Content : " . self::$logformat['msg'] . "<br>");
@@ -69,9 +69,9 @@ class Debug implements DebugInterface
                 throw new Server500(new \ArrayObject(array("explain" => "Undefined interface $interface",
                     "solution" => "interface available for debug [file, screen]", "line_error" => "43")));
             }
+        } else {
+            return ((new Renderer())->textRenderer(" "));
         }
-
-        return true;
     }
 
     /** Create template display

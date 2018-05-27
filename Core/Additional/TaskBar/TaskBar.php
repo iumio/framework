@@ -311,7 +311,7 @@ class TaskBar
             <ul class="iumioTaskBar iumioTaskBarVSmall" id="iumioTaskBarRestore" '.
                 ' style="display: none; width: 40px; padding: 0px 0px 0 0;">
             <li class="flogo iumioTaskBarPulse">
-            <img src="'. FEnv::get("host.web.components.libs.framework").'/img/logo_white_small.png"/>  
+            <img src="'. FEnv::get("host.web.components.libs.framework").'img/logo_white_small.png"/>  
             </li>
             </ul>';
             $str .= "\n".self::getJsTaskBar()."\n";

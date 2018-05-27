@@ -198,13 +198,8 @@
 <!--  Notifications Plugin    -->
 <script src="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs").'iumio-manager/' ?>js/bootstrap-notify.js"></script>
 
-
-<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 <script src="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs").'iumio-manager/' ?>js/demo.js"></script>
 
-<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 <script src="<?= \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs").'iumio-manager/' ?>js/main.js"></script>
-
-<?php \iumioFramework\Core\Additional\TaskBar\TaskBar::getJsTaskBar() ?>
 
 </html>

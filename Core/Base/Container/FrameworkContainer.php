@@ -19,7 +19,6 @@ use Invoker\ParameterResolver\Container\TypeHintContainerResolver;
 use iumioFramework\Core\Requirement\Environment\FEnv;
 use iumioFramework\Core\Exception\Server\Server500;
 use iumioFramework\Core\Requirement\FrameworkServices\FrameworkTools;
-use PHPMailer\PHPMailer\PHPMailer;
 
 /**
  * Class FrameworkContainer

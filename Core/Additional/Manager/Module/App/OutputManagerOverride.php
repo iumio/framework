@@ -34,7 +34,7 @@ class OutputManagerOverride extends OutputManager
     public static function outputAsSuccess(string $message, string $exit = "yes")
     {
         $colors = self::getManagerColorInstance();
-        echo "\n\n".$colors->getColoredString($message, "black", "green");
+        echo "\n\n".$colors->getColoredString($message, "green", "transparent");
         if ($exit == "yes") {
             exit();
         }
@@ -47,7 +47,12 @@ class OutputManagerOverride extends OutputManager
     public static function outputAsNormal(string $message, string $exit = "yes")
     {
         $colors = self::getManagerColorInstance();
-        echo "\n\n".$colors->getColoredString($message, "black", "green", false);
+        echo "\n\n".$colors->getColoredString(
+            $message,
+            "green",
+            "transparent",
+            false
+        );
         if ($exit == "yes") {
             exit();
         }
@@ -73,7 +78,7 @@ class OutputManagerOverride extends OutputManager
     final public static function outputAsNotice(string $message, string $exit = "yes")
     {
         $colors = self::getManagerColorInstance();
-        echo "\n\n".$colors->getColoredString($message, "black", "yellow");
+        echo "\n\n".$colors->getColoredString($message, "yellow", "transparent");
         if ($exit == "yes") {
             exit();
         }
@@ -86,7 +91,7 @@ class OutputManagerOverride extends OutputManager
     final public static function outputAsError(string $message, string $exit = "yes")
     {
         $colors = self::getManagerColorInstance();
-        echo "\n\n".$colors->getColoredString($message, "white", "red");
+        echo "\n\n".$colors->getColoredString($message, "red", "transparent");
         if ($exit == "yes") {
             exit();
         }
@@ -100,7 +105,7 @@ class OutputManagerOverride extends OutputManager
     {
         $colors = self::getManagerColorInstance();
         self::clear();
-        echo $colors->getColoredString($message, "black", "green");
+        echo $colors->getColoredString($message, "green", "transparent");
         if ($exit == "yes") {
             exit();
         }

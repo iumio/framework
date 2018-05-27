@@ -58,7 +58,8 @@ class DatabaseAccess
             }
         } catch (\Exception $e) {
             throw new Server500(new \ArrayObject(array("explain" => $e->getMessage(),
-                "solution" => "Check your database configuration!")));
+                "solution" => "Check ".(("#none" === $databaseName)? "default" : "[".$databaseName."]").
+                    " database configuration!")));
         }
     }
 

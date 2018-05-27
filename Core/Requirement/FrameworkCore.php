@@ -16,6 +16,7 @@ namespace iumioFramework\Core\Requirement;
 
 use iumioFramework\Core\Base\Locale\Locale;
 use iumioFramework\Core\Base\Renderer\Renderer;
+use iumioFramework\Core\Requirement\FrameworkServices\AppConfig;
 use iumioFramework\Core\Requirement\FrameworkServices\AppTools;
 use iumioFramework\Core\Requirement\FrameworkServices\FrameworkTools;
 use iumioFramework\Core\Requirement\Environment\FEnv;
@@ -45,10 +46,10 @@ abstract class FrameworkCore extends GlobalCoreService
     protected $environment;
     private static $runtime_parameters = null;
 
-    public const CORE_VERSION = '0.7.0';
+    public const CORE_VERSION = '0.9.0';
     public const CORE_NAME = 'SUN';
     public const CORE_STAGE = 'RC';
-    public const CORE_BUILD = 201770;
+    public const CORE_BUILD = 201790;
     protected static $edition = array();
 
     /**
@@ -197,6 +198,7 @@ abstract class FrameworkCore extends GlobalCoreService
                         $callback = FrameworkTools::manage($request, $rt->routes());
                         if ($callback != null) {
                             Routing::checkRouteMatchesMethod($callback, strtoupper($request->getMethod()));
+                            (AppConfig::getInstance($def['name']))->checkRequirements();
                             $method = $callback['method'];
                             $controller = $callback['controller'];
                             $defname = $def['name'];

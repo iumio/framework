@@ -1,12 +1,12 @@
 <!DOCTYPE HTML>
 <!--
-	iumio Starter by TEMPLATED
+	Framework Starter Theme by TEMPLATED
 	templated.co @templatedco
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
 <html>
 <head>
-    <title>iumio Starter Theme</title>
+    <title>Framework Starter Theme</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     {*webassets*}
@@ -19,7 +19,7 @@
 <!-- Header -->
 <header id="header">
     <div class="inner">
-        <a href="#" class="logo">iumio Starter</a>
+        <a href="#" class="logo">Framework Starter Theme</a>
         <nav id="nav">
             <a href="#">Home</a>
             <a href="#">Generic</a>
@@ -31,7 +31,7 @@
 
 <!-- Banner -->
 <section id="banner" style="background-image: url('{webassets path='public/images/banner.jpg'}');">
-    <h1>Welcome to iumio Starter </h1>
+    <h1>Welcome !</h1>
     {block name="parameters"}
         <p>Your parameter is {$sent} </p>
     {/block}

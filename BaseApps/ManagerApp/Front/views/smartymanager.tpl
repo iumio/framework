@@ -31,7 +31,6 @@
                                         <th>Config name</th>
                                         <th>Debug</th>
                                         <th>Cache</th>
-                                        <th>Console</th>
                                         <th>Edit</th>
                                         </thead>
                                         <tbody class="smartyconfigs" attr-href="{nocache}{route name='iumio_manager_smarty_manager_get_all'}{/nocache}">

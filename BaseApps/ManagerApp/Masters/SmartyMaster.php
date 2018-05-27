@@ -97,11 +97,11 @@ class SmartyMaster extends MasterCore
         $compile  = $this->get("request")->get("compile");
         $force    = $this->get("request")->get("force");
         $sdebug   = $this->get("request")->get("sdebug");
-        $console  = $this->get("request")->get("console");
+        //$console  = $this->get("request")->get("console");
 
         if (!in_array($debug, array('true', 'false')) || !in_array($cache, array('0', '1')) ||
             !in_array($compile, array('true', 'false')) || !in_array($force, array('true', 'false')) ||
-            !in_array($sdebug, array('true', 'false')) || !in_array($console, array("on", "off"))) {
+            !in_array($sdebug, array('true', 'false'))) {
             return ((new Renderer())->jsonRenderer(array("code" => 500, "msg" => "Error on smarty parameters")));
         }
 
@@ -116,7 +116,7 @@ class SmartyMaster extends MasterCore
         $file->$config->compile_check = $this->setRealBoolean($compile);
         $file->$config->force_compile = $this->setRealBoolean($force);
         $file->$config->smarty_debug  = $this->setRealBoolean($sdebug);
-        $file->$config->console_debug = $console;
+        //$file->$config->console_debug = $console;
 
         JL::put(
             FEnv::get("framework.config")."smarty_config/smarty.json",

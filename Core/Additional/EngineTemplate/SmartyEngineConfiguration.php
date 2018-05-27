@@ -50,8 +50,6 @@ class SmartyEngineConfiguration
     {
         switch (strtolower($env)) {
             case "dev":
-                $file = (array) (JL::open(FEnv::get("framework.config")."smarty_config/smarty.json"));
-                break;
             case "prod":
                 $file = (array) (JL::open(FEnv::get("framework.config")."smarty_config/smarty.json"));
                 break;
@@ -79,7 +77,7 @@ class SmartyEngineConfiguration
         $this->compile_check      = $file[strtolower($env)]->compile_check;
         $this->force_compile      = $file[strtolower($env)]->force_compile;
         $this->smarty_debug       = $file[strtolower($env)]->smarty_debug;
-        $this->console_debug      = $file[strtolower($env)]->console_debug;
+        //$this->console_debug      = $file[strtolower($env)]->console_debug;
         $this->env                = strtolower($env);
     }
 

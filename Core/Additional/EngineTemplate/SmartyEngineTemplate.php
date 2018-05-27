@@ -45,7 +45,7 @@ final class SmartyEngineTemplate
             if (!file_exists(FEnv::get("framework.vendor").'smarty/smarty/libs/Smarty.class.php')) {
                 throw new \Exception(
                     "Cannot load Engine Template - Smarty. No such file or directory : 
-                    Check if composer install was made"
+                Check if composer install was made"
                 );
             }
 
@@ -85,8 +85,9 @@ final class SmartyEngineTemplate
             self::$instance->debugging = $sconfig->getDebug();
             self::$instance->compile_check = $sconfig->getCompileCheck();
             self::$instance->setForceCompile($sconfig->getForceCompile());
-            self::$instance->debug_tpl = 'file:' . FEnv::get("framework.additional") .
-                'TaskBar/views/iumioTaskBar.tpl';
+            //exit(FEnv::get("framework.additional").'EngineTemplate/TaskBar/views/iumioTaskBar.tpl');
+            //self::$instance->debug_tpl = 'file:' . FEnv::get("framework.additional") .
+            //  '/TaskBar/views/iumioTaskBar.tpl';
             self::enableSmartyDebug($sconfig->getSmartyDebug());
             self::$instance->caching = $sconfig->getCache();
 
@@ -109,7 +110,7 @@ final class SmartyEngineTemplate
     final public static function enableSmartyDebug(bool $status)
     {
         $sconfig = new SmartyConfig(FEnv::get("framework.env"));
-        FEnv::set("framework.smarty.debug", $sconfig->getConsoleDebug());
+        FEnv::set("framework.smarty.debug", $sconfig->getSmartyDebug());
     }
 
     /**

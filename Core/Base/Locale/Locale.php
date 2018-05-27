@@ -220,7 +220,6 @@ class Locale extends SingletonClassicPattern
         putenv("LC_ALL=$key");
         setlocale(LC_ALL, $key);
         FEnv::set("app.locale.context", $key);
-        \Locale::setDefault($key);
         if (in_array($locale->getTranstype(), $this->transType)) {
             switch ($locale->getTranstype()) {
                 case 'poedit':
