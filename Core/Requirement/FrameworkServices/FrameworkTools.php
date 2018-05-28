@@ -34,18 +34,7 @@ use iumioFramework\Core\Base\Json\JsonListener as JL;
 class FrameworkTools extends GlobalCoreService
 {
     protected $apps = array();
-    protected $debug;
-    protected $environment;
-    private static $runtime_parameters = null;
-
-    const CORE_VERSION = '0.6.6';
-    const CORE_NAME = 'SUN';
-    const CORE_STAGE = 'BETA';
-    const CORE_BUILD = 201766;
     protected static $edition = array();
-
-
-
 
     /** Detect the app type
      * @param string $appname App name

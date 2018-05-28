@@ -122,6 +122,7 @@ class Routing extends MercureListener
      * @param string $appname The appname
      * @param array $webroutes Webroute argurment (URL splited into array)
      * @return array|null The result
+     * @throws
      */
     public static function localGetPart(string $appname, array $webroutes, string $stringwebroute):?array
     {
@@ -135,14 +136,14 @@ class Routing extends MercureListener
                             if ($comp === $second) {
                                 array_unshift($webroutes, $second);
                                 $webroutes = array_values(array_diff($webroutes, array($second)));
-                                $stringwebroute = str_replace("/$second", "", $stringwebroute);
+                                $stringwebroute = str_replace("/$second/", "/", $stringwebroute);
                                 return (["locale" => $second, "object" => $lapp,
                                     "full_webroute" => $stringwebroute, "array_webroute" => $webroutes]);
                             }
                         }
                     } elseif ($one === $comp) {
                         $webroutes = array_values(array_diff($webroutes, array($comp)));
-                        $stringwebroute = str_replace("/$comp", "", $stringwebroute);
+                        $stringwebroute = str_replace("/$comp/", "/", $stringwebroute);
                         return (["locale" => $one, "object" => $lapp,
                             "full_webroute" => $stringwebroute, "array_webroute" => $webroutes]);
                     }
@@ -349,13 +350,14 @@ class Routing extends MercureListener
                     $url = "/$redirect$route";
                 } else {
                     $clear = str_replace($reqs->get("SCRIPT_NAME"), "", $reqs->get("REQUEST_URI"));
-                    $url = $reqs->get("SCRIPT_NAME")."/".$redirect.$route;
+                    $url = $reqs->get("SCRIPT_NAME")."/".$redirect.$clear;
                 }
 
                 $server = new GlobalServer();
                 $https = ((null !== $server->get("HTTPS") &&
                     "on" === $server->get("HTTPS"))? "https://" : "http://");
                 $query = ((!empty($reqs->get("QUERY_STRING")))? "?".$reqs->get("QUERY_STRING") : "");
+
                 header("Status: 301 Moved Permanently", false, 301);
                 header("Location: ".$https.$reqs->get("HTTP_HOST").$url.$query);
 
