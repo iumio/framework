@@ -167,7 +167,7 @@
                                     </div>
                                     <hr>
                                 <?php } ?>
-                            </div>cl
+                            </div>
                         </div>
                     </div>
                 </div>

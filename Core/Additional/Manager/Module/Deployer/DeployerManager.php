@@ -227,7 +227,7 @@ class DeployerManager extends ModuleManager implements ModuleManagerInterface
         $com->__render(["commands" => ["compiled:clear"], "options" => ["--env=all", "--noexit"]]);
 
         // Mercure MANAGER
-        (new Mercure())->__render(["commands" => ["routing;build:jsrouting"], "options" => ["--noexit"]]);
+        (new Mercure())->__render(["commands" => ["mercure:build:jsrouting"], "options" => ["--noexit"]]);
 
         Output::clear();
         CoreManager::setCurrentModule("Deployer Manager");
