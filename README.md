@@ -46,8 +46,8 @@ About Us
 iumio Framework is a component of [iumio][5], created by [RAFINA Dany][6] and co-founded by [HURON Kevin][7]
 
 [1]: https://framework.iumio.com
-[2]: https://framework.iumio.com/SE/install
-[3]: https://framework.iumio.com/SE/details
+[2]: https://learn.framework.iumio.com/docs/installation/install-iumio-framework/
+[3]: https://learn.framework.iumio.com/docs/installation/framework-requirements/
 [4]: https://learn.framework.iumio.com
 [5]: https://iumio.com
 [6]: https://www.linkedin.com/in/dany-rafina-672041b3/
