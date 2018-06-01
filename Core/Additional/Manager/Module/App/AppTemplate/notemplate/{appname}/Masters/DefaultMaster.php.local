@@ -1,0 +1,24 @@
+<?php
+
+namespace {appname}\Masters;
+
+use iumioFramework\Core\Masters\MasterCore;
+use iumioFramework\Core\Base\Renderer\Renderer;
+
+/**
+ * Class DefaultMaster
+ * @package {appname}\Masters
+ */
+
+class DefaultMaster extends MasterCore
+{
+
+    /**
+     * Go to index page
+     */
+    public function indexActivity()
+    {
+        return ((new Renderer())->jsonRenderer(array("code" => 200, "name" => "First App")));
+    }
+
+}

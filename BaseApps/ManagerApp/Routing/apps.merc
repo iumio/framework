@@ -1,0 +1,66 @@
+route:
+  name : iumio_manager_app_manager
+  path :  /_manager/apps
+  activity : Apps%apps
+endroute
+
+route:
+  name: iumio_manager_base_app_manager
+  path :  /_manager/base-apps
+  activity : Apps%baseApps
+endroute
+
+route:
+  name: iumio_manager_app_manager_get_simple_apps
+  path :  /_manager/apps/simple_apps
+  activity : Apps%getSimpleApps
+endroute
+
+route:
+  name: iumio_manager_app_manager_get_config_app
+  path :  /_manager/apps/get/config/{appname}
+  activity : Apps%getAppConfig
+endroute
+
+route:
+  name : iumio_manager_app_manager_switch_default_app
+  path :  /_manager/apps/setstatus/{appname}
+  activity : Apps%switchDefault
+endroute
+
+route:
+  name : iumio_manager_app_manager_auto_dis_ena_app
+  path :  /_manager/apps/auto_dis_ena/{appname}
+  activity : Apps%autoDisabledOrEnabled
+endroute
+
+route:
+  name : iumio_manager_app_manager_remove_app
+  path :  /_manager/apps/remove/{appname}
+  activity : Apps%remove
+endroute
+
+route:
+  name : iumio_manager_app_manager_create_app
+  path :  /_manager/apps/create
+  activity : Apps%create
+endroute
+
+route:
+  name : iumio_manager_app_manager_edit_save_app
+  path :  /_manager/apps/editsave/{appname}
+  activity : Apps%edit
+endroute
+
+route:
+  name : iumio_manager_app_manager_export_app
+  path :  /_manager/apps/export/{appname}
+  activity : Apps%export
+endroute
+
+route:
+  name : iumio_manager_app_manager_import_app
+  path :  /_manager/apps/import
+  activity : Apps%import
+  m_allow : {POST}
+endroute

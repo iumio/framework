@@ -1,0 +1,48 @@
+route:
+  name : iumio_manager_index
+  path : /_manager/dashboard
+  activity : Dashboard%index
+endroute
+
+route:
+  name : iumio_manager_index_2
+  path :  /_manager
+  activity : Dashboard%index
+endroute
+
+route:
+  name : iumio_manager_logs_get
+  path :  /_manager/get/logs
+  activity : Dashboard%getlastlog
+endroute
+
+route:
+  name : iumio_manager_app_default_get
+  path :  /_manager/get/app/default
+  activity : Dashboard%getDefaultApp
+endroute
+
+route:
+  name : iumio_manager_dashboard_edit_200_event
+  path :  /_manager/dashboard/framework/edit/200/event
+  activity : Dashboard%edit200Event
+endroute
+
+route:
+  name : iumio_manager_dashboard_edit_404_event
+  path :  /_manager/dashboard/framework/edit/404/event
+  activity : Dashboard%edit404Event
+endroute
+
+route:
+  name : iumio_manager_dashboard_edit_u3i
+  path :  /_manager/dashboard/framework/edit/u3i
+  activity : Dashboard%editU3i
+endroute
+
+route:
+  name : iumio_manager_dashboard_get_statistics
+  path :  /_manager/get/framework/statistics
+  activity : Dashboard%getFrameworkStatistics
+  m_allow : {POST, GET}
+endroute

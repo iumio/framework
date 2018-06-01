@@ -1,0 +1,11 @@
+route:
+  name : iumio_manager_composer_manager
+  path :  /_manager/composer
+  activity : Composer%composer
+endroute
+route:
+  name: iumio_manager_composer_manager_get_all
+  path :  /_manager/composer/all
+  activity : Composer%getAll
+endroute
+

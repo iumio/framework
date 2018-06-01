@@ -1,0 +1,23 @@
+route:
+  name : iumio_manager_smarty_manager
+  path :  /_manager/smarty
+  activity : Smarty%smarty
+endroute
+
+route:
+  name : iumio_manager_smarty_manager_get_all
+  path :  /_manager/smarty/get/all
+  activity : Smarty%getAll
+endroute
+
+route:
+  name : iumio_manager_smarty_manager_edit
+  path :  /_manager/smarty/get/{config}
+  activity : Smarty%edit
+endroute
+
+route:
+  name : iumio_manager_smarty_manager_save
+  path :  /_manager/smarty/save/{config}
+  activity : Smarty%save
+endroute
