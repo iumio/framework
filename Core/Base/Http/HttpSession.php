@@ -9,11 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace iumioFramework\Core\Base\Http\Session;
+namespace iumioFramework\Core\Base\Http;
 
-use iumioFramework\Core\Base\Http\SessionBagRequest;
-use iumioFramework\Core\Base\Http\SessionInterfaceRequest;
 use iumioFramework\Core\Exception\Server\Server500;
+use iumioFramework\Core\Requirement\Patterns\Singleton\SingletonClassicPattern;
 
 /**
  * HttpSession class.
@@ -25,25 +24,26 @@ use iumioFramework\Core\Exception\Server\Server500;
  * @licence  MIT License
  * @link https://framework.iumio.com
  */
-class HttpSession implements SessionInterfaceRequest
+class HttpSession extends SingletonClassicPattern implements SessionInterfaceRequest
 {
-    protected $session;
-    /**
-     * @return mixed
-     */
+    protected $session = null;
+
 
     /**
      * HttpSession constructor.
+     * @throws
      */
     public function __construct()
     {
-        //session_start();
         $this->start();
     }
 
     public function start()
     {
-        $this->session = $_SESSION;
+        if (!$this->isStarted() && null === $this->session) {
+            $_SESSION = [];
+            $this->session = $_SESSION;
+        }
     }
 
     /**
@@ -51,7 +51,7 @@ class HttpSession implements SessionInterfaceRequest
      */
     public function getId()
     {
-        // TODO: Implement getId() method.
+        return (session_id());
     }
 
     /**
@@ -60,7 +60,7 @@ class HttpSession implements SessionInterfaceRequest
      */
     public function setId($id)
     {
-        // TODO: Implement setId() method.
+        return (session_id($id));
     }
 
     /**
@@ -68,7 +68,7 @@ class HttpSession implements SessionInterfaceRequest
      */
     public function getName()
     {
-        // TODO: Implement getName() method.
+        return (session_name());
     }
 
     /**
@@ -77,7 +77,7 @@ class HttpSession implements SessionInterfaceRequest
      */
     public function setName($name)
     {
-        // TODO: Implement setName() method.
+        return (session_name($name));
     }
 
     /**
@@ -104,7 +104,8 @@ class HttpSession implements SessionInterfaceRequest
      */
     public function save()
     {
-        // TODO: Implement save() method.
+        $_SESSION = array_merge($this->session, $_SESSION);
+        return (0 === count(array_diff($this->session, $_SESSION)))? true : false;
     }
 
     /**
@@ -113,7 +114,7 @@ class HttpSession implements SessionInterfaceRequest
      */
     public function has($name)
     {
-        // TODO: Implement has() method.
+        return ((isset($this->session[$name]) && null != $this->session[$name])? true : false);
     }
 
     /**
@@ -123,7 +124,7 @@ class HttpSession implements SessionInterfaceRequest
      */
     public function get($name, $default = null)
     {
-        return (isset($this->session[$name])? $this->session[$name] : null);
+        return ((isset($this->session[$name]) && null != $this->session[$name])? $this->session[$name] : null);
     }
 
     /**
@@ -135,9 +136,8 @@ class HttpSession implements SessionInterfaceRequest
     public function set($name, $value)
     {
         if (is_string($name)) {
-            $_SESSION[$name] = $value;
-            $this->start();
-            return (true);
+            $this->session[$name] = $value;
+            return ((isset($this->session[$name]) && null != $this->session[$name])? true : false);
         } else {
             throw new Server500(new \ArrayObject(array("explain" =>
                 "Session Error : Your session name is not a string value", "solution" =>
@@ -185,40 +185,20 @@ class HttpSession implements SessionInterfaceRequest
      */
     public function clear()
     {
-        return(session_destroy());
+        if ($this->isStarted()) {
+            return (session_destroy());
+        }
+        return (false);
     }
 
-    /**
-     * @return mixed
+    /** Check if session is started
+     * @return bool
      */
     public function isStarted()
     {
-        // TODO: Implement isStarted() method.
-    }
-
-    /**
-     * @param SessionBagRequest $bag
-     * @return mixed
-     */
-    public function registerBag(SessionBagRequest $bag)
-    {
-        // TODO: Implement registerBag() method.
-    }
-
-    /**
-     * @param string $name
-     * @return mixed
-     */
-    public function getBag($name)
-    {
-        // TODO: Implement getBag() method.
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getMetaBagRequest()
-    {
-        // TODO: Implement getMetaBagRequest() method.
+        if ('cli' !== php_sapi_name()) {
+            return ((PHP_SESSION_ACTIVE === session_status()) ? true : false);
+        }
+        return (false);
     }
 }

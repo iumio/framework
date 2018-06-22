@@ -19,6 +19,11 @@
       "role": "iumio Framework Co-Architect / iumio Co-Founder"
     }
   ],
+  "autoload-dev": {
+    "psr-4": {
+      "iumioFramework\\Tests\\": "tests/"
+    }
+  },
   "autoload": {
     "psr-4": {
       "iumioFramework\\": "",
