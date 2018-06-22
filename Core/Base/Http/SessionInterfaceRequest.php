@@ -159,26 +159,4 @@ interface SessionInterfaceRequest
      */
     public function isStarted();
 
-    /**
-     * Registers a SessionBagRequest with the session.
-     *
-     * @param SessionBagRequest $bag
-     */
-    public function registerBag(SessionBagRequest $bag);
-
-    /**
-     * Gets a bag instance by name.
-     *
-     * @param string $name
-     *
-     * @return SessionBagRequest
-     */
-    public function getBag($name);
-
-    /**
-     * Gets session meta.
-     *
-     * @return MetaBagRequest
-     */
-    public function getMetaBagRequest();
 }
