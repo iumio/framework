@@ -36,57 +36,28 @@ interface SessionInterfaceRequest
      *
      * @return string The session ID
      */
-    public function getId();
+    public static function getId();
 
     /**
      * Sets the session ID.
      *
      * @param string $id
      */
-    public function setId($id);
+    public static function setId($id);
 
     /**
      * Returns the session name.
      *
      * @return mixed The session name
      */
-    public function getName();
+    public static function getName();
 
     /**
      * Sets the session name.
      *
      * @param string $name
      */
-    public function setName($name);
-
-    /**
-     * Invalidates the current session.
-     *
-     * Clears all session attributes and flashes and regenerates the
-     * session and deletes the old session from persistence.
-     *
-     * @param int $lifetime Sets the cookie lifetime for the session cookie. A null value
-     *                      will leave the system settings unchanged, 0 sets the cookie
-     *                      to expire with browser session. Time is in seconds, and is
-     *                      not a Unix timestamp.
-     *
-     * @return bool True if session invalidated, false if error
-     */
-    public function invalidate($lifetime = null);
-
-    /**
-     * Migrates the current session to a new session id while maintaining all
-     * session attributes.
-     *
-     * @param bool $destroy  Whether to delete the old session or leave it to garbage collection
-     * @param int  $lifetime Sets the cookie lifetime for the session cookie. A null value
-     *                       will leave the system settings unchanged, 0 sets the cookie
-     *                       to expire with browser session. Time is in seconds, and is
-     *                       not a Unix timestamp.
-     *
-     * @return bool True if session migrated, false if error
-     */
-    public function migrate($destroy = false, $lifetime = null);
+    public static function setName($name);
 
     /**
      * Force the session to be saved and closed.

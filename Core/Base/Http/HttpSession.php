@@ -13,6 +13,7 @@ namespace iumioFramework\Core\Base\Http;
 
 use iumioFramework\Core\Exception\Server\Server500;
 use iumioFramework\Core\Requirement\Patterns\Singleton\SingletonClassicPattern;
+use Josantonius\Session\Session;
 
 /**
  * HttpSession class.
@@ -27,7 +28,7 @@ use iumioFramework\Core\Requirement\Patterns\Singleton\SingletonClassicPattern;
 class HttpSession extends SingletonClassicPattern implements SessionInterfaceRequest
 {
     protected $session = null;
-
+    private static $id = null;
 
     /**
      * HttpSession constructor.
@@ -41,15 +42,18 @@ class HttpSession extends SingletonClassicPattern implements SessionInterfaceReq
     public function start()
     {
         if (!$this->isStarted() && null === $this->session) {
-            $_SESSION = [];
+            //@ob_start();
+
+            session_start();
             $this->session = $_SESSION;
+
         }
     }
 
     /**
      * @return mixed
      */
-    public function getId()
+    public static function getId()
     {
         return (session_id());
     }
@@ -58,15 +62,16 @@ class HttpSession extends SingletonClassicPattern implements SessionInterfaceReq
      * @param string $id
      * @return mixed
      */
-    public function setId($id)
+    public static function setId($id)
     {
+        self::$id = $id;
         return (session_id($id));
     }
 
     /**
      * @return mixed
      */
-    public function getName()
+    public static function getName()
     {
         return (session_name());
     }
@@ -75,7 +80,7 @@ class HttpSession extends SingletonClassicPattern implements SessionInterfaceReq
      * @param string $name
      * @return mixed
      */
-    public function setName($name)
+    public static function setName($name)
     {
         return (session_name($name));
     }
@@ -104,7 +109,7 @@ class HttpSession extends SingletonClassicPattern implements SessionInterfaceReq
      */
     public function save()
     {
-        $_SESSION = array_merge($this->session, $_SESSION);
+        $_SESSION = $this->session;
         return (0 === count(array_diff($this->session, $_SESSION)))? true : false;
     }
 
@@ -155,11 +160,23 @@ class HttpSession extends SingletonClassicPattern implements SessionInterfaceReq
 
     /**
      * @param array $attributes
-     * @return mixed
+     * @return bool|null
+     * @throws Server500
      */
     public function replace(array $attributes)
     {
-        // TODO: Implement replace() method.
+        $status = false;
+        foreach ($this->session as $one => $value) {
+            if (null !== $this->get($one)) {
+                $this->set($one, $value);
+                $status = true;
+            }
+        }
+        if (true === $status) {
+            $this->save();
+            return (true);
+        }
+        return (null);
     }
 
     /**
@@ -169,8 +186,8 @@ class HttpSession extends SingletonClassicPattern implements SessionInterfaceReq
      */
     public function remove($name)
     {
-        if (isset($_SESSION[$name])) {
-            unset($_SESSION[$name]);
+        if (isset($this->session[$name])) {
+            unset($this->session[$name]);
             $this->start();
             return (true);
         } else {
@@ -201,4 +218,5 @@ class HttpSession extends SingletonClassicPattern implements SessionInterfaceReq
         }
         return (false);
     }
+
 }
