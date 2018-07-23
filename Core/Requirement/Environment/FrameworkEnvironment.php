@@ -47,6 +47,7 @@ class FrameworkEnvironment
         $base = realpath(__DIR__ . "/../../../../../../")."/";
 
         define('IUMIO_ENV', $env);
+        define('IUMIO_ROOT', $base);
 
         $current = self::getProtocol()."://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']);
         $current_temp = substr($current, 0, strpos($current, self::getFileEnv($env)));
