@@ -14,7 +14,7 @@
 
 
 namespace iumioFramework\Tests;
-error_reporting(E_ALL);
+
 use iumioFramework\Core\Base\Http\HttpSession;
 use PHPUnit\Framework\TestCase;
 
@@ -24,7 +24,12 @@ use PHPUnit\Framework\TestCase;
  */
 class HttpSessionTest extends TestCase
 {
-
+    public function setUp()
+    {
+        define('IUMIO_ENV', 'dev');
+        $base = realpath(__DIR__ . "/../")."/";
+        define('IUMIO_ROOT', $base);
+    }
     /**
      * Test if session is started
      * @throws \Exception
@@ -114,8 +119,8 @@ class HttpSessionTest extends TestCase
      */
     public function testId()
     {
-        HttpSession::setId("123");
         $instance = HttpSession::getInstance();
+        $instance->setId("123");
         $this->assertEquals("123", session_id());
         $this->assertEquals("123", $instance->getId());
     }
@@ -124,9 +129,14 @@ class HttpSessionTest extends TestCase
      * Test destroy a session
      * @throws \Exception
      */
-    public function testDestroy()
+    public function testClear()
     {
         $instance = HttpSession::getInstance();
+        $arr =  ["test" => "val1", "test2" => "val2", "test3" => "val3"];
+        foreach ($arr as $one => $value) {
+            $instance->set($one, $value);
+        }
+        $instance->save();
         $this->assertTrue($instance->clear());
     }
 
@@ -135,13 +145,13 @@ class HttpSessionTest extends TestCase
      * Test set name for session
      * @throws \Exception
      */
-    public function testName()
+    /*public function testName()
     {
-        HttpSession::setName("test");
         $instance = HttpSession::getInstance();
+        $instance->setName("test");
         $this->assertEquals("test", session_name());
         $this->assertEquals("test", $instance->getName());
-    }
+    }*/
 
 
     /**

@@ -36,28 +36,28 @@ interface SessionInterfaceRequest
      *
      * @return string The session ID
      */
-    public static function getId();
+    public function getId();
 
     /**
      * Sets the session ID.
      *
      * @param string $id
      */
-    public static function setId($id);
+    public function setId($id);
 
     /**
      * Returns the session name.
      *
      * @return mixed The session name
      */
-    public static function getName();
+    public function getName();
 
     /**
      * Sets the session name.
      *
      * @param string $name
      */
-    public static function setName($name);
+    public function setName($name);
 
     /**
      * Force the session to be saved and closed.
@@ -129,5 +129,4 @@ interface SessionInterfaceRequest
      * @return bool
      */
     public function isStarted();
-
 }
