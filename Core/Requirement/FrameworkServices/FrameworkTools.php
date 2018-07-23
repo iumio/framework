@@ -115,7 +115,7 @@ class FrameworkTools extends GlobalCoreService
                 header('Location: '.FEnv::get("host.current").'/setup/setup.php');
                 exit(1);
             } else {
-                throw new \RuntimeException("(Setup components does not exist in web directory => Please download".
+                throw new \RuntimeException("(Setup components does not exist in web directory => Please download ".
                     "the setup components on iumio Framework Website to fix this error and put him in web directory)");
             }
         }

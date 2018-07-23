@@ -7,7 +7,10 @@ iumio Framework
 
 @ Let's create more simply
 
+- CODACY : 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b1b1beef4a244d25a2586c2cdf3a1cc5)](https://www.codacy.com/app/iumio-team/iumio-framework?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=iumio/framework&amp;utm_campaign=Badge_Grade)
+
+- TRAVIS : [![Build Status](https://travis-ci.org/iumio/framework.svg?branch=master)](https://travis-ci.org/iumio/framework)
 
 Description
 ------------

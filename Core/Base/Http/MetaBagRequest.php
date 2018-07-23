@@ -17,7 +17,6 @@ namespace iumioFramework\Core\Base\Http;
  * Adds metadata to the session.
  *
  * @author Fabien Potencier <fabien@symfony.com>
- * @author Dany RAFINA <dany.rafina@iumio.com>
  * @category Framework
  * @licence  MIT License
  * @link https://framework.iumio.com
