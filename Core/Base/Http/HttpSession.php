@@ -13,6 +13,7 @@ namespace iumioFramework\Core\Base\Http;
 
 use iumioFramework\Core\Exception\Server\Server500;
 use iumioFramework\Core\Requirement\Patterns\Singleton\SingletonClassicPattern;
+use iumioFramework\Core\Server\Server;
 
 /**
  * HttpSession class.
@@ -26,8 +27,20 @@ use iumioFramework\Core\Requirement\Patterns\Singleton\SingletonClassicPattern;
  */
 class HttpSession extends SingletonClassicPattern implements SessionInterfaceRequest
 {
+    /**
+     * @var null|array The session oject : Initialized to null firstly
+     */
     protected $session = null;
 
+    /**
+     * @var null|string The session identifier : Initialized to null firstly
+     */
+    private $id = null;
+
+    /**
+     * @var null|string The session name : Initialized to null firstly
+     */
+    private $name = null;
 
     /**
      * HttpSession constructor.
@@ -38,28 +51,35 @@ class HttpSession extends SingletonClassicPattern implements SessionInterfaceReq
         $this->start();
     }
 
+    /** Start the session
+     * @return void
+     * @throws Server500
+     * @throws \Exception
+     */
     public function start()
     {
         if (!$this->isStarted() && null === $this->session) {
-            $_SESSION = [];
+            $this->initSessionConfig();
+            session_start();
             $this->session = $_SESSION;
         }
     }
 
-    /**
-     * @return mixed
+    /** Get the session id
+     * @return mixed The session id
      */
     public function getId()
     {
-        return (session_id());
+        return ($this->id);
     }
 
-    /**
-     * @param string $id
-     * @return mixed
+    /** Set a new session id
+     * @param string $id The session id
+     * @return mixed Return the session id
      */
     public function setId($id)
     {
+        $this->id = $id;
         return (session_id($id));
     }
 
@@ -68,7 +88,7 @@ class HttpSession extends SingletonClassicPattern implements SessionInterfaceReq
      */
     public function getName()
     {
-        return (session_name());
+        return ($this->name);
     }
 
     /**
@@ -77,6 +97,7 @@ class HttpSession extends SingletonClassicPattern implements SessionInterfaceReq
      */
     public function setName($name)
     {
+        $this->name = $name;
         return (session_name($name));
     }
 
@@ -100,27 +121,30 @@ class HttpSession extends SingletonClassicPattern implements SessionInterfaceReq
     }
 
     /**
-     * @return mixed
+     * Save the modification about sessions items
+     * @return bool true if iumio session is the same as PHP SESSION, false for an error
+     * ($_SESSION & $this->session not the same)
      */
-    public function save()
+    public function save():bool
     {
-        $_SESSION = array_merge($this->session, $_SESSION);
+        $_SESSION = $this->session;
         return (0 === count(array_diff($this->session, $_SESSION)))? true : false;
     }
 
     /**
-     * @param string $name
-     * @return mixed
+     * Check if a session key exist
+     * @param string $name The session key
+     * @return bool If exist or not
      */
-    public function has($name)
+    public function has($name):bool
     {
         return ((isset($this->session[$name]) && null != $this->session[$name])? true : false);
     }
 
-    /**
-     * @param string $name
+    /** Get a session key value
+     * @param string $name The session key
      * @param mixed|null $default
-     * @return mixed
+     * @return mixed The result (if null : not result)
      */
     public function get($name, $default = null)
     {
@@ -128,9 +152,10 @@ class HttpSession extends SingletonClassicPattern implements SessionInterfaceReq
     }
 
     /**
-     * @param string $name
-     * @param mixed $value
-     * @return bool
+     * Edit a session key
+     * @param string $name Key name
+     * @param mixed $value session item value
+     * @return bool If session exist or not
      * @throws Server500
      */
     public function set($name, $value)
@@ -146,59 +171,110 @@ class HttpSession extends SingletonClassicPattern implements SessionInterfaceReq
     }
 
     /**
-     * @return mixed
+     * Return all session items
+     * @return null|array Null if session are not initialized or an array with all session item
      */
-    public function all()
+    public function all():?array
     {
         return ($this->session);
     }
 
-    /**
-     * @param array $attributes
-     * @return mixed
-     */
-    public function replace(array $attributes)
-    {
-        // TODO: Implement replace() method.
-    }
-
-    /**
-     * @param string $name
-     * @return bool
+    /** Replace session items
+     * @param array $attributes Session item with key/value
+     * @return bool false if not session item has not edited or true if it has been edited
      * @throws Server500
      */
-    public function remove($name)
+    public function replace(array $attributes):bool
     {
-        if (isset($_SESSION[$name])) {
-            unset($_SESSION[$name]);
-            $this->start();
+        $status = false;
+        foreach ($this->session as $one => $value) {
+            if (null !== $this->get($one)) {
+                $this->set($one, $value);
+                $status = true;
+            }
+        }
+        if (true === $status) {
+            $this->save();
+        }
+
+        return ($status);
+    }
+
+    /** Remove a session item
+     * @param string $name Item name
+     * @return bool
+     * @throws Server500
+     * @throws \Exception
+     */
+    public function remove($name):bool
+    {
+        if (isset($this->session[$name])) {
+            unset($this->session[$name]);
+            $this->save();
             return (true);
         } else {
             throw new Server500(new \ArrayObject(array("explain" =>
-                "iumio Session Error : Your session name is not defined", "solution" =>
-                "Please check the session object with HttpSession::all instruction")));
+                    "Session Error : The session name [$name] is not defined", "solution" =>
+                    "Please check the session object with HttpSession::all instruction to remove".
+                    " the correct session item")));
         }
     }
 
     /**
-     * @return mixed
+     * Clear the session
+     * @return bool If session is clear properly or not
+     * @throws Server500
      */
-    public function clear()
+    public function clear():bool
     {
-        if ($this->isStarted()) {
-            return (session_destroy());
+        if (true === $this->isStarted()) {
+            session_unset();
+            $this->setToDefault();
+            session_regenerate_id(true);
+            return (empty($_SESSION)? true : false);
         }
-        return (false);
+        throw new Server500(new \ArrayObject(array("explain" => "Cannot clear the session when is not started",
+            "solution" => "Please start a session instance before clear it")));
     }
+
+    /**
+     * Set all value to default
+     */
+    private function setToDefault():void
+    {
+        $this->session = null;
+        $this->id = null;
+        $this->name = null;
+    }
+
+    /** Init the session configuration
+     * @throws Server500
+     * @throws \Exception
+     * @return void
+     */
+    private function initSessionConfig():void
+    {
+        if (!defined("IUMIO_ENV")) {
+            throw new Server500(new \ArrayObject(array("explain" => "Framework Environment is not defined",
+                "solution" => "Please initialize the framework environment")));
+        }
+        if (false === Server::exist(IUMIO_ROOT."/elements/cache/".strtolower(IUMIO_ENV)."/sessions")) {
+            Server::create(IUMIO_ROOT."/elements/cache/".
+                strtolower(IUMIO_ENV)."/sessions", "directory");
+        }
+
+        $this->id = session_id();
+        $this->name = session_name();
+        session_save_path(IUMIO_ROOT.'/elements/cache/'.strtolower(IUMIO_ENV).'/sessions');
+        ini_set('session.gc_probability', 1);
+    }
+
 
     /** Check if session is started
      * @return bool
      */
     public function isStarted()
     {
-        if ('cli' !== php_sapi_name()) {
-            return ((PHP_SESSION_ACTIVE === session_status()) ? true : false);
-        }
-        return (false);
+        return ((PHP_SESSION_ACTIVE === session_status()) ? true : false);
     }
 }

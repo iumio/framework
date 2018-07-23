@@ -24,7 +24,7 @@ use iumioFramework\Core\Requirement\FrameworkCore;
 use iumioFramework\Core\Requirement\FrameworkServices\GlobalCoreService;
 use iumioFramework\Core\Base\Database\DatabaseAccess as IDA;
 use iumioFramework\Core\Exception\Server\Server500;
-use iumioFramework\Core\Base\Http\Session\HttpSession;
+use iumioFramework\Core\Base\Http\HttpSession;
 use iumioFramework\Core\Base\Json\JsonListener as JL;
 
 /**
@@ -68,7 +68,7 @@ class MasterCore extends GlobalCoreService
                 return (FrameworkCore::getRuntimeParameters())->query;
                 break;
             case 'session':
-                return (new HttpSession());
+                return (HttpSession::getInstance());
                 break;
             case 'service':
                 return (Services::getInstance());
