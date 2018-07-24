@@ -227,11 +227,11 @@ class ViewBasePlugin
             }
         }
 
-        return ("<script type='text/javascript' src='".FEnv::get("host.web.components")."mercure/config_files/".
+        return ("<script type='text/javascript' src='".FEnv::get("host.web.components")."libs/mercure/config_files/".
             ((FEnv::get("app.is_components"))?
                 "map.merc.base.js" : "map.merc.js")."'></script>\n".
                 "<script type='text/javascript' src='".
-                FEnv::get("host.web.components")."mercure/libs/js/Mercure.js' id='mercure_app_referer' 
+                FEnv::get("host.web.components")."libs/mercure/libs/js/Mercure.js' id='mercure_app_referer' 
                 referer-app='".FEnv::get("app.call")."' base-url='".$base.$url."'></script>");
     }
 
