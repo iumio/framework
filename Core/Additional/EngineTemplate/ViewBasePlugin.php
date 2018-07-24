@@ -360,7 +360,8 @@ class ViewBasePlugin
             throw new \Exception("The parameter [name] is missing to generate a valid route", E_ERROR);
         }
         $route = ($im->generateRoute(((isset($params['name']))? $params['name'] : ""), ((isset($params['params']) &&
-            !empty($params['params']))? $params['params']  : null), null, ((isset($params['component']) &&
+            !empty($params['params']))? $params['params']  : null), ((isset($params['appname']) &&
+            !empty($params['appname']))? $params['appname']  : null), ((isset($params['component']) &&
             $params['component'] == "yes")? true  : false)));
         return ($route);
     }
