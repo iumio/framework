@@ -12,6 +12,17 @@ All notable changes to this project will be documented in this file.
 
 ## [STABLE RELEASE]
 
+## [1.0.4] STS - 2018-07-24
+- Fixed : 
+    - HttpSession : 
+        - Fix retreive session when is already started
+        - Change header for iumio organization
+     - SessionInterfaceRequest : 
+        - Change header for iumio organization
+- Edited :
+    - Exception
+        - Clear the exception layout
+
 ## [1.0.3] STS - 2018-07-24
 - Fixed : 
     - HttpSession : 

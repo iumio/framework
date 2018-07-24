@@ -1,12 +1,15 @@
 <?php
 
-/*
- * This file is part of the Symfony package.
+/**
  *
- * (c) Fabien Potencier <fabien@symfony.com>
+ *  * This is an iumio Framework component
+ *  *
+ *  * (c) RAFINA DANY <dany.rafina@iumio.com>
+ *  *
+ *  * iumio Framework, an iumio component [https://iumio.com]
+ *  *
+ *  * To get more information about licence, please check the licence file
  *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
  */
 
 namespace iumioFramework\Core\Base\Http;
@@ -14,7 +17,6 @@ namespace iumioFramework\Core\Base\Http;
 /**
  * Interface for the session.
  *
- * @author Fabien Potencier <fabien@symfony.com>
  * @author RAFINA Dany <dany.rafina@iumio.com>
  * @category Framework
  * @licence  MIT License
@@ -23,13 +25,10 @@ namespace iumioFramework\Core\Base\Http;
 interface SessionInterfaceRequest
 {
     /**
-     * Starts the session storage.
+     * Starts the session.
      *
-     * @return bool True if session started
-     *
-     * @throws \RuntimeException If session fails to start.
      */
-    public function start();
+    public function start():void;
 
     /**
      * Returns the session ID.
@@ -60,13 +59,10 @@ interface SessionInterfaceRequest
     public function setName($name);
 
     /**
-     * Force the session to be saved and closed.
-     *
-     * This method is generally not required for real sessions as
-     * the session will be automatically saved at the end of
-     * code execution.
+     * Save the current session.
+     * @return bool
      */
-    public function save();
+    public function save():bool ;
 
     /**
      * Checks if an attribute is defined.
@@ -78,17 +74,16 @@ interface SessionInterfaceRequest
     public function has($name);
 
     /**
-     * Returns an attribute.
+     * Returns a session item.
      *
      * @param string $name    The attribute name
-     * @param mixed  $default The default value if not found
      *
      * @return mixed
      */
-    public function get($name, $default = null);
+    public function get($name);
 
     /**
-     * Sets an attribute.
+     * Sets an session item.
      *
      * @param string $name
      * @param mixed  $value
@@ -96,37 +91,35 @@ interface SessionInterfaceRequest
     public function set($name, $value);
 
     /**
-     * Returns attributes.
+     * Returns all session items.
      *
-     * @return array Attributes
+     * @return array|null Attributes
      */
-    public function all();
+    public function all():?array;
 
     /**
-     * Sets attributes.
+     * Edit session items.
      *
-     * @param array $attributes Attributes
+     * @param array $attributes Session item with key/value
+     * @return bool false if not session item has not edited or true if it has been edited
      */
-    public function replace(array $attributes);
+    public function replace(array $attributes):bool;
+
+    /** Remove a session item
+     * @param string $name Item name
+     * @return bool
+     * @throws \Exception
+     */
+    public function remove($name):bool;
 
     /**
-     * Removes an attribute.
-     *
-     * @param string $name
-     *
-     * @return mixed The removed value or null when it does not exist
+     * Clear the session
+     * @return bool If session is clear properly or not
      */
-    public function remove($name);
+    public function clear():bool;
 
-    /**
-     * Clears all attributes.
-     */
-    public function clear();
-
-    /**
-     * Checks if the session was started.
-     *
+    /** Check if session is started
      * @return bool
      */
-    public function isStarted();
+    public function isStarted():bool;
 }
