@@ -59,7 +59,6 @@ class HttpSession extends SingletonClassicPattern implements SessionInterfaceReq
      */
     public function start():void
     {
-
         if ((!$this->isStarted() && null === $this->session) || ($this->isStarted() && null === $this->session)) {
             $this->initSessionConfig();
             if (!$this->isStarted()) {
@@ -198,9 +197,9 @@ class HttpSession extends SingletonClassicPattern implements SessionInterfaceReq
             return (true);
         } else {
             throw new Server500(new \ArrayObject(array("explain" =>
-                "Session Error : The session name [$name] is not defined", "solution" =>
-                "Please check the session object with HttpSession::all instruction to remove".
-                " the correct session item")));
+                    "Session Error : The session name [$name] is not defined", "solution" =>
+                    "Please check the session object with HttpSession::all instruction to remove".
+                    " the correct session item")));
         }
     }
 
