@@ -1,12 +1,15 @@
 <?php
 
-/*
- * This file is part of the Symfony package.
+/**
  *
- * (c) Fabien Potencier <fabien@symfony.com>
+ *  * This is an iumio Framework component
+ *  *
+ *  * (c) RAFINA DANY <dany.rafina@iumio.com>
+ *  *
+ *  * iumio Framework, an iumio component [https://iumio.com]
+ *  *
+ *  * To get more information about licence, please check the licence file
  *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
  */
 
 namespace iumioFramework\Core\Base\Http;
@@ -18,8 +21,6 @@ use iumioFramework\Core\Server\Server;
 /**
  * HttpSession class.
  * Manage a session
- *
- * @author Fabien Potencier <fabien@symfony.com>
  * @author Dany Rafina <dany.rafina@iumio.com>
  * @category Framework
  * @licence  MIT License
@@ -56,11 +57,13 @@ class HttpSession extends SingletonClassicPattern implements SessionInterfaceReq
      * @throws Server500
      * @throws \Exception
      */
-    public function start()
+    public function start():void
     {
-        if (!$this->isStarted() && null === $this->session) {
+        if ((!$this->isStarted() && null === $this->session) || ($this->isStarted() && null === $this->session)) {
             $this->initSessionConfig();
-            session_start();
+            if (!$this->isStarted()) {
+                session_start();
+            }
             $this->session = $_SESSION;
         }
     }
@@ -102,25 +105,6 @@ class HttpSession extends SingletonClassicPattern implements SessionInterfaceReq
     }
 
     /**
-     * @param int|null $lifetime
-     * @return mixed
-     */
-    public function invalidate($lifetime = null)
-    {
-        // TODO: Implement invalidate() method.
-    }
-
-    /**
-     * @param bool $destroy
-     * @param int|null $lifetime
-     * @return mixed
-     */
-    public function migrate($destroy = false, $lifetime = null)
-    {
-        // TODO: Implement migrate() method.
-    }
-
-    /**
      * Save the modification about sessions items
      * @return bool true if iumio session is the same as PHP SESSION, false for an error
      * ($_SESSION & $this->session not the same)
@@ -143,10 +127,9 @@ class HttpSession extends SingletonClassicPattern implements SessionInterfaceReq
 
     /** Get a session key value
      * @param string $name The session key
-     * @param mixed|null $default
      * @return mixed The result (if null : not result)
      */
-    public function get($name, $default = null)
+    public function get($name)
     {
         return ((isset($this->session[$name]) && null != $this->session[$name])? $this->session[$name] : null);
     }
@@ -265,15 +248,17 @@ class HttpSession extends SingletonClassicPattern implements SessionInterfaceReq
 
         $this->id = session_id();
         $this->name = session_name();
-        session_save_path(IUMIO_ROOT.'/elements/cache/'.strtolower(IUMIO_ENV).'/sessions');
-        ini_set('session.gc_probability', 1);
+        if (!$this->isStarted()) {
+            session_save_path(IUMIO_ROOT . '/elements/cache/' . strtolower(IUMIO_ENV) . '/sessions');
+            ini_set('session.gc_probability', 1);
+        }
     }
 
 
     /** Check if session is started
      * @return bool
      */
-    public function isStarted()
+    public function isStarted():bool
     {
         return ((PHP_SESSION_ACTIVE === session_status()) ? true : false);
     }

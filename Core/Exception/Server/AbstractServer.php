@@ -118,9 +118,24 @@ abstract class AbstractServer extends \Exception implements ServerInterface
             return($this->displayConsole($code, $message));
         }
 
-        /*if (false != ob_get_length()) {
-            ob_end_clean();
-        }*/
+        $libf = \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs.framework");
+        $title = $this->code.' '.strtolower(ucfirst($this->codeTitle)).
+            ' - Environment '.(ucfirst(strtolower($this->env)));
+        $boot = \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs").'bootstrap/';
+        $anim = \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs").
+            'animate.css/';
+        $im = \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs").
+            'iumio-manager/';
+        $font =  \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs").
+            'font-awesome/';
+
+        $msg = 'An exception was generated - Environment '.(strtoupper(strtolower($this->env)));
+
+        $fimg = \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs.framework").
+            'img/';
+
+        $libs =  \iumioFramework\Core\Requirement\Environment\FEnv::get("host.web.components.libs");
+
         @header($_SERVER['SERVER_PROTOCOL'] .' '.
             (($code == 000)? 500 : $code).' '.HttpResponse::getPhrase($code), true, $code);
         if ($this->checkExceptionOverride($code)) {
