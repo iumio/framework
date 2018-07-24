@@ -198,7 +198,7 @@ class ViewBasePlugin
      * @return string return js routing file
      * @throws \Exception
      */
-    final public static function rtfile()
+    final public static function mercurefile()
     {
         $env = FrameworkEnvironment::getFileEnv(FEnv::get("framework.env"));
         if (strpos($_SERVER['REQUEST_URI'], $env) == false) {
@@ -227,11 +227,12 @@ class ViewBasePlugin
             }
         }
 
-        return ("<script type='text/javascript' src='".FEnv::get("host.web.components")."mercure/config_files/".
+        return ("<script type='text/javascript' src='".FEnv::get("host.web.components").
+            "libs/mercure/config_files/".
             ((FEnv::get("app.is_components"))?
                 "map.merc.base.js" : "map.merc.js")."'></script>\n".
-                "<script type='text/javascript' src='".
-                FEnv::get("host.web.components")."mercure/libs/js/Mercure.js' id='mercure_app_referer' 
+            "<script type='text/javascript' src='".
+            FEnv::get("host.web.components")."libs/mercure/libs/js/Mercure.js' id='mercure_app_referer' 
                 referer-app='".FEnv::get("app.call")."' base-url='".$base.$url."'></script>");
     }
 
@@ -360,7 +361,8 @@ class ViewBasePlugin
             throw new \Exception("The parameter [name] is missing to generate a valid route", E_ERROR);
         }
         $route = ($im->generateRoute(((isset($params['name']))? $params['name'] : ""), ((isset($params['params']) &&
-            !empty($params['params']))? $params['params']  : null), null, ((isset($params['component']) &&
+            !empty($params['params']))? $params['params']  : null), ((isset($params['appname']) &&
+            !empty($params['appname']))? $params['appname']  : null), ((isset($params['component']) &&
             $params['component'] == "yes")? true  : false)));
         return ($route);
     }
