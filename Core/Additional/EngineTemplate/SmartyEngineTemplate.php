@@ -259,10 +259,11 @@ final class SmartyEngineTemplate
             array("iumioFramework\Core\Additional\EngineTemplate\ViewBasePlugin", "taskbar")
         );
 
+
         self::$instance->registerPlugin(
             \Smarty::PLUGIN_FUNCTION,
-            'rt',
-            array("iumioFramework\Core\Additional\EngineTemplate\ViewBasePlugin", "rtfile")
+            'mercure',
+            array("iumioFramework\Core\Additional\EngineTemplate\ViewBasePlugin", "mercurefile")
         );
 
         return (1);
