@@ -198,7 +198,7 @@ class ViewBasePlugin
      * @return string return js routing file
      * @throws \Exception
      */
-    final public static function rtfile()
+    final public static function mercurefile()
     {
         $env = FrameworkEnvironment::getFileEnv(FEnv::get("framework.env"));
         if (strpos($_SERVER['REQUEST_URI'], $env) == false) {
