@@ -193,7 +193,7 @@ class FrameworkEnvironment
             throw new Server500(new ArrayObject(array("explain" => "An error was detected on environment declaration",
                 "solution" => "Please check the environment declaration.", "external" => "yes")));
         }
-        $host_env = FEnv::get((FEnv::get("framework.env"))?
+        $host_env = FEnv::get(("dev" === FEnv::get("framework.env"))?
             "framework.config.hosts.dev.file" : "framework.config.hosts.prod.file");
         $hosts = file_get_contents($host_env);
 
