@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 
 ## [STABLE RELEASE]
 
+## [1.1.0] STS - Coming Soon
 
 ## [1.0.4] STS - 2018-07-24
 - Fixed : 
